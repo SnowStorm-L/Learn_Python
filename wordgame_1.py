@@ -154,4 +154,22 @@ print(MultiLineString)
 # step = 1 表示第三个参数的默认值是1
 # range这个BIF的作用是生产一个从start参数的值开始到stop参数的值结束的数字序列
 
+# range(5)
+# list(range(5)) 结果 [0,1,2,3,4]
+
+# range(2, 9)
+# list(range(2, 9)) 结果 [2 , 3, 4, 5, 6, 7, 8] 不包含9
+
+# range(1, 10 , 2) 第三个参数2是步进
+# 结果 [1, 3, 5, 7, 9] 每次递增2
+
+# break 终止当前循环体, continue 跳出本次循环体
+
+for idx in range(10):
+    if idx%2 != 0:
+        print(idx)
+        continue
+    idx += 2
+    print(idx)
+
 
