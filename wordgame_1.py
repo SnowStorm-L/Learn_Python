@@ -44,9 +44,9 @@ print("游戏结束 结果是" + str(result))
 
 # e记法 e是10 e后面是次方的意思 e后面加(+,-) 正负多少次方
 
-lalala = 15e10
+count = 15e10
 
-print(lalala)
+print(count)
 
 # 类型转换
 
@@ -72,9 +72,9 @@ path = r"C:\now""\\"
 print(path)
 
 # 反斜杠转义
-Cpath = "C:\\aaa"
+DiskPath = "C:\\aaa"
 
-print(Cpath)
+print(DiskPath)
 
 # 多行字符串
 MultiLineString = """
@@ -166,7 +166,7 @@ print(MultiLineString)
 # break 终止当前循环体, continue 跳出本次循环体
 
 for idx in range(10):
-    if idx%2 != 0:
+    if idx % 2 != 0:
         print(idx)
         continue
     idx += 2
