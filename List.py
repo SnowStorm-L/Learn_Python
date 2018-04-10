@@ -1,3 +1,49 @@
+#!/usr/local/bin/python3
+# -*- coding: utf-8 -*-
+
+# 列表、元组和字符串的共同点
+# - 都可以通过索引得到每一个元素
+# - 默认索引值总是从0开始
+# - 可以通过分片的方法得到一个范围内的元素的集合
+# - 有很多共同的操作符(重复操作符、拼接操作符、成员关系操作符)
+
+# list()
+# 把一个可迭代对象转换为列表
+
+# 迭代
+# 重复反馈过程的活动,其目的是为了接近所需目标或结果
+# 每一次对过程的重复称为一次“迭代”，而每一次迭代得到的结果会作为下一次迭代的初始值。
+
+emptyList = list()
+
+strList = list('python learn')
+
+tupleList = list((1, 1, 2, 3, 5, 8, 13, 21, 34))
+
+# tuple()
+# 把一个可迭代对象转换为元组
+
+print(len(tupleList))
+
+print(max(tupleList))
+
+print(min(tupleList))
+
+# sum 后面有个可选值 sum(p1, p2) 计算完p1的结果后再加上p2
+print(sum(tupleList))
+
+# reversed 返回一个迭代器对象
+print(list(reversed(tupleList)))
+
+# 枚举
+# 返回元组,  下标和数据
+print(list(enumerate(tupleList)))
+
+zipA = [1, 2, 3]
+zipB = [4, 5, 6, 7]
+# 成对打包,多出的扔掉
+print(list(zip(zipA, zipB)))
+
 stringArray = ['a', 'b', 'c', 'd']
 numberArray = [1, 2, 3, 4]
 mixArray = [1, 'a', 3.14, [1, 2, 3]]
