@@ -6,6 +6,8 @@
 # @File    : Def.py
 # @Software: PyCharm
 
+import logging
+
 # 定义
 # def 定义函数的关键字
 
@@ -40,3 +42,44 @@ def test(*parameter, exp):
 
 
 test(1, 2, 3, '4', exp='8')
+
+
+def hello():
+    print("666")
+
+
+temp = hello()
+
+# None
+print(temp)
+# <class 'NoneType'>
+print(type(temp))
+
+# 调用函数,没返回值就返回None
+
+
+# 返回多个值, 元组或者序列
+
+def back():
+    return [1, "2"]
+
+
+# 嵌套函数
+
+def checkparams(fn):
+    def wrapper(a, b):
+        if isinstance(a, (int, float)) and isinstance(b, (int, float)):
+            return fn(a, b)
+        logging.warning("variable 'a' and 'b' can't not be add")
+        return
+    return wrapper
+
+
+add = checkparams(add)
+add(3, 'test')
+
+@checkparams
+def add(a, b):
+ return a + b
+
+print('结果是:', add(4, 5))
