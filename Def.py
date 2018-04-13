@@ -168,3 +168,29 @@ print(NameSpace.__dict__)
 # LEGB规定了查找一个名称的顺序为：local-->enclosing function locals-->global-->builtin
 # 在任何一层先找到了符合要求的变量名，则不再向更外层查找。
 # 如果直到Builtin层仍然没有找到符合要求的变量，则抛出NameError异常。这就是变量名解析的：LEGB法则。
+
+
+x = 1
+
+
+def foo():
+
+    x = 2
+
+    def innerfoo():
+
+        # x = 3
+        # x = 3 属于函数内部命名空间，当被注释掉之后，函数innerfoo内部通过print x 使用x这个名称时，触发了名称查找动作。
+        # 首先在Local命名空间查找，没有找到，然后到Enclosing function locals命名空间查找，查找成功，然后调用。
+
+        print('locals ', x)
+
+    innerfoo()
+
+    print('enclosing function locals ', x)
+
+
+foo()
+
+print('global ', x)
+
