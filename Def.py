@@ -131,6 +131,38 @@ def add(a, b):
 print('结果是:', checkparams(add)(5, 8))
 
 
+# 错误示范
+# def fun1():
+#     x = 5 # 这里被屏蔽起来了
+#     def func2():
+#         x *= x  # x被认为是局部变量
+#         return x
+#     return func2()
+# local variable 'x' referenced before assignment
+# 局部变量'x'不能在没有定义之前引用
+
+# python3 之前是没有直接的解决方法的,只能通过以下的间接解决方法(容器类型,不是存放在栈里面,不会被屏蔽)
+
+# def fun1():
+#     x = [5]
+#     def func2():
+#         x[0] *= x[0]
+#         return x[0]
+#     return func2()
+#
+# print('结果~~~~~',fun1())
+
+
+# python3 后 添加 nonlocal 关键字
+# def fun1():
+#     x = 5
+#     def func2():
+#         nonlocal x
+#         x *= x
+#         return x
+#     return func2()
+
+
 # LEGB法则
 # LEGB就是用来规定命名空间查找顺序的规则
 
