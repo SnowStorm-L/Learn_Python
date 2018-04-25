@@ -61,8 +61,98 @@ file.seek(0, 0)
 for each_line in file:
     print(each_line)
 
-file.write('jjyy')
+file.write('test_str')
 
 # 打开对应关闭, 打开和关闭之间是操作
 # 关闭文件
 file.close()
+
+# 小练习
+
+# 在桌面创建一个名为record.txt的文件 把以下内容去掉注释, 复制进record.txt
+
+# 小客服：小甲鱼，今天有客服问你有没有女朋友？
+# 小甲鱼：咦？
+# 小客服：我跟她说你有女朋友了！
+# 小甲鱼：。。。。。。。
+# 小客服：她让你分手后考虑下她！然后我说：“您要买个优盘，我就帮您留意下~”
+# 小甲鱼：然后呢？
+# 小客服：她买了两个，说发一个货就好~
+# 小甲鱼：呃。。。。。。你真牛！
+# 小客服：谁让我是鱼C最可爱的小客服嘛~
+# 小甲鱼：下次有人想调戏你我不阻止~
+# 小客服：滚！！！
+# ======================================================================================
+# 小客服：小甲鱼，有个好评很好笑哈。
+# 小甲鱼：哦？
+# 小客服：“有了小甲鱼，以后妈妈再也不用担心我的学习了~”
+# 小甲鱼：哈哈哈，我看到丫，我还发微博了呢~
+# 小客服：嗯嗯，我看了你的微博丫~
+# 小甲鱼：哟西~
+# 小客服：那个有条回复“左手拿着小甲鱼，右手拿着打火机，哪里不会点哪里，so easy ^_^”
+# 小甲鱼：T_T
+# =======================================================================================
+# 小客服：小甲鱼，今天一个会员想找你
+# 小甲鱼：哦？什么事？
+# 小客服：他说你的一个学生月薪已经超过12K了！！
+# 小甲鱼：哪里的？
+# 小客服：上海的
+# 小甲鱼：那正常，哪家公司？
+# 小客服：他没说呀。
+# 小甲鱼：哦
+# 小客服：老大，为什么我工资那么低啊？？是时候涨工资了！！
+# 小甲鱼：啊，你说什么？我在外边呢，这里好吵吖。。。。。
+# 小客服：滚！！
+
+# 练习要求
+# 任务：将文件（record.txt）中的数据进行分割并按照以下规律保存起来：
+# -小甲鱼的对话单独保存为boy_*.txt的文件（去掉“小甲鱼：”）
+# -小客服的对话单独保存为girl_*.txt的文件（去掉“小客服：”）
+# -文件中总共有三段对话，分别保存为boy_1.txt，girl_1.txt，boy_2.txt，
+# girl_2.txt，boy_3.txt，girl_3.txt共6个文件（提示：文件中的不同对话见已经使用“=========”分割）
+
+# 以下属性命名可能和上面的重复, 注释一下就好
+
+# def create_file(filename, write_content):
+#
+#     file = open('/Users/l/Desktop/{0}.txt'.format(filename), mode='x')
+#
+#     file.writelines(write_content)
+#
+#     file.close()
+#
+#
+# def split_file():
+#
+#     origin_file = open('/Users/l/Desktop/record.txt')
+#
+#     file_content_dict = {}
+#
+#     index = 0
+#
+#     for each_line in origin_file:
+#
+#         if '===' in each_line:
+#
+#             index += 1
+#
+#             continue
+#
+#         else:
+#
+#             (people, content) = each_line.split('：', 1)
+#
+#             file_content_dict[people] = '{0}{1}'.format(file_content_dict.get(people), content)
+#
+#             sub_filename = '{0}_{1}'.format('boy' if people == '小甲鱼' else 'girl', index)
+#
+#             file_content_dict[sub_filename] = '{0}{1}'.format(file_content_dict.get(sub_filename), content)
+#
+#     origin_file.close()
+#
+#     return file_content_dict
+#
+#
+# for key in split_file().keys():
+#
+#     create_file(key, list(split_file().get(key)))
