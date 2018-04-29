@@ -78,6 +78,6 @@ print(list(os.walk(path)))
 # isabs(path)             判断指定路径是否为绝对路径
 # isdir(path)             判断指定路径是否存在且是一个目录
 # isfile(path)            判断指定路径是否存在且是一个文件
-# islink(path)            判断指定路径是否存在且是一个符号链接
-# ismount(path)           判断指定路径是否存在且是一个挂载点
+# islink(path)            判断指定路径是否存在且是一个符号链接(windows上就是快捷方式)
+# ismount(path)           判断指定路径是否存在且是一个挂载点(例如C盘,D盘这些就是挂载点)
 # samefile(path1, paht2)  判断path1和path2两个路径是否指向同一个文件
