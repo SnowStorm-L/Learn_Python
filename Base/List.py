@@ -143,6 +143,29 @@ listFive.sort()
 
 print(listFive)
 
+# 列表推导式或列表解析
+
+# 列表推导式（List comprehensions）也叫列表解析，灵感取自函数式编程语言 Haskell。Ta 是一个非常有用和灵活的工具，可以用来动态的创建列表
+#
+# 语法如：
+# [有关变量的表达式 for 变量 in 列表] 或者 [有关变量的表达式 for 变量 in 列表 if 条件]
+
+print([i*i for i in range(10) if i % 3 == 0])
+
+# 上面的写法相当于以下的代码
+
+# list1 = []
+# for x in range(10):
+#     list1.append(x**2)
+
+# 相关的也有 字典推导,集合推导...
+
+# 字典
+print({x: x > 3 for x in range(10)})
+
+# 集合
+print({x for x in range(10)})
+
 # *** 重点  为什么要用[:]重新切片(拷贝)整个数组, 而不用newList = originList
 # 看以下例子
 
@@ -158,3 +181,11 @@ listSeven = listSix
 listSix.reverse()
 
 print(listSeven)
+
+
+# 编写一个程序，求 100~999 之间的所有水仙花数。
+# 如果一个 3 位数等于其各位数字的立方和，则称这个数为水仙花数。例如：153 = 1^3 + 5^3 + 3^3，因此 153 就是一个水仙花数。
+
+for idx in range(100, 1000):
+    if idx == sum(list(map(lambda x: int(x) ** 3, list(str(idx))))):
+        print(idx)
