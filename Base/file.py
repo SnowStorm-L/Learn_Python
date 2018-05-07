@@ -67,6 +67,18 @@ file.write('test_str')
 # 关闭文件
 file.close()
 
+# *********************************************#
+#        异常处理配合with语句                   #
+#            可以避免已打开文件没关闭的情况       #
+# *********************************************#
+try:
+    with open('data.txt', 'w') as f:
+        for each_line in f:
+            print(each_line)
+except OSError as reason:
+    print('出错啦：' + str(reason))
+
+
 # 小练习
 
 # 在桌面创建一个名为record.txt的文件 把以下内容去掉注释, 复制进record.txt

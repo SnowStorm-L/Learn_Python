@@ -100,5 +100,13 @@ except Exception as array_error_reason:
 # except TypeError: 可以except不同类型异常分别处理
 # except (TypeError, OSError): 也可以一起处理
 
+# else 配合异常使用
+try:
+    print(int('abc'))
+except ValueError as reason:
+    print('出错啦：' + str(reason))
+else:
+    print('没有任何异常！')
+
 # raise 引发异常
 raise ZeroDivisionError('自己的异常')

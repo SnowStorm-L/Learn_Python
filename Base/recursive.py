@@ -80,3 +80,21 @@ def hanoitower(n, x='X', y='Y', z='Z'):
 
 
 print(hanoitower(3))
+
+
+# *************************************************#
+#      判断给定数的最大公约数，如果是素数，则打印         #
+# *************************************************#
+def show_max_factor(num):
+    count = num // 2
+    while count > 1:
+        if num % count == 0:
+            print('%d最大的约数是%d' % (num, count))
+            break
+        count -= 1
+    else:
+        print('%d是素数！' % num)
+
+
+number = int(input('请输入一个数：'))
+show_max_factor(number)
