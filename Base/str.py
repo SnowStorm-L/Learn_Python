@@ -2,7 +2,7 @@
 # @Time    : 2018/4/9 PM3:12
 # @Author  : L
 # @Email   : L862608263@163.com
-# @File    : Str.py
+# @File    : str.py
 # @Software: PyCharm
 
 newStr = 'python python'
