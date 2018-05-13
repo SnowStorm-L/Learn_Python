@@ -66,3 +66,46 @@ big_turtle = BigTurtle()
 # small_turtle 不仅是Turtle还是SmallTurtle
 print(isinstance(small_turtle, SmallTurtle))
 print(isinstance(small_turtle, Turtle))
+
+# python 的self相当于cplusplus的this指针
+
+
+class Ball:
+
+    input_name = ''
+
+    __private_property = "私有属性"
+
+    # 重写私有属性的get方法,供外部使用
+    def get_private_property(self):
+        return self.__private_property
+
+    # 重写实例化方法
+    def __init__(self, name):
+        self.input_name = name
+
+    def set_name(self, name):
+        self.input_name = name
+
+    def kick(self):
+        print('%s踢了我' % self.input_name)
+
+
+# ball = Ball()
+# print(ball.input_name)
+ball = Ball('波波')
+# ball.set_name('保龄球')
+# kick这里有第一个隐藏参数,self
+ball.kick()
+
+# name mangling (名字改编,名字重整) 私有属性的内部实现
+print(ball.get_private_property())
+# 把双__的私有变量自动改了名  改成(_类名__变量名)
+# python 的私有机制,是伪私有
+print(ball._Ball__private_property)
+
+# 公有和私有
+
+# 默认的函数变量都是公有的
+
+# 在py中定义私有变量只需在变量或函数名前面加"__"两个下划线,那么这个函数或变量就会成为私有的了
