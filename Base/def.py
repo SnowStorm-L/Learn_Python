@@ -226,3 +226,6 @@ foo()
 
 print('global ', x)
 
+# TODO
+# @classmethod, @staticmethod 类方法和静态方法的方法修饰词的作用
+
