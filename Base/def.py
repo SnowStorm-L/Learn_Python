@@ -229,3 +229,5 @@ print('global ', x)
 # TODO
 # @classmethod, @staticmethod 类方法和静态方法的方法修饰词的作用
 
+# 下面这行可以取消类里面方法带参数self而不使用self的警告
+# noinspection PyMethodMayBeStatic
