@@ -186,6 +186,7 @@ class BaseClassTwo:
         print('i`m BaseClassTwo')
 
 
+# 多继承实现
 class SomeClass(BaseClassOne, BaseClassTwo):
     pass
 
@@ -193,3 +194,71 @@ class SomeClass(BaseClassOne, BaseClassTwo):
 some_class = SomeClass()
 some_class.say_one()
 some_class.say_two()
+# mro查看继承关系
+print(SomeClass.__mro__)
+
+# Mixin 编程是一种开发模式，是一种将多个类中的功能单元的进行组合的利用的方式，
+# 这听起来就像是有类的继承机制就可以实现，然而这与传统的类继承有所不同。
+# 通常 Mixin 并不作为任何类的基类，也不关心与什么类一起使用，而是在运行时动态的同其他零散的类一起组合使用
+
+# 使用 Mixin 机制有如下好处：
+# 可以在不修改任何源代码的情况下，对已有类进行扩展；
+# 可以保证组件的划分；
+# 可以根据需要，使用已有的功能进行组合，来实现“新”类；
+# 很好的避免了类继承的局限性，因为新的业务需要可能就需要创建新的子类。
+
+# 插件方式
+
+# 以上方式，都是基于多继承和python的元编程特性，然而在业务需求变化时，就需要新的功能组合，
+# 那么就需要重新修改A的基类，这回带来同步的问题，因为我们改的是类的特性，而不是对象的。
+# 因此以上修改会对所有引用该类的模块都收到影响，这是相当危险的。
+# 通常我们希望修改对象的行为，而不是修改类的。同样的我们可以利用__dict__来扩展对象的方法。
+
+
+class PlugIn(object):
+    """object 是大多数类的基类, 可以省略 """
+    def __init__(self):
+        self._exported_methods = []
+  
+    def plug_in(self, owner):
+        for f in self._exported_methods:
+            owner.__dict__[f.__name__] = f
+
+    def plug_out(self, owner):
+        for f in self._exported_methods:
+            del owner.__dict__[f.__name__]
+
+
+class AFeature(PlugIn):
+
+    def __init__(self):
+        super().__init__()
+        self._exported_methods.append(self.get_a_value)
+
+    # noinspection PyMethodMayBeStatic
+    def get_a_value(self):
+        print('a feature.')
+
+
+class BFeature(PlugIn):
+
+    def __init__(self):
+        super(BFeature, self).__init__()
+        self._exported_methods.append(self.get_b_value)
+
+    # noinspection PyMethodMayBeStatic
+    def get_b_value(self):
+        print('b feature.')
+
+
+class Combine:
+    pass
+
+
+c = Combine()
+
+AFeature().plug_in(c)
+BFeature().plug_in(c)
+
+c.get_a_value()
+c.get_b_value()
