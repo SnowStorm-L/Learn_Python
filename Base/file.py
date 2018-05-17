@@ -168,3 +168,22 @@ except OSError as reason:
 # for key in split_file().keys():
 #
 #     create_file(key, list(split_file().get(key)))
+
+# 编写一个程序,接受用户输入并保持为新的文件
+
+# def file_write(file_name):
+#     try:
+#         with open('/Users/l/Desktop/{0}.txt'.format(file_name), 'w') as input_file:
+#             print("请输入内容[单独输入':w'保存退出]:")
+#             while True:
+#                 input_content = input()
+#                 if input_content == ":w":
+#                     break
+#                 input_file.write('%s\n' % input_content)
+#
+#     except OSError as reason:
+#         print('出错啦：' + str(reason))
+#
+#
+# input_file_name = input('请输入文件名:')
+# file_write(input_file_name)
