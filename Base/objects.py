@@ -262,3 +262,62 @@ BFeature().plug_in(c)
 
 c.get_a_value()
 c.get_b_value()
+
+
+# 类和对象相关的BIF
+
+# issubclass(class, classinfo)
+# 第一个class是第二个classinfo的子类,就返回true
+
+# 非严格性检查
+# 1,一个类被认为是其自身的子类
+# 2,classinfo可以是类对象组成的元组, 只要class与其中任何一个候选类的子类,则返回true
+
+# 检查实例对象是否属于一个类(classinfo)的
+# isinstance(object, classinfo)
+
+# 非严格性检查
+# 1,如果第一个参数不是对象,则永远返回False
+# 2,如果第二个参数不是类或者由类对象组成的元祖,会抛出一个TypeError异常
+# 3,classinfo可以是类对象组成的元组, 只要class与其中任何一个候选类的子类,则返回true
+
+# attribute: 属性
+# 检查对象是否有指定属性
+# name要用字符串
+# hasattr(object, name)
+
+# 返回对象指定的属性值
+# 如果指定属性不存在,并且设置了default,就会把default打印出来
+# 否则抛出AttributeError的异常
+# getattr(object, name, default=None)
+
+# 设置对象属性值,如果不存在,会新创建
+# setattr(object, name, value)
+
+# 删除对象指定的属性
+# delattr(object, name)
+
+# 通过属性设置属性
+# 用途--设置对外接口(可以不用经常改变), 对内的只是方法(用户只调x操作)
+# property(fget=None, fset=None, fdel=None, doc=None)
+
+
+# class Demo:
+#
+#     def __init__(self, value=10):
+#         self.size = value
+#
+#     def get_size(self):
+#         return self.size
+#
+#     def set_size(self, value):
+#         self.size = value
+#
+#     def del_size(self):
+#         del self.size
+#
+#     x = property(get_size, set_size, del_size)
+#
+#
+# demo = Demo()
+# demo.x = 20
