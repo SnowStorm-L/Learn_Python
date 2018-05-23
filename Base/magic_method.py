@@ -78,6 +78,69 @@
 # 定义当描述符的值被删除时的行为
 
 
+# 比较操作符
+
+# __lt__(self, other)
+# 定义小于号的行为：x < y 调用 x.__lt__(y)
+#
+# __le__(self, other)
+# 定义小于等于号的行为：x <= y 调用 x.__le__(y)
+#
+# __eq__(self, other)
+# 定义等于号的行为：x == y 调用 x.__eq__(y)
+#
+# __ne__(self, other)
+# 定义不等号的行为：x != y 调用 x.__ne__(y)
+#
+# __gt__(self, other)
+# 定义大于号的行为：x > y 调用 x.__gt__(y)
+#
+# __ge__(self, other)
+# 定义大于等于号的行为：x >= y 调用 x.__ge__(y)
+
+
+# 算数运算符
+
+# __add__(self, other)
+# 定义加法的行为：+
+#
+# __sub__(self, other)
+# 定义减法的行为：-
+#
+# __mul__(self, other)
+# 定义乘法的行为：*
+#
+# __truediv__(self, other)
+# 定义真除法的行为：/
+#
+# __floordiv__(self, other)
+# 定义整数除法的行为：//
+#
+# __mod__(self, other)
+# 定义取模算法的行为：%
+#
+# __divmod__(self, other)
+# 定义当被 divmod() 调用时的行为  divmod(a, b) 返回一个元祖: (a//b, a%b)
+#
+# __pow__(self, power, modulo=None)
+# 定义当被 power() 调用或 ** 运算时的行为
+#
+# __lshift__(self, other)
+# 定义按位左移位的行为：<<
+#
+# __rshift__(self, other)
+# 定义按位右移位的行为：>>
+#
+# __and__(self, other)
+# 定义按位与操作的行为：&
+#
+# __xor__(self, other)
+# 定义按位异或操作的行为：^
+#
+# __or__(self, other)
+# 定义按位或操作的行为：|
+
+
 # 一个重写int的魔法方法的小例子
 
 class Demo(int):
@@ -91,3 +154,118 @@ class Demo(int):
 
 print(Demo(5) + Demo(3))
 
+# 反运算 （与上方相同，当左操作数不支持相应的操作时被调用）
+
+# __radd__(self, other)	
+# __rsub__(self, other)	
+# __rmul__(self, other)	
+# __rtruediv__(self, other)	
+# __rfloordiv__(self, other)	
+# __rmod__(self, other)	
+# __rdivmod__(self, other)	
+# __rpow__(self, other)	
+# __rlshift__(self, other)	
+# __rrshift__(self, other)	
+# __rand__(self, other)	
+# __rxor__(self, other)	
+# __ror__(self, other)
+
+# 例如: a + b
+# a是主动, 但是如果a对象的add方法没有实现,或者不支持相应操作时
+# python 就找到对象b的__radd__(self, other)方法
+
+
+class Nint(int):
+
+    def __radd__(self, other):
+        print('__radd__方法执行了1-5')
+        return int.__sub__(other, self)
+
+
+a = Nint(3)
+b = Nint(5)
+
+print(a + b)
+
+# 1找不到它的add方法,于是去找b, b执行的radd方法 返回sub结果
+# 这里因为是b执行的方法,所以self是b  radd返回的sub参数要调换一下(other和self位置调换)
+print(1 + b)
+
+
+# 增量赋值运算
+
+# __iadd__(self, other)	定义赋值加法的行为：+=
+# __isub__(self, other)	定义赋值减法的行为：-=
+# __imul__(self, other)	定义赋值乘法的行为：*=
+# __itruediv__(self, other)	定义赋值真除法的行为：/=
+# __ifloordiv__(self, other)	定义赋值整数除法的行为：//=
+# __imod__(self, other)	定义赋值取模算法的行为：%=
+# __ipow__(self, other[, modulo])	定义赋值幂运算的行为：**=
+# __ilshift__(self, other)	定义赋值按位左移位的行为：<<=
+# __irshift__(self, other)	定义赋值按位右移位的行为：>>=
+# __iand__(self, other)	定义赋值按位与操作的行为：&=
+# __ixor__(self, other)	定义赋值按位异或操作的行为：^=
+# __ior__(self, other)	定义赋值按位或操作的行为：|=
+
+
+# 一元操作符
+
+# __pos__(self)	定义正号的行为：+x
+# __neg__(self)	定义负号的行为：-x
+# __abs__(self)	定义当被 abs() 调用时的行为
+# __invert__(self)	定义按位求反的行为：~x
+
+
+# 类型转换
+
+# __complex__(self)
+# 定义当被 complex() 调用时的行为（需要返回恰当的值）
+#
+# __int__(self)
+# 定义当被 int() 调用时的行为（需要返回恰当的值）
+#
+# __float__(self)
+# 定义当被 float() 调用时的行为（需要返回恰当的值）
+#
+# __round__(self, n=None)
+# 定义当被 round() 调用时的行为（需要返回恰当的值）
+#
+# __index__(self)
+# 1. 当对象是被应用在切片表达式中时，实现整形强制转换
+# 2. 如果你定义了一个可能在切片时用到的定制的数值型,你应该定义 __index__
+# 3. 如果 __index__ 被定义，则 __int__ 也需要被定义，且返回相同的值
+
+
+# 上下文管理（with 语句）
+
+# __enter__(self)
+# 1. 定义当使用 with 语句时的初始化行为
+# 2. __enter__ 的返回值被 with 语句的目标或者 as 后的名字绑定
+#
+# __exit__(self, exc_type, exc_value, exc_tb)
+# 1. 定义当一个代码块被执行或者终止后上下文管理器应该做什么
+# 2. 一般被用来处理异常，清除工作或者做一些代码块执行完毕之后的日常工作
+
+
+# 容器类型
+
+# __len__(self)	定义当被 len()
+# 调用时的行为（返回容器中元素的个数）
+#
+# __getitem__(self, key)
+# 定义获取容器中指定元素的行为，相当于 self[key]
+#
+# __setitem__(self, key, value)
+# 定义设置容器中指定元素的行为，相当于 self[key] = value
+#
+# __delitem__(self, key)
+# 定义删除容器中指定元素的行为，相当于 del self[key]
+#
+# __iter__(self)
+# 定义当迭代容器中的元素的行为
+#
+# __reversed__(self)
+# 定义当被 reversed() 调用时的行为
+#
+# __contains__(self, item)
+# 定义当使用成员测试运算符（in 或 not in）时的行为
