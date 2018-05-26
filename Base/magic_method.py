@@ -77,6 +77,28 @@
 # __delete__(self, instance)
 # 定义当描述符的值被删除时的行为
 
+class Property:
+
+    def __getattribute__(self, item):
+        print('getattribute')
+        return super().__getattribute__(item)
+
+    def __getattr__(self, item):
+        print('getattr')
+
+    def __setattr__(self, key, value):
+        print('setattr')
+        super().__setattr__(key, value)
+
+    def __delattr__(self, item):
+        print('delattr')
+        super().__delattr__(item)
+
+
+p = Property()
+print(p.x)
+p.x = 1
+del p.x
 
 # 比较操作符
 
