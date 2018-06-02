@@ -8,6 +8,7 @@
 
 import logging
 
+
 # 定义
 # def 定义函数的关键字
 
@@ -30,6 +31,7 @@ print(add.__doc__)
 # 关键字参数
 
 print(add(num1=1))
+
 
 # 收集参数(可变参数) ***再加其它参数的话,要加默认参数,或者调用的时候用关键字参数
 
@@ -55,6 +57,7 @@ print(temp)
 # <class 'NoneType'>
 print(type(temp))
 
+
 # 调用函数,没返回值就返回None
 
 
@@ -72,6 +75,7 @@ def fun1():
 
     def fun2():
         print('fun2()正在被调用')
+
     fun2()
 
 
@@ -90,6 +94,7 @@ def external(x):
         # 2, internal对外部作用域(就是external的作用域)的变量(这里是x)进行引用
         # 达到1,2两点需求的话  就是闭包(internal是闭包)
         return x * y
+
     return internal
 
 
@@ -113,6 +118,7 @@ def checkparams(fn):
             return fn(a, b)
         logging.warning("variable 'a' and 'b' can't not be add")
         return
+
     return wrapper
 
 
@@ -121,6 +127,7 @@ def checkparams(fn):
 # @checkparams
 def add(a, b):
     return a + b
+
 
 # 调用方法1
 # add = checkparams(add)
@@ -162,6 +169,20 @@ print('结果是:', checkparams(add)(5, 8))
 #         return x
 #     return func2()
 
+# 属性名和方法名重复,属性会覆盖方法
+
+# class Demo:
+#     number = 5
+#
+#     def number(self):
+#         print(666)
+#
+#
+# a = Demo()
+# # <bound method Demo.number of <__main__.Demo object at 0x106897e80>>
+# print(a.number)
+# print(a.number())
+
 
 # LEGB法则
 # LEGB就是用来规定命名空间查找顺序的规则
@@ -184,7 +205,6 @@ print('结果是:', checkparams(add)(5, 8))
 
 # 由以下例子证明
 class NameSpace:
-
     b = 5
 
 
@@ -192,7 +212,6 @@ class NameSpace:
 # 由于这是一种映射关系，所以，可以使用键-值的形式来表示，即{'b': 5}。
 # 字典{name(str类型) : object(any类型)}
 print(NameSpace.__dict__)
-
 
 # 前面讲到，Python的命名空间是一个字典，字典内保存了变量名称与对象之间的映射关系，因此，查找变量名就是在命名空间字典中查找键-值对。
 # Python有多个命名空间，因此，需要有规则来规定，按照怎样的顺序来查找命名空间，LEGB就是用来规定命名空间查找顺序的规则。
@@ -206,11 +225,9 @@ x = 1
 
 
 def foo():
-
     x = 2
 
     def innerfoo():
-
         # x = 3
         # x = 3 属于函数内部命名空间，当被注释掉之后，函数innerfoo内部通过print x 使用x这个名称时，触发了名称查找动作。
         # 首先在Local命名空间查找，没有找到，然后到Enclosing function locals命名空间查找，查找成功，然后调用。
