@@ -166,6 +166,11 @@ print({x: x > 3 for x in range(10)})
 # 集合
 print({x for x in range(10)})
 
+# 生成器推导式 看generator.py
+e = (i for i in range(10))
+print(e)
+next(e)
+
 # *** 重点  为什么要用[:]重新切片(拷贝)整个数组, 而不用newList = originList
 # 看以下例子
 
