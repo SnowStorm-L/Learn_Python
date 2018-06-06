@@ -100,6 +100,72 @@ print(p.x)
 p.x = 1
 del p.x
 
+
+# 描述符
+# 描述符就是将某种特殊类型的类的实例指派给另一个类的属性
+
+class MyDecriptor:
+
+    def __get__(self, instance, owner):
+        print('getting...', self, instance, owner)
+
+    def __set__(self, instance, value):
+        print('setting...', self, instance, value)
+
+    def __delete__(self, instance):
+        print('delete...', self, instance)
+
+
+class Test:
+    x = MyDecriptor()
+
+
+test = Test()
+print(test.x)
+
+
+# 属性的根本实现是描述符
+
+class MyProperty:
+    def __init__(self, fget=None, fset=None, fdel=None):
+        self.fget = fget
+        self.fset = fset
+        self.fdel = fdel
+
+    def __get__(self, instance, owner):
+        return self.fget(instance)
+
+    def __set__(self, instance, value):
+        self.fset(instance, value)
+
+    def __delete__(self, instance):
+        self.fdel(instance)
+
+
+class SomeClass:
+
+    _x = ''
+
+    def __init__(self):
+        self._x = None
+
+    def get_x(self):
+        return self._x
+
+    def set_x(self, value):
+        self._x = value
+
+    def del_x(self):
+        del self._x
+
+    x = MyProperty(get_x, set_x, del_x)
+
+
+some_class = SomeClass()
+some_class.x = 'nothing'
+print(some_class._x)
+
+
 # 比较操作符
 
 # __lt__(self, other)
@@ -176,6 +242,7 @@ class Demo(int):
 
 print(Demo(5) + Demo(3))
 
+
 # 反运算 （与上方相同，当左操作数不支持相应的操作时被调用）
 
 # __radd__(self, other)	
@@ -212,7 +279,6 @@ print(a + b)
 # 1找不到它的add方法,于是去找b, b执行的radd方法 返回sub结果
 # 这里因为是b执行的方法,所以self是b  radd返回的sub参数要调换一下(other和self位置调换)
 print(1 + b)
-
 
 # 增量赋值运算
 
