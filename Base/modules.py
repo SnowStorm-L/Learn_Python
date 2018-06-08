@@ -100,7 +100,8 @@ import os
 # removedirs(path)                                          递归删除目录，从子目录到父目录逐层尝试删除，遇到目录非空则抛出异常
 # rename(old, new)                                          将文件old重命名为new
 # system(command)                                           运行系统的shell命令 e.g (os.system('open -a Terminal.app'))
-# walk(top, topdown=True, onerror=None, followlinks=False)) 遍历top路径以下所有的子目录，返回一个三元组：(路径, [包含目录], [包含文件])
+# walk(top, topdown=True, onerror=None, followlinks=False))
+# 遍历top路径以下所有的子**目录(只是目录)，top返回一个三元组：(路径, [包含目录], [包含文件])
 #
 # 以下是支持路径操作中常用到的一些定义，支持所有平台
 #
