@@ -29,13 +29,15 @@
 # 导入方法3
 # 这种方法比较推荐,既能保持easygui的命名空间,又能减少前缀的代码数
 
+import os
+from os import path
 import easygui as g
 import random
-import os
 
 
 class GuessNumber:
 
+    # noinspection PyMethodMayBeStatic
     def start(self):
         g.msgbox('嗨,欢迎进入第一个界面小游戏')
         secret = random.randint(1, 10)
@@ -60,15 +62,15 @@ class GuessNumber:
 
 class UserInfo:
 
+    # noinspection PyMethodMayBeStatic
     def start(self):
         msg = "请填写以下联系方式"
         title = "账号中心"
         field_names = ['*用户名', '*真实姓名', '固定电话', '*手机号码', 'QQ', 'E-mail']
-        field_values = []
         field_values = g.multenterbox(msg, title, field_names)
 
         while 1:
-            if field_values == None:
+            if field_values is None:
                 break
             err_msg = ""
             for i in range(len(field_names)):
@@ -84,11 +86,12 @@ class UserInfo:
 
 class FileBrowse:
 
+    # noinspection PyMethodMayBeStatic
     def start(self):
         file_path = g.fileopenbox(default='*.txt')
         # 系统有bug  百度文库125页 跳过
         with open(file_path) as f:
-            title = os.path.basename(file_path)
+            title = path.basename(file_path)
             msg = '文件[%s]的内容如下:' % title
             text = f.read()
             g.textbox(msg, title, text)
@@ -97,10 +100,9 @@ class FileBrowse:
 class CodeStatistics:
     source_list = {}
     file_list = {}
-    target = ['.js', '.html', '.css', '.h', '.m', '.swift', '.py']
+    target = ['.js', '.html', '.css', '.m', '.swift', '.py']
 
-    def show_result(self, start_dir):
-        lines = 0
+    def show_result(self):
         total = 0
         text = ''
         for i in self.source_list:
@@ -111,12 +113,13 @@ class CodeStatistics:
         msg = '目前累积编写了 %d 行代码,完成进度: %.2f %%\n离 10 万行代码还差 %d 行, 请继续努力' % (total, total / 1000, 100000 - total)
         g.textbox(msg, title, text)
 
+    # noinspection PyMethodMayBeStatic
     def calc_code(self, file_name):
         lines = 0
         with open(file_name) as f:
             print('正在分析文件: %s ...' % file_name)
             try:
-                for each_line in f:
+                for _ in f:
                     lines += 1
             except UnicodeDecodeError:
                 pass  # 文件格式不兼容, 忽略掉
@@ -124,8 +127,8 @@ class CodeStatistics:
 
     def search_file(self, start_dir):
         os.chdir(start_dir)
-        for each_file in os.listdir(os.curdir):
-            ext = os.path.splitext(each_file)[1]
+        for each_file in os.listdir(path.curdir):
+            ext = path.splitext(each_file)[1]
             if ext in self.target:
                 lines = self.calc_code(each_file)  # 统计行数
                 # 如果字典中不存,抛出KeyError,则添加字典键
@@ -141,9 +144,9 @@ class CodeStatistics:
                 except KeyError:
                     self.source_list[ext] = lines
 
-            if os.path.isdir(each_file):
+            if path.isdir(each_file):
                 self.search_file(each_file)  # 递归调用
-                os.chdir(os.pardir)  # 递归调用后返回上一层目录
+                os.chdir(path.pardir)  # 递归调用后返回上一层目录
 
 
 # GuessNumber().start()
@@ -151,10 +154,10 @@ class CodeStatistics:
 # FileBrowse().start()
 
 g.msgbox("打开存放代码的文件...", "统计代码量")
-path = g.diropenbox("选择代码库:")
+code_path = g.diropenbox("选择代码库:")
 
 code_statistics = CodeStatistics()
-code_statistics.search_file(path)
-code_statistics.show_result(path)
+code_statistics.search_file(code_path)
+code_statistics.show_result()
 
 # g.egdemo()
