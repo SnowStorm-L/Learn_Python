@@ -125,33 +125,40 @@ class CodeStatistics:
                 pass  # 文件格式不兼容, 忽略掉
         return lines
 
-    def search_file(self, start_dir):
-        os.chdir(start_dir)
-        for each_file in os.listdir(path.curdir):
-            ext = path.splitext(each_file)[1]
-            if ext in self.target:
-                lines = self.calc_code(each_file)  # 统计行数
-                # 如果字典中不存,抛出KeyError,则添加字典键
-                # 统计文件数
-                try:
-                    self.file_list[ext] += 1
-                except KeyError:
-                    self.file_list[ext] = 1
+    def search_file(self, in_path):
 
-                # 统计源代码行数
-                try:
-                    self.source_list[ext] += lines
-                except KeyError:
-                    self.source_list[ext] = lines
+        file_list = os.listdir(in_path)
 
-            if path.isdir(each_file):
-                self.search_file(each_file)  # 递归调用
-                os.chdir(path.pardir)  # 递归调用后返回上一层目录
+        for filename in file_list:
+
+            file_path = os.path.join(in_path, filename)
+
+            if os.path.isdir(file_path):
+                self.search_file(file_path)
+            else:
+                file, ext = os.path.splitext(file_path)
+                if ext is None:
+                    continue
+                if ext in self.target:
+                    lines = self.calc_code("{0}{1}".format(file, ext))  # 统计行数
+                    # 如果字典中不存,抛出KeyError,则添加字典键
+                    # 统计文件数
+                    try:
+                        self.file_list[ext] += 1
+                    except KeyError:
+                        self.file_list[ext] = 1
+
+                    # 统计源代码行数
+                    try:
+                        self.source_list[ext] += lines
+                    except KeyError:
+                        self.source_list[ext] = lines
 
 
 # GuessNumber().start()
 # UserInfo().start()
 # FileBrowse().start()
+
 
 g.msgbox("打开存放代码的文件...", "统计代码量")
 code_path = g.diropenbox("选择代码库:")
