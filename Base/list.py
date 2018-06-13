@@ -162,6 +162,7 @@ print([i*i for i in range(10) if i % 3 == 0])
 
 # 字典
 print({x: x > 3 for x in range(10)})
+# {key: value for key, value in collection if value != XXX}
 
 # 集合
 print({x for x in range(10)})

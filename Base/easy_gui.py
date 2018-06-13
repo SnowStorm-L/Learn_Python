@@ -6,6 +6,9 @@
 # @File    : easy_gui.py
 # @Software: PyCharm
 
+# python 做UI的 有以下几个库
+# easyGUI < Tkinter(自带的) < PyQT5
+
 # 安装easyGUI
 
 # command + , 进入 preference
@@ -30,7 +33,6 @@
 # 这种方法比较推荐,既能保持easygui的命名空间,又能减少前缀的代码数
 
 import os
-from os import path
 import easygui as g
 import random
 
@@ -84,23 +86,16 @@ class UserInfo:
         print('用户资料如下: %s' % (str(field_values)))
 
 
-class FileBrowse:
-
-    # noinspection PyMethodMayBeStatic
-    def start(self):
-        file_path = g.fileopenbox(default='*.txt')
-        # 系统有bug  百度文库125页 跳过
-        with open(file_path) as f:
-            title = path.basename(file_path)
-            msg = '文件[%s]的内容如下:' % title
-            text = f.read()
-            g.textbox(msg, title, text)
-
-
 class CodeStatistics:
     source_list = {}
     file_list = {}
     target = ['.js', '.html', '.css', '.m', '.swift', '.py']
+
+    def start(self):
+        g.msgbox("打开存放代码的文件...", "统计代码量")
+        code_path = g.diropenbox("选择代码库:")
+        self.search_file(code_path)
+        self.show_result()
 
     def show_result(self):
         total = 0
@@ -110,7 +105,7 @@ class CodeStatistics:
             total += lines
             text += '[%s] 源文件 %d 个, 源代码 %d 行\n' % (i, self.file_list[i], lines)
         title = '统计结果'
-        msg = '目前累积编写了 %d 行代码,完成进度: %.2f %%\n离 10 万行代码还差 %d 行, 请继续努力' % (total, total / 1000, 100000 - total)
+        msg = '目前累积编写了 %d 行代码' % total
         g.textbox(msg, title, text)
 
     # noinspection PyMethodMayBeStatic
@@ -157,14 +152,4 @@ class CodeStatistics:
 
 # GuessNumber().start()
 # UserInfo().start()
-# FileBrowse().start()
-
-
-g.msgbox("打开存放代码的文件...", "统计代码量")
-code_path = g.diropenbox("选择代码库:")
-
-code_statistics = CodeStatistics()
-code_statistics.search_file(code_path)
-code_statistics.show_result()
-
-# g.egdemo()
+CodeStatistics().start()
