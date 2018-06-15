@@ -11,11 +11,13 @@ import sys
 # 设置递归最大深度
 sys.setrecursionlimit(10000)
 
+
 # 递归
 
 
 def recursion():
     return recursion()
+
 
 # 死循环
 # RecursionError: maximum recursion depth exceeded
@@ -32,6 +34,7 @@ def factorial(n):
     #     result *= i
     # return result
 
+
 # 递归的流程
 # factorial(5) = 5 * factorial(4)
 # factorial(4) = 4 * factorial(3)
@@ -42,18 +45,33 @@ def factorial(n):
 
 print(factorial(5))
 
+
+# 求：1+2*3+4*5*6+7*8*9*10+11*12*13*14*15+……+(n-k)*...*(n-1)*n的和。
+# 说明：第k个加法项，就有n个数相乘，如果最后一项不足，有几项相乘几项。
+# 例如：n=13时，则求1+2*3+4*5*6+7*8*9*10+11*12*13
+# n=16时，则求1+2*3+4*5*6+7*8*9*10+11*12*13*14*15+16
+
+def calculate(n):
+    number_list = [str(i) for i in range(1, n + 1)]
+
+    operators_list = ''.join(['+' + '*' * i for i in range(1, n // 2 + 1)])
+
+    result_tuple = sum(zip(number_list, operators_list), ())
+
+    return eval(''.join(result_tuple[:-1]))
+
+
 # 斐波那契数列  递归实现
 # 1、1、2、3、5、8、13、21
 
 
-def fibonaccisequence(n):
-    return 1 if n < 3 else fibonaccisequence(n - 2) + fibonaccisequence(n - 1)
+def fibonacci_sequence(n):
+    return 1 if n < 3 else fibonacci_sequence(n - 2) + fibonacci_sequence(n - 1)
 
 
 # 迭代实现
 
 def iteration(n):
-
     if n < 3:
         return 1
 
@@ -70,16 +88,16 @@ def iteration(n):
 
 # 汉诺塔游戏
 # 3根柱子(x, y, z),仍以层数
-def hanoitower(n, x='X', y='Y', z='Z'):
+def hanoi_tower(n, x='X', y='Y', z='Z'):
     if n == 1:
         print(x, '-->', z)
     else:
-        hanoitower(n-1, x, z, y)  # 将前n-1个盘子从x移动到y上
+        hanoi_tower(n - 1, x, z, y)  # 将前n-1个盘子从x移动到y上
         print(x, '-->', z)  # 将最底下的最后一个盘子从x移动到z上
-        hanoitower(n-1, y, x, z)  # 将y上的n-1个盘子移动到z上
+        hanoi_tower(n - 1, y, x, z)  # 将y上的n-1个盘子移动到z上
 
 
-print(hanoitower(3))
+print(hanoi_tower(3))
 
 
 # *************************************************#
