@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 easygui = "*"
+django = "*"
 
 [dev-packages]
 
