@@ -152,4 +152,15 @@ class CodeStatistics:
 
 # GuessNumber().start()
 # UserInfo().start()
-CodeStatistics().start()
+# CodeStatistics().start()
+
+# 用pipenv导入不识别头文件, 可以在Project Interpreter用pip3导入
+
+
+# import sys
+#
+# from PyQt5.QtWidgets import *
+# from PyQt5.QtCore import *
+# from PyQt5.QtGui import *
+#
+# app = QApplication(sys.argv)
