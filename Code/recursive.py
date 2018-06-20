@@ -7,6 +7,7 @@
 # @Software: PyCharm
 
 import sys
+from functools import reduce
 
 # 设置递归最大深度
 sys.setrecursionlimit(10000)
@@ -84,6 +85,14 @@ def iteration(n):
         second = temp
         i += 1
     return temp
+
+
+# 一行代码实现
+# fibonacci = lambda n: reduce(lambda x, _: [x[1], x[0] + x[1]], range(n), [0, 1])[0]
+# print(fibonacci(6))
+# fibonacci = lambda n: reduce(lambda x, _: (x[0] + x[1], x[0]), [(1, 1)] * (n - 2))[0]
+# print(fibonacci(6))
+# print([x[0] for x in [(a[i][0], a.append([a[i][1], a[i][0] + a[i][1]])) for a in ([[1, 1]],) for i in range(6)]])
 
 
 # 汉诺塔游戏
