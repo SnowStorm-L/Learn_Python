@@ -157,10 +157,17 @@ class CodeStatistics:
 # 用pipenv导入不识别头文件, 可以在Project Interpreter用pip3导入
 
 
-# import sys
-#
-# from PyQt5.QtWidgets import *
-# from PyQt5.QtCore import *
-# from PyQt5.QtGui import *
-#
-# app = QApplication(sys.argv)
+import sys
+
+from PyQt5.QtWidgets import *
+
+app = QApplication(sys.argv)
+# QWidget部件是pyqt5所有用户界面对象的基类。他为QWidget提供默认构造函数。默认构造函数没有父类。
+widget = QWidget()
+widget.setGeometry(10, 10, 300, 220)
+widget.setWindowTitle('Simple')
+widget.show()
+
+# 系统exit()方法确保应用程序干净的退出
+# 的exec_()方法有下划线。因为执行是一个Python关键词。因此，exec_()代替
+sys.exit(app.exec_())
