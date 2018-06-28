@@ -35,6 +35,7 @@
 import os
 import easygui as g
 import random
+import sys
 
 
 class GuessNumber:
@@ -156,18 +157,36 @@ class CodeStatistics:
 
 # 用pipenv导入不识别头文件, 可以在Project Interpreter用pip3导入
 
+from PyQt5 import QtCore, QtGui, QtWidgets
 
-import sys
 
-from PyQt5.QtWidgets import *
+class QTGuessNumber(QtWidgets.QMainWindow):
 
-app = QApplication(sys.argv)
-# QWidget部件是pyqt5所有用户界面对象的基类。他为QWidget提供默认构造函数。默认构造函数没有父类。
-widget = QWidget()
-widget.setGeometry(10, 10, 300, 220)
-widget.setWindowTitle('Simple')
-widget.show()
+    def __init__(self):
+        super().__init__()
 
-# 系统exit()方法确保应用程序干净的退出
-# 的exec_()方法有下划线。因为执行是一个Python关键词。因此，exec_()代替
-sys.exit(app.exec_())
+        self.setup_ui(self)
+
+    def setup_ui(self, main_window):
+        self.central_Widget = QtWidgets.QWidget(main_window)
+        self.central_Widget.setObjectName("centralWidget")
+        main_window.setObjectName("MainWindow")
+        main_window.resize(386, 127)
+        main_window.setCentralWidget(self.central_Widget)
+        main_window.setWindowTitle("猜数字小游戏")
+        # 关联信号槽
+        QtCore.QMetaObject.connectSlotsByName(main_window)
+
+        self.begin_button = QtWidgets.QPushButton(main_window)
+        self.begin_button.setText("开始游戏")
+        self.begin_button.setGeometry(142, 10, 100, 100)
+        self.begin_button.setObjectName("begin_button")
+
+        self.begin_button.clicked.connect(main_window.close)
+
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    game = QTGuessNumber()
+    game.show()
+    sys.exit(app.exec_())
