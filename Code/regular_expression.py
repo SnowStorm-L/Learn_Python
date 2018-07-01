@@ -39,6 +39,37 @@ import re
 # \\            转义特殊字符 或 signals a special sequence.(没看懂这句什么意思, 可能是后面\\\一堆的意思) 正则表达式匹配反斜杠"\","\\\\" 或 r"\\"
 # []            表示一组字符。作为第一个字符的“^”表示补充集合。
 
+# NOTE re模块 特殊
+
+# 特殊序列由“\\”和列表中的一个字符组成
+# 下面。 如果普通字符不在列表中，那么
+# 导致RE将匹配第二个字符。
+
+# \number  Matches the contents of the group of the same number.
+# \A       Matches only at the start of the string.
+# \Z       Matches only at the end of the string.
+# \b       Matches the empty string, but only at the start or end of a word.
+# \B       Matches the empty string, but not at the start or end of a word.
+# \d       Matches any decimal digit; equivalent to the set [0-9] in
+#          bytes patterns or string patterns with the ASCII flag.
+#          In string patterns without the ASCII flag, it will match the whole
+#          range of Unicode digits.
+# \D       Matches any non-digit character; equivalent to [^\d].
+# \s       Matches any whitespace character; equivalent to [ \t\n\r\f\v] in
+#          bytes patterns or string patterns with the ASCII flag.
+#          In string patterns without the ASCII flag, it will match the whole
+#          range of Unicode whitespace characters.
+# \S       Matches any non-whitespace character; equivalent to [^\s].
+# \w       Matches any alphanumeric character; equivalent to [a-zA-Z0-9_]
+#          in bytes patterns or string patterns with the ASCII flag.
+#          In string patterns without the ASCII flag, it will match the
+#          range of Unicode alphanumeric characters (letters plus digits
+#          plus underscore).
+#          With LOCALE, it will match the set [0-9_] plus characters defined
+#          as letters for the current locale.
+# \W       Matches the complement of \w.
+# \\       Matches a literal backslash.
+
 
 # NOTE re模块 修饰符 - 可选标志 介绍
 # re模块提供的方法基本都带有flags参数, flags参数是个默认参数 flags = 0
