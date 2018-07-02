@@ -46,20 +46,20 @@ import re
 # 导致RE将匹配第二个字符。
 
 # \number  Matches the contents of the group of the same number.
-# \A       Matches only at the start of the string.
-# \Z       Matches only at the end of the string.
-# \b       Matches the empty string, but only at the start or end of a word.
-# \B       Matches the empty string, but not at the start or end of a word.
+# \A       只匹配字符串的开头。
+# \Z       只匹配字符串的末尾。
+# \b       匹配空字符串，但仅限于单词的开头或结尾。
+# \B       匹配空字符串，但不匹配单词的开头或结尾。
 # \d       Matches any decimal digit; equivalent to the set [0-9] in
 #          bytes patterns or string patterns with the ASCII flag.
 #          In string patterns without the ASCII flag, it will match the whole
 #          range of Unicode digits.
-# \D       Matches any non-digit character; equivalent to [^\d].
+# \D       匹配任何非数字字符; 相当于[^ \ d]。
 # \s       Matches any whitespace character; equivalent to [ \t\n\r\f\v] in
 #          bytes patterns or string patterns with the ASCII flag.
 #          In string patterns without the ASCII flag, it will match the whole
 #          range of Unicode whitespace characters.
-# \S       Matches any non-whitespace character; equivalent to [^\s].
+# \S       匹配任何非空白字符; 相当于[^ \ s]。
 # \w       Matches any alphanumeric character; equivalent to [a-zA-Z0-9_]
 #          in bytes patterns or string patterns with the ASCII flag.
 #          In string patterns without the ASCII flag, it will match the
