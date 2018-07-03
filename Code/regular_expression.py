@@ -46,27 +46,33 @@ import re
 # 导致RE将匹配第二个字符。
 
 # \number  Matches the contents of the group of the same number.
+
 # \A       只匹配字符串的开头。
+
 # \Z       只匹配字符串的末尾。
+
 # \b       匹配空字符串，但仅限于单词的开头或结尾。
+
 # \B       匹配空字符串，但不匹配单词的开头或结尾。
-# \d       Matches any decimal digit; equivalent to the set [0-9] in
-#          bytes patterns or string patterns with the ASCII flag.
-#          In string patterns without the ASCII flag, it will match the whole
-#          range of Unicode digits.
+
+# \d       匹配任何十进制数字; 相当于以字节模式设置的[0-9]或带有ASCII标志的字符串模式。
+#          在没有ASCII标志的字符串模式中，它将匹配整个Unicode数字范围。
+
 # \D       匹配任何非数字字符; 相当于[^ \ d]。
+
 # \s       Matches any whitespace character; equivalent to [ \t\n\r\f\v] in
 #          bytes patterns or string patterns with the ASCII flag.
 #          In string patterns without the ASCII flag, it will match the whole
 #          range of Unicode whitespace characters.
+
 # \S       匹配任何非空白字符; 相当于[^ \ s]。
-# \w       Matches any alphanumeric character; equivalent to [a-zA-Z0-9_]
-#          in bytes patterns or string patterns with the ASCII flag.
-#          In string patterns without the ASCII flag, it will match the
-#          range of Unicode alphanumeric characters (letters plus digits
-#          plus underscore).
-#          With LOCALE, it will match the set [0-9_] plus characters defined
-#          as letters for the current locale.
+
+# \w       匹配任何字母数字字符; 等效于字节模式中的[a-zA-Z0-9_]或带有ASCII标志的字符串模式。
+#
+#          在没有ASCII标志的字符串模式中，它将匹配Unicode字母数字字符的范围（字母加数字加下划线）。
+#
+#          使用LOCALE，它将匹配set [0-9_]加上定义为当前语言环境的字母的字符。
+
 # \W       Matches the complement of \w.
 # \\       Matches a literal backslash.
 
