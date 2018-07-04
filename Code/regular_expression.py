@@ -45,7 +45,7 @@ import re
 # 下面。 如果普通字符不在列表中，那么
 # 导致RE将匹配第二个字符。
 
-# \number  Matches the contents of the group of the same number.
+# \number  匹配相同number的组的内容。 Matches the contents of the group of the same number.
 
 # \A       只匹配字符串的开头。
 
@@ -60,10 +60,8 @@ import re
 
 # \D       匹配任何非数字字符; 相当于[^ \ d]。
 
-# \s       Matches any whitespace character; equivalent to [ \t\n\r\f\v] in
-#          bytes patterns or string patterns with the ASCII flag.
-#          In string patterns without the ASCII flag, it will match the whole
-#          range of Unicode whitespace characters.
+# \s       匹配任何空白字符; 等效于[\ t \ n \ r \ n \ f \ v]字节模式或带有ASCII标志的字符串模式。
+#          在没有ASCII标志的字符串模式中，它将匹配整个Unicode空白字符范围。
 
 # \S       匹配任何非空白字符; 相当于[^ \ s]。
 
@@ -73,8 +71,8 @@ import re
 #
 #          使用LOCALE，它将匹配set [0-9_]加上定义为当前语言环境的字母的字符。
 
-# \W       Matches the complement of \w.
-# \\       Matches a literal backslash.
+# \W       用于匹配所有与\w不匹配的字符
+# \\       匹配反斜杠.
 
 
 # NOTE re模块 修饰符 - 可选标志 介绍
