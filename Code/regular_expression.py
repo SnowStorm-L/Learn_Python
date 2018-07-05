@@ -39,11 +39,10 @@ import re
 # \\            转义特殊字符 或 signals a special sequence.(没看懂这句什么意思, 可能是后面\\\一堆的意思) 正则表达式匹配反斜杠"\","\\\\" 或 r"\\"
 # []            表示一组字符。作为第一个字符的“^”表示补充集合。
 
-# NOTE re模块 特殊
+# NOTE re模块 特殊序列
 
-# 特殊序列由“\\”和列表中的一个字符组成
-# 下面。 如果普通字符不在列表中，那么
-# 导致RE将匹配第二个字符。
+# 特殊序列由“\\”和下面列表中的字符组成。
+# 如果普通字符不在列表中，则生成的RE将匹配第二个字符。
 
 # \number  匹配相同number的组的内容。 Matches the contents of the group of the same number.
 
