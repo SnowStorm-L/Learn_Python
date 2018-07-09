@@ -137,17 +137,13 @@ import re
 # matchObj = re.fullmatch('www.bai.com', 'www.bai.com')
 # print(matchObj)
 
-
-# 下边是元字符的完整列表（我们将在后边逐一讲解）：
-#
-# .   ^   $   *   +   ?   { }   [ ]   \   |   ( )
-
-# []
-
-# 我们先来看下方括号 [ ]，它们指定一个字符类用于存放你需要匹配的字符集合。
-# 可以单独列出需要匹配的字符，也可以通过两个字符和一个横杆 - 指定匹配的范围。
-# 例如
-# [abc] 会匹配字符 a，b 或 c；
-# [a-c] 可以实现相同的功能。
-# 后者使用范围来表示与前者相同的字符集合。
-# 如果你想只匹配小写字母，你的 RE 可以写成 [a-z]
+re.search()
+re.sub()
+re.subn()
+re.split()
+re.findall()
+re.finditer()
+re.compile()
+re.purge()
+re.template()
+re.escape()
