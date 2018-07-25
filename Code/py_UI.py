@@ -3,7 +3,7 @@
 # @Time    : 2018/5/7 PM3:46
 # @Author  : L
 # @Email   : L862608263@163.com
-# @File    : easy_gui.py
+# @File    : py_UI.py
 # @Software: PyCharm
 
 # python 做UI的 有以下几个库
