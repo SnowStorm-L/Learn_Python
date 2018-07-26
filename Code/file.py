@@ -78,7 +78,6 @@ try:
 except OSError as reason:
     print('出错啦：' + str(reason))
 
-
 try:
     f = open('jjj.txt')
     print(f.read())
@@ -90,8 +89,6 @@ finally:
         # 需要用if 'f' in locals():判断
         # 如果文件对象变量存在当前局部变量符号表的话, 说明打开成功
         f.close()
-
-
 
 # 小练习
 

@@ -30,9 +30,7 @@ while True:
 # def __iter__(self):
 
 class FibonacciSequence:
-    a = 0
-    b = 1
-    n = 10
+    a, b, n = 0, 1, 10
 
     def __iter__(self):
         return self
@@ -44,7 +42,7 @@ class FibonacciSequence:
         return self.a
 
 
-fibo = FibonacciSequence()
+fi_bo = FibonacciSequence()
 
-for each in fibo:
+for each in fi_bo:
     print(each)

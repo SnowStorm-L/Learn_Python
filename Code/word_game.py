@@ -171,5 +171,3 @@ for idx in range(10):
         continue
     idx += 2
     print(idx)
-
-

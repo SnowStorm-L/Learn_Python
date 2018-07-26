@@ -7,7 +7,7 @@
 # @Software: PyCharm
 
 import sys
-from functools import reduce
+# from functools import reduce
 
 # 设置递归最大深度
 sys.setrecursionlimit(10000)
