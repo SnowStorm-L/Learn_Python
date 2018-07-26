@@ -34,11 +34,10 @@ emptyTuple = ()
 tupleOperational = ('一', '二', '三')
 
 # 加入
-tupleOperational = tupleOperational[:2] + ('新的', ) + tupleOperational[2:]
+tupleOperational = tupleOperational[:2] + ('新的',) + tupleOperational[2:]
 
 print(tupleOperational)
 
 # 删除
 # del整个删除或者用[:]切片
 del tupleOperational
-

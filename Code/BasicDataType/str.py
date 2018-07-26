@@ -201,4 +201,3 @@ print(newStr.center(40, 'a'))
 
 # zfill(width)
 # 返回长度为width的字符串，原字符串右对齐，前边用0填充。
-
