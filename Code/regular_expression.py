@@ -107,7 +107,7 @@ import re
 
 # NOTE re模块 提供的方法介绍
 
-# 1, re.match(pattern, string, flags=0)
+# NOTE 1, re.match(pattern, string, flags=0)
 # 将正则表达式模式匹配到字符串的开头。(验证字符串开头, 是否符合匹配规则)
 # pattern      匹配的正则表达式
 # string       要匹配的字符串。
@@ -130,20 +130,121 @@ import re
 # else:
 #     print("No match!!")
 
-# 2, re.fullmatch(pattern, string, flags=0)
+# NOTE 2, re.fullmatch(pattern, string, flags=0)
 # 将正则表达式模式匹配到所有字符串。  (找整个字符串, 验证是否符合匹配规则)
 
 # Demo
 # matchObj = re.fullmatch('www.bai.com', 'www.bai.com')
 # print(matchObj)
 
-re.search()
-re.sub()
-re.subn()
-re.split()
-re.findall()
-re.finditer()
-re.compile()
-re.purge()
-re.template()
-re.escape()
+# NOTE 3, re.search(pattern, string, flags=0)
+# 扫描整个字符串以查找与模式匹配的内容，返回第一个匹配对象，如果未找到匹配则返回None。
+
+# Demo
+# print(re.search("super", "man_super_sun_super"))
+
+# NOTE search 和 match的区别, 看以下2个例子
+
+# print(re.match("super", "superstition").span())
+# 会返回(0, 5)
+#
+# 而
+# print(re.match("super", "insuperable"))
+# 则返回None
+#
+# search()会扫描整个字符串并返回第一个成功的匹配
+# 例如：
+# print(re.search("super", "superstition").span())
+# 返回(0, 5)
+#
+# print(re.search("super", "insuperable").span())
+# 返回(2, 7)
+
+# NOTE 4, re.sub(pattern, repl, string, count=0, flags=0)
+
+# 返回通过替换repl替换字符串中, 最左边不重叠的模式而获得的字符串。
+#
+# repl可以是字符串也可以是函数;
+#
+# 如果是一个字符串，反斜杠转义在其中被处理。
+#
+# 如果它是可调用的函数，则传递匹配对象并且必须返回要使用的替换字符串。
+#
+# (这解释看得有点模糊, 还是看下面的例子,容易理解) 简单来说就是个正则替换
+
+# pattern, string, flags 就不解释了, 不懂的看上面
+
+# repl，就是replacement，被替换，的字符串的意思。repl可以是字符串，也可以是函数。
+# count 处理的次数
+
+# demo
+
+# 如果输入字符串是
+# input_str = "hello 111 world 111"
+
+# 你想替换 111 变成 222, 那么你可以通过字符串本身的替换方法
+# replaced_str = input_str.replace("111", "222")
+
+# 但是，如果输入字符串是
+# input_str = "hello 123 world 456"
+
+# 而你是想把123和456，都换成222 (以及其他还有更多的复杂的情况的时候), 那么就没法直接通过字符串的replace达到这一目的了。
+
+# 就需要借助于re.sub，通过正则表达式，来实现这种相对复杂的字符串的替换
+# replaced_str = re.sub("\d+", "", input_str)
+# print(replaced_str)
+
+# repl是函数的demo
+
+# 比如输入内容是：hello 123 world 456
+# 想要把其中的数字部分，都加上111，变成：hello 234 world 567
+
+# count 参数, 控制替换的次数,范围
+
+# def re_sub_demo():
+#     input_str = "hello 123 world 456"
+#
+#     def add_numbers_in_input_str(matched):
+#         int_str = matched.group("number")
+#         return str(int(int_str) + 111)
+#     # count 如果是1的话, 只处理前面的123, 默认是0(全部处理)
+#     replaced_str = re.sub("(?P<number>\d+)", add_numbers_in_input_str, input_str, count=1)
+#     print("input_str = %s, replaced_str = %s" % (input_str, replaced_str))
+#
+#
+# re_sub_demo()
+
+# NOTE 5, re.subn(pattern, repl, string, count=0, flags=0)
+
+# 这个方法和re.sub基本类似, 只不过它返回一个元祖, (new_string, number)
+# new_string 和 re.sub返回的一样, number表示统计subn方法处理过程中, 替换操作的次数
+
+# NOTE 6, re.split(pattern, string, maxsplit=0, flags=0)
+
+# 按照正则拆分源字符串，返回包含结果子字符串的列表。
+# 如果正则中使用括号，则模式中所有组的文本也将作为结果列表的一部分返回。
+# 如果maxsplit非零，则最多发生maxsplit拆分，并且字符串的其余部分将作为列表的最后一个元素返回。
+
+# demo
+
+# # 1.空格分
+# test_str = 'w w w'
+# print(re.split(r'[\s]', test_str))
+#
+# # 2.只分割一次
+# print(re.split(r'[\s]', test_str, 1))
+#
+# # 3.多个字符分割
+# test_str = 'w!w@w%w^w'
+#
+# print(re.split(r'[!@%^]', test_str))
+
+# NOTE 7, re.findall(pattern, string, flags=0)
+
+
+# re.findall()
+# re.finditer()
+# re.compile()
+# re.purge()
+# re.template()
+# re.escape()
