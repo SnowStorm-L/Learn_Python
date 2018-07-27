@@ -53,7 +53,7 @@ class BaseTimer(threading.Thread):  # from abc import ABCMeta, abstractmethod , 
     # @abstractmethod
     # 使用abstractmethod修饰符, 并在继承的位置,设定metaclass=ABCMeta, 导入ABCMeta, abstractmethod模块
 
-    # (以上实现方式,在Python不通版本中,稍有不同  这里只是按照当前的Python版本做个demo)
+    # (以上实现方式,在Python不同版本中,稍有不同  这里只是按照当前的Python版本做个demo)
 
     # 可以使子类必须实现exec方法, 否则报错
     # TypeError: Can't instantiate abstract class BaseTimer with abstract methods exec
