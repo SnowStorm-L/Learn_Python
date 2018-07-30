@@ -241,6 +241,35 @@ import re
 
 # NOTE 7, re.findall(pattern, string, flags=0)
 
+# 返回字符串中所有非重叠匹配的列表。
+
+# 如果模式中存在一个或多个捕获组，则返回组列表;
+
+# 如果模式有多个组，这将是一个元组列表。
+
+# 结果中包含空匹配。
+
+# demo
+
+# # /s 是 匹配任何空白字符  这个demo中相当于空格
+# # /w 是 匹配任何字母数字字符 这个demo中相当于a,b,c,d 这几个
+#
+# string = "a  b  c  d"
+#
+# # regex 中是带有2个括号的，我们可以看到其输出是一个list 中包含2个 tuple
+# regex = re.compile("((\w+)\s+\w+)")
+# print(regex.findall(string))
+# # [('a  b', 'a'), ('c  d', 'c')]
+#
+# # regex 中带有1个括号，其输出的内容就是括号匹配到的内容，而不是整个表达式所匹配到的结果。
+# regex1 = re.compile("(\w+)\s+\w+")
+# print(regex1.findall(string))
+# # ['a', 'c']
+#
+# # regex 中不带有括号,其输出的内容就是整个表达式所匹配到的内容。
+# regex2 = re.compile("\w\s+\w")
+# print(regex2.findall(string))
+# # ['a  b', 'c  d']
 
 # re.findall()
 # re.finditer()
