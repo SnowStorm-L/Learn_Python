@@ -251,18 +251,19 @@ import re
 
 # demo
 
+# #  + 是 匹配前一个一次或无数次
 # # /s 是 匹配任何空白字符  这个demo中相当于空格
 # # /w 是 匹配任何字母数字字符 这个demo中相当于a,b,c,d 这几个
 #
 # string = "a  b  c  d"
 #
 # # regex 中是带有2个括号的，我们可以看到其输出是一个list 中包含2个 tuple
-# regex = re.compile("((\w+)\s+\w+)")
+# regex = re.compile("((\w)\s+\w)")
 # print(regex.findall(string))
 # # [('a  b', 'a'), ('c  d', 'c')]
 #
 # # regex 中带有1个括号，其输出的内容就是括号匹配到的内容，而不是整个表达式所匹配到的结果。
-# regex1 = re.compile("(\w+)\s+\w+")
+# regex1 = re.compile("(\w)\s+\w")
 # print(regex1.findall(string))
 # # ['a', 'c']
 #
@@ -271,9 +272,53 @@ import re
 # print(regex2.findall(string))
 # # ['a  b', 'c  d']
 
-# re.findall()
-# re.finditer()
-# re.compile()
-# re.purge()
-# re.template()
-# re.escape()
+# NOTE 8, re.finditer(pattern, string, flags=0)
+
+# 在字符串中的所有非重叠匹配上返回迭代器。
+# 对于每个匹配，迭代器返回一个匹配对象。
+# 结果中包含空匹配。
+
+# demo
+
+# content = '''email:12345678@163.com
+# email:2345678@163.com
+# email:345678@163.com
+# '''
+#
+# result_finditer = re.finditer(r"\d+@\w+.com", content)
+# # 由于返回的为MatchObject的iterator，所以我们需要迭代并通过MatchObject的方法输出
+# print(result_finditer)
+# for i in result_finditer:
+#     print(i.group())
+#
+# # finditer() 在提供匹配对象而不是字符串时很有用。
+# # 如果想在某些文本中查找所有的副词及其位置, 他们将以下列方式使用 finditer():
+# text = "He was carefully disguised but captured quickly by police."
+# for m in re.finditer(r"\w+ly", text):
+#     print('%02d-%02d: %s' % (m.start(), m.end(), m.group(0)))
+
+# NOTE 9, re.compile()
+
+# 将正则表达式模式编译为正则表达式对象, 可用于使用其 match()、 search() 和其他方法进行匹配.
+# 可以通过指定标志值来修改表达式的行为。值可以是下列任一变量, 并使用按位 or ( |运算符) 组合。
+
+# 下面2行
+# prog = re.compile(pattern)
+# result = prog.match(string)
+
+# 等效于
+# result = re.match(pattern, string)
+
+# 使用 re.compile() 并保存生成的正则表达式对象以供重用, 在单个程序中多次使用表达式时, 效率会更高
+
+# NOTE 10, re.purge()
+
+# 清除正则表达式缓存
+
+# NOTE 11, template(pattern, flags=0)
+
+# 编译模板模式，返回模式对象
+
+# NOTE 12, re.escape()
+
+# 除ASCII字母，数字和'_'外，转义模式中的所有字符。
