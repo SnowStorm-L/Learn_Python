@@ -293,9 +293,9 @@ import re
 #
 # # finditer() 在提供匹配对象而不是字符串时很有用。
 # # 如果想在某些文本中查找所有的副词及其位置, 他们将以下列方式使用 finditer():
-# text = "He was carefully disguised but captured quickly by police."
-# for m in re.finditer(r"\w+ly", text):
-#     print('%02d-%02d: %s' % (m.start(), m.end(), m.group(0)))
+text = "He was carefully disguised but captured quickly by police."
+for m in re.finditer(r"\w+ly", text):
+    print('%02d-%02d: %s' % (m.start(), m.end(), m.group(0)))
 
 # NOTE 9, re.compile()
 
@@ -303,8 +303,8 @@ import re
 # 可以通过指定标志值来修改表达式的行为。值可以是下列任一变量, 并使用按位 or ( |运算符) 组合。
 
 # 下面2行
-# prog = re.compile(pattern)
-# result = prog.match(string)
+# compile = re.compile(pattern)
+# result = compile.match(string)
 
 # 等效于
 # result = re.match(pattern, string)
