@@ -132,4 +132,41 @@ def pool_demo():
 # 就可以同时跑5个进程。
 # 由于Pool的默认大小是CPU的核数，如果你拥有8核CPU，你要提交至少9个子进程才能看到上面的等待效果。
 
-pool_demo()
+# pool_demo()
+
+# NOTE 子进程
+
+# 运用subprocess包可以在运行python的进程下进一步开启一个子进程，创建子进程要注意
+
+# 1. 父进程是否暂停
+
+# 2.创建出的子进程返回了什么
+
+# 3.执行出错，即返回的code不是0的时候应该如何处理
+
+# subprocess包提供了三个开启子进程的方法，subprocess.call() , subprocess.check_call() , subprocess.check_output()，
+# 给三者传递命令字符串作为参数。
+# 可以用(['ping','www.baidu.com','-c','3'])这种列表的形式。
+# 在开启子进程的时候，可以加上shell=True的参数来让python开启一个shell，通过shell来解释获得的命令。
+#  一般在windows下运行的程序最好都把shell=True加上，这样才能顺利地执行dos命令，但是linux下似乎不加也没啥关系。
+# 因为linux下未指明用shell执行的话会调用/bin/sh来执行，问题不大，但是dos下系统不会默认用cmd.exe来执行命令，所以要加上shell=True。
+
+import subprocess
+
+try:
+    a = subprocess.call(['ping'])
+    print("~~~~~", a)
+except Exception as e:
+    print(e)
+
+# subprocess.call()
+# subprocess.check_call()
+# subprocess.check_output()
+
+# 这三者的区别在于，返回的值分别是，子进程的执行返回码;
+# 若返回码是0则返回0， 否则出错的话raise起CalledProcessError，可以用except处理之；
+#
+# 若返回码是0则返回子进程向stdout输出的结果，否则也raise起CalledProcessError。
+
+# 另外，这三个方法都是让父进程挂起等待的，在子进程结束之前，父进程不会继续往下运行。
+# 从本质上讲，上述三个方法都是对subprocess. Popen方法的一个包装，Popen开启的子进程是不会让父进程等待其完成的，除非调用了wait()方法
