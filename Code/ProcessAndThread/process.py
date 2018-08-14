@@ -136,37 +136,37 @@ def pool_demo():
 
 # NOTE 子进程
 
-# 运用subprocess包可以在运行python的进程下进一步开启一个子进程，创建子进程要注意
-
-# 1. 父进程是否暂停
-
-# 2.创建出的子进程返回了什么
-
-# 3.执行出错，即返回的code不是0的时候应该如何处理
-
-# subprocess包提供了三个开启子进程的方法，subprocess.call() , subprocess.check_call() , subprocess.check_output()，
-# 给三者传递命令字符串作为参数。
-# 可以用(['ping','www.baidu.com','-c','3'])这种列表的形式。
-# 在开启子进程的时候，可以加上shell=True的参数来让python开启一个shell，通过shell来解释获得的命令。
-#  一般在windows下运行的程序最好都把shell=True加上，这样才能顺利地执行dos命令，但是linux下似乎不加也没啥关系。
-# 因为linux下未指明用shell执行的话会调用/bin/sh来执行，问题不大，但是dos下系统不会默认用cmd.exe来执行命令，所以要加上shell=True。
-
 import subprocess
 
-try:
-    a = subprocess.call(['ping'])
-    print("~~~~~", a)
-except Exception as e:
-    print(e)
+# 调用子进程的推荐方法是对它可以处理的所有用例使用 run() 函数。对于更高级的用例, 可以直接使用底层的 Popen 接口。
+# subprocess.(args, *, stdin=None, input=None, stdout=None, stderr=None, capture_output=False, shell=False, cwd=None,
+#              timeout=None, check=False, encoding=None, errors=None, text=None, env=None)
 
-# subprocess.call()
-# subprocess.check_call()
-# subprocess.check_output()
+# 运行args描述的命令。 等待命令完成，然后返回CompletedProcess实例。
+# 上面显示的参数仅仅是最常见的参数，在下面的常用参数中进行了描述（因此在缩写签名中使用了仅关键字符号）。
+# 完整的函数签名与Popen构造函数的签名大致相同 - 此函数的大多数参数都传递给该接口。 （超时，输入，检查和capture_output不是。）
 
-# 这三者的区别在于，返回的值分别是，子进程的执行返回码;
-# 若返回码是0则返回0， 否则出错的话raise起CalledProcessError，可以用except处理之；
-#
-# 若返回码是0则返回子进程向stdout输出的结果，否则也raise起CalledProcessError。
+# 如果capture_output为true，则将捕获stdout和stderr。
+# 使用时，将使用stdout = PIPE和stderr = PIPE自动创建内部Popen对象。 也可能不使用stdout和stderr参数。
 
-# 另外，这三个方法都是让父进程挂起等待的，在子进程结束之前，父进程不会继续往下运行。
-# 从本质上讲，上述三个方法都是对subprocess. Popen方法的一个包装，Popen开启的子进程是不会让父进程等待其完成的，除非调用了wait()方法
+# timeout参数传递给Popen.communicate（）。 如果超时到期，子进程将被终止并等待。 子进程终止后，将重新引发TimeoutExpired异常。
+
+# 输入参数传递给Popen.communicate（），从而传递给子进程的stdin。
+# 如果使用它必须是字节序列，或者如果指定了编码或错误或文本为真，则必须是字符串。
+# 使用时，使用stdin = PIPE自动创建内部Popen对象，也可以不使用stdin参数。
+
+# 如果check为true，并且进程以非零退出代码退出，则将引发CalledProcessError异常。
+# 该异常的属性包含参数，退出代码以及stdout和stderr（如果它们被捕获）。
+
+# 如果指定了编码或错误，或者text为true，则使用指定的编码和错误或io.TextIOWrapper默认值在文本模式下打开stdin，stdout和stderr的文件对象。
+# universal_newlines参数等同于text，用于向后兼容。 默认情况下，文件对象以二进制模式打开。
+
+# 如果environment不是None，则它必须是定义新进程的环境变量的映射; 这些是用来代替继承当前进程环境的默认行为。 它直接传递给Popen。
+
+# demo
+
+# 不捕获输出
+subprocess.run("ping baidu.com -c 3", shell=True)
+
+# 相当于
+subprocess.CompletedProcess(args="ping baidu.com -c 3", returncode=0)
