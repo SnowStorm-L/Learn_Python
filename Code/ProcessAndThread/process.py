@@ -170,3 +170,9 @@ subprocess.run("ping baidu.com -c 3", shell=True)
 
 # 相当于
 subprocess.CompletedProcess(args="ping baidu.com -c 3", returncode=0)
+
+# 获取终端执行命令后的结果
+(state, output) = subprocess.getstatusoutput("ls -all")
+print("state %d output %s" % (state, output))
+
+# subprocess.getoutput() 只获取结果
