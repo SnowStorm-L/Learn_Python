@@ -102,7 +102,7 @@ print(issubclass(bool, int))
 
 print(bool(), bool(0), bool(1), bool(2))
 
-# TODO 未完成 7
+# TODO 未完成 7, 8
 
 # NOTE 7, breakpoint(*args: Any, **kws: Any) -> None
 
@@ -114,3 +114,6 @@ print(bool(), bool(0), bool(1), bool(2))
 # 默认情况下，sys.breakpointhook（）调用pdb.set_trace（）期望没有参数。
 # 在这种情况下，它纯粹是一个便利功能，因此您不必显式导入pdb或输入尽可能多的代码来进入调试器。
 # 但是，sys.breakpointhook（）可以设置为其他一些函数，breakpoint（）会自动调用它，允许你进入所选的调试器。
+
+# NOTE 8, class bytearray(object)
+
