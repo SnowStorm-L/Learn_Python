@@ -102,7 +102,8 @@ print(issubclass(bool, int))
 
 print(bool(), bool(0), bool(1), bool(2))
 
-# TODO 未完成 7, 8
+
+# TODO 未完成 7, 8, 9
 
 # NOTE 7, breakpoint(*args: Any, **kws: Any) -> None
 
@@ -115,5 +116,67 @@ print(bool(), bool(0), bool(1), bool(2))
 # 在这种情况下，它纯粹是一个便利功能，因此您不必显式导入pdb或输入尽可能多的代码来进入调试器。
 # 但是，sys.breakpointhook（）可以设置为其他一些函数，breakpoint（）会自动调用它，允许你进入所选的调试器。
 
-# NOTE 8, class bytearray(object)
+# NOTE 8, class bytearray([source[, encoding[, errors]]])
 
+# NOTE 9, class bytes([source[, encoding[, errors]]])
+
+# NOTE 10, callable(object)
+
+# 如果对象参数显示为可调用，则返回True，否则返回False。
+# 如果返回true，则调用仍然可能失败，但如果为false，则调用对象将永远不会成功。
+# 请注意，类是可调用的（调用类会返回一个新实例）; 如果实例的类具有__call __（）方法，则它们是可调用的。
+# 可被调用指的是对象能否使用()括号的方法调用。
+
+# 版本3.2中的新功能：此功能首先在Python 3.0中删除，然后在Python 3.2中恢复。
+
+class A:
+    pass
+
+
+class B:  # 定义类B
+    def __call__(self):
+        print('instances are callable now.')
+
+
+a = A()  # 调用类A
+# 实例a不可调用
+
+b = B()  # 调用类B
+# 实例b是可调用对象
+
+print(callable(B), callable(A), callable(a), callable(b))
+
+# 调用实例b成功
+b()
+
+# NOTE 11, chr(i)
+
+# 返回表示Unicode代码点为整数i的字符的字符串。
+# 例如，chr（97）返回字符串'a'，而chr（8364）返回字符串'€'。
+# 这是ord（）相反作用的函数。
+
+print(chr(97))
+print(chr(8364))
+
+
+# NOTE 12, @classmethod 类方法标志
+
+# 将方法转换为类方法。
+# 类方法接收类作为隐式的第一个参数，就像实例方法接收实例一样。
+# 要声明一个类方法，请使用此惯用语法：
+
+class C:
+    @classmethod
+    def f(cls, arg1, arg2): ...
+
+# @classmethod的构成 是一个函数装饰器
+# 有关详细信息，请参阅函数定义中的函数定义说明。
+
+# 它可以在类（ 例如C.f() ）或实例（ 例如C().f() ）上调用。
+# 除了类之外，该实例被忽略。
+# 如果为派生类调用类方法，则派生类对象将作为隐含的第一个参数传递。
+
+# 类方法与C ++或Java静态方法不同。 如果需要，请参阅本节中的staticmethod()。
+# 有关类方法的更多信息，请参阅标准类型层次结构中标准类型层次结构的文档。
+
+# NOTE 13, compile(source, filename, mode, flags=0, dont_inherit=False, optimize=-1)
