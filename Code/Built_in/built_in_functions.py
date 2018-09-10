@@ -13,9 +13,9 @@
 # NOTE 1, abs(x)
 # 返回数字的绝对值。参数可以是整数或浮点数字。如果参数是复数, 则返回其大小。
 
-
 print(abs(-1))
 print(abs(-1.1))
+
 # 复数例子
 # 复数: (mmp 数学是体育老师教的, 还是我铭记了有借有还的道理?)
 #   我们把形如a+bi（a,b均为实数）的数称为复数，其中a称为实部，b称为虚部，i称为虚数单位(python 这里必须用 j 表示?)。
@@ -103,7 +103,7 @@ print(issubclass(bool, int))
 print(bool(), bool(0), bool(1), bool(2))
 
 
-# TODO 未完成 7, 8, 9
+# WARNING 未完成 7, 8, 9
 
 # NOTE 7, breakpoint(*args: Any, **kws: Any) -> None
 
@@ -180,3 +180,38 @@ class C:
 # 有关类方法的更多信息，请参阅标准类型层次结构中标准类型层次结构的文档。
 
 # NOTE 13, compile(source, filename, mode, flags=0, dont_inherit=False, optimize=-1)
+
+# 将源编译为代码或 AST 对象。 代码对象可以由 exec() 或 eval()执行。
+# 源可以是普通字符串、字节字符串或 AST 对象。有关如何使用 ast 对象的信息, 请参阅 ast 模块文档。
+# https://docs.python.org/3/library/ast.html#module-ast
+
+# 文件名参数应提供从中读取代码的文件。如果没有从文件中读取 ('<string>' ), 请传递一些可识别的值。
+
+# 模式参数指定必须编译的代码类型。
+# 如果源由一组语句组成, 'eval' (如果包含单个表达式) 或'single' " (如果它由单个交互式语句组成),
+# 则可以是'exec' (在后一种情况下, 将打印计算结果为非None的表达式语句)。
+
+# 可选参数标志和dont_inherit控件, 将来的语句(https://docs.python.org/3/reference/simple_stmts.html#future)会影响源的编译。
+# 如果两者都不存在 (或者两者都为零), 则代码将使用在调用 compile()的代码中生效的那些未来语句进行编译。
+# 如果给出了flags参数, 并且dont_inherit不是 (或为零), 则除了将使用的语句之外, 还将使用由flags参数指定的未来声明
+# 如果dont_inherit是非零整数, 则标志参数是它-将忽略在编译调用前后生效的未来语句。
+
+# 未来的语句由位数指定, 可以按位 or 运算来指定多个语句。
+# 指定给定功能所需的组标志可以被发现为 __future__ 模块_Feature实例上的compiler_flag属性。
+
+# 参数优化指定编译器的优化级别;默认值-1根据给定的 -O 选项选择解释器的优化级别。
+# 显式级别为0 (无优化;__debug__是真的), 1 (断言被删除, __debug__是假的) 或2 (单行也被删除)。
+
+# 如果编译的源无效, 则此函数将引发 SyntaxError , 如果源包含 null 字节, 则 ValueError 。
+
+# 如果要将 Python 代码解析为其 AST 表示形式, 请参见 ast.parse() .
+
+# NOTE
+# 在'single'或'eval'模式下使用多行代码编译字符串时, 输入必须至少由一个换行符终止。
+# 这是为了便于在 code 模块中检测不完整和完整的语句.
+
+# WARNING
+# 由于 python 的 ast 编译器堆栈深度限制, 编译到 AST 对象时, 可能会使 python 解释程序与一个足够大/复杂的字符串碰撞.
+
+# 在3.2 版中更改:允许使用 Windows 和 Mac 换行符。在'exec'模式下输入也不必再以换行符结束。添加了优化参数。
+# 在3.5 版中更改:以前, 当源中遇到 null 字节时, TypeError 被引发。.
