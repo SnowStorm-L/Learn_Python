@@ -169,6 +169,7 @@ class C:
     @classmethod
     def f(cls, arg1, arg2): ...
 
+
 # @classmethod的构成 是一个函数装饰器
 # 有关详细信息，请参阅函数定义中的函数定义说明。
 
@@ -215,3 +216,12 @@ class C:
 
 # 在3.2 版中更改:允许使用 Windows 和 Mac 换行符。在'exec'模式下输入也不必再以换行符结束。添加了优化参数。
 # 在3.5 版中更改:以前, 当源中遇到 null 字节时, TypeError 被引发。.
+
+str = "for i in range(0,10): print(i)"
+c = compile(str, '', 'exec')  # 编译为字节代码对象
+exec(c)
+
+str = "3 * 4 + 5"
+a = compile(str, '', 'eval')
+print(eval(a))
+
