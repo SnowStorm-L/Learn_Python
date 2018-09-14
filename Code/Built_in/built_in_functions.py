@@ -33,6 +33,7 @@ print(abs(-1.1))
 z = 3 + 4j
 print(z.real)  # 实部 获取
 print(z.imag)  # 虚部 获取
+print(z.conjugate())  # 输出该复数的共轭复数
 print(abs(3 + 4j))
 
 # NOTE 2, all(iterable)
@@ -217,11 +218,43 @@ class C:
 # 在3.2 版中更改:允许使用 Windows 和 Mac 换行符。在'exec'模式下输入也不必再以换行符结束。添加了优化参数。
 # 在3.5 版中更改:以前, 当源中遇到 null 字节时, TypeError 被引发。.
 
-str = "for i in range(0,10): print(i)"
-c = compile(str, '', 'exec')  # 编译为字节代码对象
-exec(c)
+for_in = "for i in range(0,10): print(i)"
+for_in_compile = compile(for_in, '', 'exec')  # 编译为字节代码对象
+exec(for_in_compile)
 
-str = "3 * 4 + 5"
-a = compile(str, '', 'eval')
-print(eval(a))
+test = "3 * 4 + 5"
+test_compile = compile(test, '', 'eval')
+print(eval(test_compile))
 
+# NOTE 14, class complex([real[, imag]])
+
+# 返回值为real + imag * 1j的复数或将字符串或数字转换为复数。
+# 如果第一个参数是一个字符串，它将被解释为一个复数，并且必须在没有第二个参数的情况下调用该函数。
+# 第二个参数永远不能是字符串。 每个参数可以是任何数字类型（包括复数）。
+# 如果省略imag，则默认为零，构造函数用作int和float之类的数字转换。 如果省略两个参数，则返回0j。
+
+# WARNING
+
+# 从字符串转换时，字符串不得包含中心+或 - 运算符周围的空格。 例如，complex('1+2j'）很好，
+# 但complex('1 + 2j'）引发ValueError。
+
+# 复合类型在数值类型中描述, — int, float, complex.
+# 版本3.6中已更改：允许使用下划线对数字进行分组，如代码文字中所示。
+
+print(complex(1, 2))
+print(complex(1))
+print(complex("1"))  # 当做字符串处理
+
+# 注意：这个地方在"+"号两边不能有空格，也就是不能写成"1 + 2j"，应该是"1+2j"，否则会报错
+print(complex("1+2j"))
+
+# 第一个参数为字符串，还添加第二个参数时会报错：
+# print(complex('111', 2))  # TypeError: complex() can't take second arg if first is a string
+
+# NOTE 15, delattr(object, name)
+
+# 这是setattr()的亲戚。
+# 参数是一个对象和一个字符串。
+# 该字符串必须是对象属性之一的名称。
+# 如果对象允许，该函数将删除命名属性。
+# 例如，delattr（x，'foobar'）等同于del x.foobar。
