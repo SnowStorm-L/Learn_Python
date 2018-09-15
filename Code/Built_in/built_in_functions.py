@@ -248,6 +248,7 @@ print(complex("1"))  # 当做字符串处理
 # 注意：这个地方在"+"号两边不能有空格，也就是不能写成"1 + 2j"，应该是"1+2j"，否则会报错
 print(complex("1+2j"))
 
+
 # 第一个参数为字符串，还添加第二个参数时会报错：
 # print(complex('111', 2))  # TypeError: complex() can't take second arg if first is a string
 
@@ -258,3 +259,127 @@ print(complex("1+2j"))
 # 该字符串必须是对象属性之一的名称。
 # 如果对象允许，该函数将删除命名属性。
 # 例如，delattr（x，'foobar'）等同于del x.foobar。
+
+class Coordinate:
+    x = 10
+    y = -5
+    z = 0
+
+
+point = Coordinate()
+print('x = ', point.x)
+print('y = ', point.y)
+print('z = ', point.z)
+delattr(Coordinate, 'z')
+print('--删除 z 属性后--')
+print('x = ', point.x)
+print('y = ', point.y)
+# 触发错误 AttributeError: 'Coordinate' object has no attribute 'z'
+# print('z = ', point.z)
+
+# NOTE 16, dict
+"""
+class dict(**kwarg)
+class dict(mapping, **kwarg)
+class dict(iterable, **kwarg)
+"""
+
+# 创建一个新词典。 dict对象是字典类。
+# 有关此类的文档，请参阅dict(https://docs.python.org/3/library/stdtypes.html#dict)
+# 和Mapping Types - dict(https://docs.python.org/3/library/stdtypes.html#typesmapping)
+# 对于其他容器，请参阅内置列表，set和tuple类以及collections模块。
+
+# NOTE 17, dir([object])
+
+# 如果没有参数，则返回当前本地范围中的名称列表。
+# 使用参数，尝试返回该对象的有效属性列表。
+
+# 如果对象具有名为 __dir__() 的方法，则将调用此方法，并且必须返回属性列表。
+# 这允许实现自定义 __getattr__() 或 __getattribute__() 函数的对象自定义 dir() 报告其属性的方式。
+
+# 如果对象未提供 __dir__() ，则该函数会尽力从对象的__dict__属性（如果已定义）及其类型对象中收集信息。
+# 结果列表不一定完整，并且当对象具有自定义 __getattr__() 时可能不准确。
+
+# 默认的 dir() 机制对不同类型的对象表现不同，因为它尝试生成最相关的信息，而不是完整的信息：
+# 1, 如果对象是模块对象，则列表包含模块属性的名称。
+# 2, 如果对象是类型或类对象，则列表包含其属性的名称，并递归地包含其基础的属性。
+# 3, 否则，该列表包含对象的属性名称，其类的属性的名称，以及其类的基类的属性的递归。
+
+# 结果列表按字母顺序排序。 例如：
+
+import struct
+
+print(dir())  # 显示模块命名空间中的名称
+
+print(dir(struct))  # 显示struct模块中的名称
+
+
+class Shape:
+    def __dir__(self):
+        return ['area', 'perimeter', 'location']
+
+
+s = Shape()
+print(dir(s))
+
+# NOTE:
+
+# 因为 dir() 主要是为了方便在交互式提示中使用而提供的，所以它尝试提供一组有趣的名称，
+# 而不是尝试提供严格或一致定义的名称集，并且其详细行为可能会在不同版本之间发生变化。
+# 例如，当参数是类时，元类属性不在结果列表中。
+
+# NOTE 18, divmod(a, b)
+
+# 将两个（非复数）数作为参数，并在使用整数除法时返回由商和余数组成的一对数。
+# 对于混合操作数类型，二进制算术运算符的规则适用。
+# 对于整数，结果与（a // b，a％b）相同。
+# 对于浮点数，结果为（q，a％b），其中q通常为math.floor（a / b），但可能比该值小1。
+# 无论如何q * b + a％b非常接近a， 如果a％b非零，则其符号与b相同，并且 0 <= abs(a % b) < abs(b).
+
+# NOTE 19, enumerate(iterable, start=0)
+
+# 返回一个枚举对象。 iterable必须是序列，迭代器或支持迭代的其他对象。
+# enumerate() 返回的迭代器的 __next__() 方法返回一个包含计数的元组（从start开始，默认为0）和迭代迭代得到的值。
+
+seasons = ['Spring', 'Summer', 'Fall', 'Winter']
+
+print(list(enumerate(seasons)))
+
+print(list(enumerate(seasons, start=1)))
+
+
+# enumerate的实现：
+
+def custom_enumerate(sequence, start=0):
+    n = start
+    for elem in sequence:
+        yield n, elem
+        n += 1
+
+
+print(list(custom_enumerate(seasons)))
+
+print(list(custom_enumerate(seasons, start=1)))
+
+# NOTE 20, eval(expression, globals=None, locals=None)
+
+# 参数是一个字符串和可选的全局变量和本地变量。 如果提供，globals必须是字典。 如果提供，则locals可以是任何映射对象。
+# 表达式参数作为Python表达式（技术上讲，条件列表）被解析和评估，使用全局和本地字典作为全局和本地命名空间。
+# 如果全局字典存在且不包含键__builtins__的值，则在解析表达式之前，会在该键下插入对内置模块内置字典的引用。
+# 这意味着表达式通常具有对标准内置模块的完全访问权限，并且传播受限制的环境。
+# 如果省略locals字典，则默认为globals字典。
+# 如果省略两个字典，则表达式在调用 eval() 的环境中执行。
+# 返回值是计算表达式的结果。
+# 语法错误报告为异常。
+# 例：
+
+x = 1
+print(eval('x+1'))
+
+# 此函数还可用于执行任意代码对象（例如由compile（）创建的代码对象）。
+# 在这种情况下，传递代码对象而不是字符串。
+# 如果代码对象已使用'exec'作为mode参数进行编译，则 eval() 的返回值将为None。
+
+# 提示：exec（）函数支持动态执行语句。
+# globals() 和 locals() 函数分别返回当前的全局和本地字典，这对于传递以供 eval() 或 exec() 使用可能很有用。
+# 请参阅 ast.literal_eval() 以获取可以安全地评估包含仅包含文字的表达式的字符串的函数。
