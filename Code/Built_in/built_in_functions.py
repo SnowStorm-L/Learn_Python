@@ -371,10 +371,6 @@ print(list(custom_enumerate(seasons, start=1)))
 # 如果省略两个字典，则表达式在调用 eval() 的环境中执行。
 # 返回值是计算表达式的结果。
 # 语法错误报告为异常。
-# 例：
-
-x = 1
-print(eval('x+1'))
 
 # 此函数还可用于执行任意代码对象（例如由compile（）创建的代码对象）。
 # 在这种情况下，传递代码对象而不是字符串。
@@ -383,3 +379,90 @@ print(eval('x+1'))
 # 提示：exec（）函数支持动态执行语句。
 # globals() 和 locals() 函数分别返回当前的全局和本地字典，这对于传递以供 eval() 或 exec() 使用可能很有用。
 # 请参阅 ast.literal_eval() 以获取可以安全地评估包含仅包含文字的表达式的字符串的函数。
+
+# demo 1
+x = 1
+print(eval('x+1'))
+
+a = 1
+g = {'a': 20}
+print(eval("a+1", g))
+
+# demo 2
+
+x = 1
+y = 1
+
+
+def g():
+    x = 2
+    y = 2
+    # 由于提供了globals()参数，那么首先应当找全局的x和y值，也就是都为1，那么显而易见，num的值也是2。
+    # 如果注释掉该句，执行下面一句呢？结果为4
+    # num = eval("x+y", globals())
+    num = eval("x+y", globals(), locals())
+    print("num", num)
+
+
+g()
+
+print('locals x %d locals y %d globals x %d globals y %d' % (
+    locals()["x"], locals()["y"], globals()["x"], globals()["y"]))
+
+# demo 3 locals()对象的值不能修改，globals()对象的值可以修改
+
+z = 0
+
+
+def f():
+    z = 1
+    print(locals())
+    locals()["z"] = 2
+    print(locals())
+
+
+f()
+globals()["z"] = 2
+print(z)
+
+# eval有安全性问题,比如用户恶意输入就会获得当前目录文件
+
+import os
+
+print(eval("__import__('os').system('ls')"))
+
+print('os' in globals())
+
+print(os.system('whoami'))
+
+# 怎么避免安全问题？
+# １、自行写检查函数；
+# ２、使用ast.literal_eval
+
+# NOTE 21, exec(object[, globals[, locals]])
+
+# 此函数支持Python代码的动态执行。 object必须是字符串或代码对象。
+# 如果它是一个字符串，则将该字符串解析为一组Python语句，然后执行该语句（除非发生语法错误）。如果它是一个代码对象，则只需执行它。
+# 在所有情况下，执行的代码应该作为文件输入有效（请参见“参考手册”中的“文件输入”部分）。
+# 请注意，即使在传递给exec（）函数的代码的上下文中，也不能在函数定义之外使用return和yield语句。
+# 返回值为None。
+# 在所有情况下，如果省略可选部分，则代码在当前范围内执行。
+# 如果只提供全局变量，则它必须是字典，它将用于全局变量和局部变量。
+# 如果给出全局变量和局部变量，则它们分别用于全局变量和局部变量。
+# 如果提供，则locals可以是任何映射对象。
+# 请记住，在模块级别，全局变量和本地变量是相同的字典。
+# 如果exec获得两个单独的对象作为全局变量和局部变量，则代码将被执行，就好像它嵌入在类定义中一样。
+# 如果全局字典不包含键__builtins__的值，则在该键下插入对内置模块内置字典的引用。
+# 这样，您可以通过将自己的__builtins__字典插入到globals中，然后将其传递给 exec() 来控制已执行代码可用的内置函数。
+
+# NOTE
+# 内置函数 globals() 和 locals() 分别返回当前的全局和本地字典，这可能有助于传递用作 exec() 的第二个和第三个参数。
+# 默认的locals的行为与下面的函数 locals() 相同：不应尝试修改默认的locals字典。
+# 如果需要在函数 exec() 返回后查看代码对locals的影响，则传递显式的locals字典。
+
+i = 2
+j = 3
+exec("ans = i + j")
+print("Answer is: ", ans)
+# 在上个例子里面，ans变量并没有显式的定义，但仍然可以在print函数中调用。
+# 这是exec语句执行了"ans = i + j"中的代码，定义了ans变量。
