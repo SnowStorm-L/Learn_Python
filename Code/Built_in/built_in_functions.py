@@ -463,6 +463,84 @@ print(os.system('whoami'))
 i = 2
 j = 3
 exec("ans = i + j")
-print("Answer is: ", ans)
+# print("Answer is: ", ans)
+
 # 在上个例子里面，ans变量并没有显式的定义，但仍然可以在print函数中调用。
 # 这是exec语句执行了"ans = i + j"中的代码，定义了ans变量。
+
+exec('print("Hello World")')
+
+x = 10
+
+
+def func():
+    y = 20
+    a = exec("x+y")
+    print("a:", a)
+    b = exec("x+y", {"x": 1, "y": 2})
+    print("b:", b)
+    c = exec("x+y", {"x": 1, "y": 2}, {"y": 3, "z": 4})
+    print("c:", c)
+    d = exec("print(x,y)")
+    print("d:", d)
+
+
+func()
+
+x = 10
+expr = """
+z = 30
+sum = x + y + z   #代码段
+print(sum)
+"""
+
+
+def func():
+    y = 20
+    exec(expr)
+    # 10 + 20 + 30
+    exec(expr, {'x': 1, 'y': 2})
+    # 30 + 1 + 2
+    exec(expr, {'x': 1, 'y': 2}, {'y': 3, 'z': 4})  # 30+1+3，x是定义全局变量1，y是局部变量
+
+
+func()
+
+
+# NOTE 22, filter(function, iterable)
+
+# 从iterable的元素中构造迭代器,函数返回 true。iterable可以是序列、支持迭代的容器或迭代器。
+# 如果函数为None, 则假定标识函数为 false, 即删除所有iterable的元素。
+
+# that filter(function, iterable) is equivalent to the generator
+# expression (item for item in iterable if function(item))
+# if function is not None and (item for item in iterable if item) if function is None.
+
+# 有关函数返回false的迭代函数的补充函数，请参见itertools.filterfalse()。
+
+# 过滤出列表中的所有奇数：
+def is_odd(n):
+    return n % 2 == 1
+
+
+new_list = filter(is_odd, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+print(list(new_list))
+
+import math
+
+
+# 过滤出1~100中平方根是整数的数：
+def is_sqr(x):
+    return math.sqrt(x) % 1 == 0
+
+
+new_list = filter(is_sqr, range(1, 101))
+print(list(new_list))
+
+# NOTE 23, class float([x])
+
+# 返回由数字或字符串x构造的浮点数。
+# 如果参数是一个字符串，它应该包含一个十进制数字，可选地以符号开头，并且可选地嵌入在空格中。
+# 可选符号可以是“+”或“ - ”; “+”符号对产生的值没有影响。
+# 参数也可以是表示NaN（非数字）或正或负无穷大的字符串。
+# 更准确地说，在删除前导和尾随空格字符后，输入必须符合以下语法：
