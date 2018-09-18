@@ -544,3 +544,55 @@ print(list(new_list))
 # 可选符号可以是“+”或“ - ”; “+”符号对产生的值没有影响。
 # 参数也可以是表示NaN（非数字）或正或负无穷大的字符串。
 # 更准确地说，在删除前导和尾随空格字符后，输入必须符合以下语法：
+
+"""
+sign           ::=  "+" | "-"
+infinity       ::=  "Infinity" | "inf"
+nan            ::=  "nan"
+numeric_value  ::=  floatnumber | infinity | nan
+numeric_string ::=  [sign] numeric_value
+"""
+
+# 这里floatnumber是Python浮点文字的形式,在浮点文字中描述。(https://docs.python.org/3/reference/lexical_analysis.html#floating)
+# 案例并不重要，因此，例如，“inf”，“Inf”，“INFINITY”和“iNfINity”都是正无穷大的可接受拼写。
+# 否则，如果参数是整数或浮点数，则返回具有相同值的浮点数（在Python的浮点精度内）。
+# 如果参数超出Python float的范围，则会引发OverflowError。
+
+# 对于一般的Python对象x，float（x）委托给x .__ float __（）。
+# 如果没有给出参数，则返回0.0。
+
+print(float('+1.23'), float('   -12345\n'), float('1e-003'), float('+1E6'), float('-Infinity'))
+
+# float类型在Numeric Types中描述 - int，float，complex。
+
+# 版本3.6中已更改：允许使用下划线对数字进行分组，如代码文字中所示。
+# 在版本3.7中更改：x现在是仅位置参数。
+
+# NOTE 24, format(value[, format_spec])
+
+# 将值转换为“formatted”表示，由format_spec控制。
+# format_spec的解释取决于value参数的类型，但是大多数内置类型都使用标准格式化语法：
+# Format Specification Mini-Language。(https://docs.python.org/3/library/string.html#formatspec)
+
+# 默认的format_spec是一个空字符串，通常与调用str（value）具有相同的效果。
+
+# 对format（value，format_spec）的调用被转换为type（value）.__ format __（value，format_spec）
+# 在搜索值的__format __（）方法时绕过实例字典。
+# 如果方法搜索到达对象且format_spec为非空，或者format_spec或返回值不是字符串，则引发TypeError异常。
+# 版本3.4中更改：object（）.__ format __（format_spec）如果format_spec不是空字符串，则引发TypeError。
+
+# NOTE 25, class frozenset([iterable])
+
+# 返回一个新的frozenset对象，可选地，从迭代中获取元素。
+# frozenset 是一个内置的类。
+# 有关此类的文档，请参阅frozenset和Set Types - set，frozenset。
+# 对于其他容器，请参阅内置的set，list，tuple和dict类，以及collections模块。
+
+# 具体例子看set.py
+
+# NOTE 26, getattr(object, name[, default])
+
+# 返回object的named属性的值。name必须是一个字符串。
+# 如果字符串是对象属性之一的名称，则结果是该属性的值。
+# 例如，getattr（x，'foobar'）等同于x.foobar。
+# 如果named属性不存在，则返回default（如果提供），否则引发AttributeError。
