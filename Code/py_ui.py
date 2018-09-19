@@ -165,24 +165,63 @@ class QTGuessNumber(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setup_ui(self)
+        self.setupUi(self)
 
-    def setup_ui(self, main_window):
-        self.central_Widget = QtWidgets.QWidget(main_window)
-        self.central_Widget.setObjectName("centralWidget")
-        main_window.setObjectName("MainWindow")
-        main_window.resize(386, 127)
-        main_window.setCentralWidget(self.central_Widget)
-        main_window.setWindowTitle("猜数字小游戏")
-        # 关联信号槽
-        QtCore.QMetaObject.connectSlotsByName(main_window)
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(400, 300)
 
-        self.begin_button = QtWidgets.QPushButton(main_window)
-        self.begin_button.setText("开始游戏")
-        self.begin_button.setGeometry(142, 10, 100, 100)
-        self.begin_button.setObjectName("begin_button")
+        self.centralWidget = QtWidgets.QWidget(MainWindow)
+        self.centralWidget.setObjectName("centralWidget")
 
-        self.begin_button.clicked.connect(main_window.close)
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralWidget)
+        self.verticalLayout.setContentsMargins(11, 11, 11, 11)
+        self.verticalLayout.setSpacing(6)
+        self.verticalLayout.setObjectName("verticalLayout")
+
+        self.gridLayout = QtWidgets.QGridLayout()
+        self.gridLayout.setContentsMargins(20, -1, 20, -1)
+        self.gridLayout.setSpacing(6)
+        self.gridLayout.setObjectName("gridLayout")
+
+        self.label = QtWidgets.QLabel(self.centralWidget)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+
+        self.pushButton = QtWidgets.QPushButton(self.centralWidget)
+        self.pushButton.setObjectName("pushButton")
+
+        self.gridLayout.addWidget(self.pushButton, 1, 0, 1, 1)
+
+        self.verticalLayout.addLayout(self.gridLayout)
+
+        MainWindow.setCentralWidget(self.centralWidget)
+
+        self.menuBar = QtWidgets.QMenuBar(MainWindow)
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 400, 22))
+        self.menuBar.setObjectName("menuBar")
+        MainWindow.setMenuBar(self.menuBar)
+
+        self.mainToolBar = QtWidgets.QToolBar(MainWindow)
+        self.mainToolBar.setObjectName("mainToolBar")
+        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.mainToolBar)
+
+        self.statusBar = QtWidgets.QStatusBar(MainWindow)
+        self.statusBar.setObjectName("statusBar")
+
+        MainWindow.setStatusBar(self.statusBar)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "猜一猜小游戏"))
+        self.label.setText(_translate("MainWindow", "hi,欢迎进入第一个界面小游戏"))
+        self.pushButton.setText(_translate("MainWindow", "OK"))
+        self.pushButton.clicked.connect(MainWindow.close)
 
 
 if __name__ == "__main__":
