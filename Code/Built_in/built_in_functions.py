@@ -563,6 +563,7 @@ numeric_string ::=  [sign] numeric_value
 
 print(float('+1.23'), float('   -12345\n'), float('1e-003'), float('+1E6'), float('-Infinity'))
 
+
 # float类型在Numeric Types中描述 - int，float，complex。
 
 # 版本3.6中已更改：允许使用下划线对数字进行分组，如代码文字中所示。
@@ -596,3 +597,42 @@ print(float('+1.23'), float('   -12345\n'), float('1e-003'), float('+1E6'), floa
 # 如果字符串是对象属性之一的名称，则结果是该属性的值。
 # 例如，getattr（x，'foobar'）等同于x.foobar。
 # 如果named属性不存在，则返回default（如果提供），否则引发AttributeError。
+
+class A(object):
+    bar = 1
+
+
+a = A()
+getattr(a, 'bar')  # 获取属性 bar 值 1
+# getattr(a, 'bar2')  # 属性 bar2 不存在，触发异常 AttributeError: 'A' object has no attribute 'bar2'
+print(getattr(a, 'bar2', 3))  # 属性 bar2 不存在，但设置了默认值 3
+
+# NOTE 27, globals()
+
+# 返回表示当前全局符号表的字典。这始终是当前模块的字典 (在函数或方法内, 这是定义它的模块, 而不是调用它的模块)
+
+# NOTE 28, hasattr(object, name)
+
+# 参数是一个对象和一个字符串。如果字符串是对象属性之一的名称, 则结果为True , 否则为False 。
+# (这是通过调用getattr(object, name)并查看它是否引发 AttributeError 来实现的。
+
+# NOTE 29, hash(object)
+
+# 返回对象的哈希值 (如果有)。哈希值为整数。它们用于在字典查找过程中快速比较字典键。
+# 比较相等的数值具有相同的哈希值 (即使它们的类型不同, 1 和1.0 的情况也是如此)。
+
+# 注意
+# 对于具有自定义 __hash__() 方法的对象, 请注意, hash() 根据主机的位宽截断返回值。有关详细信息, 请参阅 __hash__() .
+
+# NOTE 30, help([object)
+
+# 调用内置帮助系统。
+# 此函数用于交互式使用。如果未给出参数, 交互式帮助系统将在解释器控制台上启动。
+# 如果参数是字符串, 则该字符串将被视为模块、函数、类、方法、关键字或文档主题的名称, 并在控制台上打印帮助页。
+# 如果参数是任何其他类型的对象, 则会生成对象上的帮助页。
+
+# 此函数由 site 模块添加到内置命名空间中
+
+# 在3.4 版中更改:对 pydoc 和 inspect 的更改意味着 callables 的报告签名现在更加全面和一致。
+
+help(float)
