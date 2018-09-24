@@ -671,8 +671,8 @@ print(f'{255:#x}', f'{255:x}', f'{255:X}')
 # 然后该函数从输入中读取一行，将其转换为字符串（剥离尾部换行符），然后返回该行。
 # 读取EOF时，会引发EOFError。
 
-s = input('--> ')
-print(s)
+# s = input('--> ')
+# print(s)
 
 # 如果加载了readline模块，则input（）将使用它来提供精细的行编辑和历史记录功能。
 
@@ -744,3 +744,66 @@ int(x, base=10)，base缺省值为10，也就是说不指定base的值时，函�
 # 如果object不是给定类型的对象，则该函数始终返回false。
 # 如果classinfo是类型对象的元组（或递归，其他此类元组），则如果object是任何类型的实例，则返回true。
 # 如果classinfo不是类型和类型元组的类型或元组，则会引发TypeError异常。
+
+a = "b"
+
+print(isinstance(a, str))
+
+# 参数classinfo为一个元组，则若对象类型与元组中类型名之一相同即返回True。
+print(isinstance(a, (str, int, list)))
+
+
+#  isinstance()与type()的区别
+
+# isinstance() 会认为子类是一种父类类型，考虑继承关系。
+# type() 不会认为子类是一种父类类型，不考虑继承关系。
+
+class A:
+    pass
+
+
+class B(A):
+    pass
+
+
+isinstance(B(), A)  # returns True
+type(B()) == A  # returns False
+
+# NOTE 36, issubclass(class, classinfo)
+
+# 如果class是classinfo的子类（直接，间接或虚拟），则返回true。
+# 类被认为是其自身的子类。
+# classinfo可以是类对象的元组，在这种情况下，将检查classinfo中的每个条目。
+# 在任何其他情况下，都会引发TypeError异常。
+
+print(issubclass(B, A))
+print(issubclass(B, (int, str)))
+
+# NOTE 37, iter(object[, sentinel])
+
+# 返回一个迭代器对象。
+# 根据第二个参数的存在，第一个参数的解释方式非常不同。
+# 如果没有第二个参数，object必须是支持迭代协议（ __iter__() 方法）的集合对象，
+# 或者它必须支持序列协议（ __getitem__() 方法，整数参数从0开始）。
+# 如果它不支持这些协议中的任何一个，则引发TypeError。
+# 如果给出第二个参数sentinel，则object必须是可调用对象。
+# 在这种情况下创建的迭代器将为每个对__next __（）方法的调用调用没有参数的对象;
+# 如果返回的值等于sentinel，则会引发StopIteration，否则返回该值。
+
+# 另请参见迭代器类型(Iterator Types)。
+# 第二种形式的 iter() 的一个有用的应用是读取文件的行直到达到某一行。
+# 以下示例读取文件，直到readline（）方法返回空字符串：
+
+# with open('mydata.txt') as fp:
+#     for line in iter(fp.readline, ''):
+#         process_line(line)
+
+# NOTE 38, len(s)
+
+# 返回对象的长度（项数）。
+# 参数可以是序列（例如字符串，字节，元组，列表或范围）或集合（例如字典，集合或不可变集合）。
+
+# NOTE 39, class list([iterable])
+
+# 列表实际上是一种可变序列类型，而不是一个函数
+# 如列表和序列类型中所述 - 列表，元组，范围。
