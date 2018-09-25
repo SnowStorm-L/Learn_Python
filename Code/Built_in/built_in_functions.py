@@ -779,6 +779,7 @@ type(B()) == A  # returns False
 print(issubclass(B, A))
 print(issubclass(B, (int, str)))
 
+
 # NOTE 37, iter(object[, sentinel])
 
 # 返回一个迭代器对象。
@@ -807,3 +808,135 @@ print(issubclass(B, (int, str)))
 
 # 列表实际上是一种可变序列类型，而不是一个函数
 # 如列表和序列类型中所述 - 列表，元组，范围。
+
+# NOTE 40, locals()
+
+# 更新并返回一个表示当前本地符号表的字典。当在函数块中调用, 而不是在类块中时, locals() 变量返回。
+
+# NOTE
+# 不应修改本词典的内容; 更改可能不会影响解释器使用的本地和自由变量的值.
+
+def runoob(arg):
+    # 两个局部变量：arg、z
+    z = 1
+    print(locals())
+
+
+runoob(4)
+print(locals())
+
+# NOTE 41, map(function, iterable, ...)
+
+# 返回一个迭代器，它将函数应用于每个iterable项，从而产生结果。
+# 如果传递了其他可迭代参数，则函数必须采用那么多参数，并且并行地应用于所有迭代的项。
+# 使用多个iterables时，迭代器会在最短的iterable耗尽时停止。
+# 对于函数输入已经排列成参数元组的情况，请参阅itertools.starmap（）。
+# https://docs.python.org/3/library/itertools.html#itertools.starmap
+
+# NOTE 42, max(iterable, *[, key, default]), max(arg1, arg2, *args[, key])
+
+# 返回可迭代中的最大项或两个或多个参数中的最大项。
+# 如果提供了一个位置参数，则它应该是可迭代的。
+# 返回iterable中的最大项。
+# 如果提供了两个或多个位置参数，则返回最大的位置参数。
+
+# 有两个可选的仅关键字参数。
+# key参数指定一个单参数排序函数，就像list.sort（）一样。
+# 如果提供的iterable为空，则default参数指定要返回的对象。
+# 如果iterable为空并且未提供default，则引发ValueError。
+
+# 如果多个项目是最大的，则该函数返回遇到的第一个项目。
+# 这与其他排序稳定性保留工具一致，例如sorted（iterable，key = keyfunc，reverse = True）[0] 和
+# heapq.nlargest（1，iterable，key = keyfunc）。
+
+# 版本3.4中的新增功能：默认的仅限关键字参数。
+
+# NOTE 43, memoryview(obj)
+
+# 返回从给定参数创建的“内存视图”对象。
+# 有关更多信息，请参阅内存视图(https://docs.python.org/3/library/stdtypes.html#typememoryview)
+
+# 其中一个作用的demo
+
+# 不使用memoryview
+
+a = 'aaaaaa'
+b = a[:2]  # 会产生新的字符串
+
+a = bytearray(b'aaaaaa')
+b = a[:2]  # 会产生新的bytearray
+b[:2] = b'bb'  # 对b的改动不影响a
+
+# 使用memoryview
+
+a = b'aaaaaa'
+me = memoryview(a)
+print(me.readonly)  # 只读的memoryview
+
+mb = me[:2]  # 不会产生新的字符串
+
+a = bytearray(b'aaaaaa')
+me = memoryview(a)
+print(me.readonly)  # 可写的memoryview
+mb = me[:2]  # 不会会产生新的bytearray
+mb[:2] = b'bb'  # 对mb的改动就是对me的改动
+
+print(mb.tobytes())
+'bb'
+
+print(me.tobytes())
+'bbaaaa'
+
+# NOTE 44, min(iterable, *[, key, default]), min(arg1, arg2, *args[, key])
+
+# 返回可迭代中的最小项或两个或多个参数中的最小项。
+# 如果提供了一个位置参数，则它应该是可迭代的。
+# 返回iterable中的最小项。 如果提供了两个或多个位置参数，则返回最小的位置参数。
+
+# 有两个可选的仅关键字参数。
+# key参数指定一个单参数排序函数，就像list.sort（）一样。
+# 如果提供的iterable为空，则default参数指定要返回的对象。
+# 如果iterable为空并且未提供default，则引发ValueError。
+
+# 如果多个项目是最小的，则该函数返回遇到的第一个项目。
+# 这与其他排序稳定性保留工具（如sorted（iterable，key = keyfunc）[0]和
+# heapq.nsmallest（1，iterable，key = keyfunc））一致。
+
+# 版本3.4中的新增功能：默认的仅限关键字参数。
+
+# NOTE 45, next(iterator[, default])
+
+# 通过调用__next__() 方法从迭代器中检索下一个项。
+# 如果给定default，则在迭代器耗尽时返回，否则引发StopIteration。
+
+# NOTE 46, class object
+
+# 返回一个新的无特征对象。
+# object是所有类的基础。 它具有所有Python类实例共有的方法。
+# 此函数不接受任何参数。
+
+# NOTE
+# 对象没有__dict__，因此您无法将任意属性分配给对象类的实例。
+
+# NOTE 47, oct(x)
+
+# 将整数转换为前缀为“0o”的八进制字符串。
+# 结果是一个有效的Python表达式。
+
+# 如果x不是Python int对象，则必须定义一个返回整数的__index__() 方法。
+
+# demo
+print(oct(8))
+print(oct(-56))
+
+# 如果要将整数转换为八进制字符串，或者使用前缀“0o”，则可以使用以下任一方法。
+
+print('%#o' % 10, '%o' % 10)
+print(format(10, '#o'), format(10, 'o'))
+print(f'{10:#o}', f'{10:o}')
+
+# 有关更多信息，另请参见format() https://docs.python.org/3/library/functions.html#format。
+
+# NOTE 48, open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)
+
+# 打开文件并返回相应的文件对象。 如果无法打开文件，则会引发OSError。
