@@ -1031,3 +1031,16 @@ print(f'{10:#o}', f'{10:o}')
 
 # opener
 # 必须返回一个打开的文件描述符（传递os.open作为opener导致类似于传递None的功能）。
+
+# FIXME open to be continue
+
+# NOTE 49, ord(c)
+
+# 给定表示一个Unicode字符的字符串，返回表示该字符的Unicode代码点的整数。
+# 例如，ord（'a'）返回整数97，ord（'€'）（欧元符号）返回8364.这是chr（）的反转。
+
+# NOTE 50, pow(x, y[, z])
+
+print(pow(5, 2))
+# modulo z（比pow（x，y）％z更有效地计算）。
+# 两个参数形式pow（x，y）相当于使用幂运算符：x ** y。
