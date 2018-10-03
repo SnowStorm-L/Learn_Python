@@ -1044,3 +1044,17 @@ print(f'{10:#o}', f'{10:o}')
 print(pow(5, 2))
 # modulo z（比pow（x，y）％z更有效地计算）。
 # 两个参数形式pow（x，y）相当于使用幂运算符：x ** y。
+
+# NOTE 51, print(*objects, sep=' ', end='\n', file=sys.stdout, flush=False)
+
+# 将对象打印到文本流文件，以sep分隔，然后结束。
+# sep，end，file和flush（如果存在）必须作为关键字参数给出。
+# 所有非关键字参数都转换为str（）所做的字符串并写入流中，由sep分隔，然后是end。
+# sep和end都必须是字符串; 它们也可以是None，这意味着使用默认值。
+# 如果没有给出对象，print（）将只写入结束。
+
+# file参数必须是带有write（string）方法的对象; 如果它不存在或None，将使用sys.stdout。
+# 由于打印的参数转换为文本字符串，因此print（）不能与二进制模式文件对象一起使用。 对于这些，请改用file.write（...）。
+# 输出是否缓冲通常由文件确定，但如果flush关键字参数为true，则强制刷新流。
+
+# 版本3.3中已更改：添加了flush关键字参数。
