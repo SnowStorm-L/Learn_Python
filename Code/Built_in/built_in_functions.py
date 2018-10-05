@@ -1042,6 +1042,8 @@ print(f'{10:#o}', f'{10:o}')
 # NOTE 50, pow(x, y[, z])
 
 print(pow(5, 2))
+
+
 # modulo z（比pow（x，y）％z更有效地计算）。
 # 两个参数形式pow（x，y）相当于使用幂运算符：x ** y。
 
@@ -1058,3 +1060,76 @@ print(pow(5, 2))
 # 输出是否缓冲通常由文件确定，但如果flush关键字参数为true，则强制刷新流。
 
 # 版本3.3中已更改：添加了flush关键字参数。
+
+# NOTE 52, class property(fget=None, fset=None, fdel=None, doc=None)
+
+# fget是获取属性值的函数。
+# fset是用于设置属性值的函数。
+# fdel是用于删除属性值的函数。
+# doc为该属性创建了一个docstring。
+
+# 典型用法是定义托管属性x
+
+class C:
+    def __init__(self):
+        self._x = None
+
+    def getx(self):
+        return self._x
+
+    def setx(self, value):
+        self._x = value
+
+    def delx(self):
+        del self._x
+
+    x = property(getx, setx, delx, "I'm the 'x' property.")
+
+
+# 如果c是C的实例，c.x将调用getter，c.x = value将调用setter和del c.x删除器。
+# 如果给定，doc将是property属性的docstring。
+# 否则，该属性将复制fget的docstring（如果存在）。
+
+# 这使得使用property（）作为装饰器可以轻松创建只读属性：
+
+class Parrot:
+    def __init__(self):
+        self._voltage = 100000
+
+    @property
+    def voltage(self):
+        """Get the current voltage."""
+        return self._voltage
+
+
+# @property装饰器将voltage（）方法转换为具有相同名称的只读属性的“getter”，并将_voltage(电压)的docstring设置为“获取当前电压”。
+
+# 属性对象具有可用作装饰器的getter，setter和deleter方法，这些方法创建属性的副本，并将相应的访问器函数设置为修饰函数。
+# 最好用一个例子来解释：
+
+class C:
+    def __init__(self):
+        self._x = None
+
+    @property
+    def x(self):
+        """I'm the 'x' property."""
+        return self._x
+
+    @x.setter
+    def x(self, value):
+        self._x = value
+
+    @x.deleter
+    def x(self):
+        del self._x
+
+# 此代码与第一个示例完全等效。 请务必为其他函数指定与原始属性相同的名称（在本例中为x）。
+# 返回的属性对象还具有与构造函数参数对应的属性fget，fset和fdel。
+
+# 在版本3.5中更改：属性对象的文档字符串现在是可写的。
+
+# NOTE 53, range(stop)
+# NOTE     range(start, stop[, step])
+
+# 范围实际上是一个不可变的序列类型，而不是一个函数，如范围和序列类型 - list，tuple，range中所述。
