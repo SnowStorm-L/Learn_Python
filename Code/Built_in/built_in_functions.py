@@ -1149,3 +1149,60 @@ print(repr([0, 1, 2, 3]))
 
 # 返回反序迭代器。
 # seq必须是一个具有__reversed __（）方法的对象，或者支持序列协议（__len __（）方法和__getitem __（）方法，整数参数从0开始）。
+
+# NOTE 56, round(number[, ndigits])
+
+# 小数点后舍入到ndigits精度的返回数。
+# 如果省略ndigits或者为None，则返回其输入的最接近的整数。
+
+# 对于支持round（）的内置类型，值被舍入到10的最接近的倍数到幂减去ndigits;
+# 如果两个倍数相等，则向均匀选择进行舍入（例如，round（0.5）和round（-0.5）均为0，round（1.5）为2）。
+# 任何整数值对ndigits（正数，零或负数）有效。
+# 如果省略ndigits或None，则返回值为整数。否则返回值与数字的类型相同。
+
+# 对于一般的Python对象编号，将代理舍入为.__ round__。
+
+# Note
+# round（）对于浮点数的行为可能会令人惊讶：例如，round（2.675,2）给出2.67而不是预期的2.68。
+# 这不是一个错误：这是因为大多数小数部分不能完全表示为浮点数。
+
+# 有关详细信息，请参阅浮点算术(https://docs.python.org/3/tutorial/floatingpoint.html#tut-fp-issues)：问题和限制。
+
+# NOTE 57, class set([iterable])
+
+# 返回一个新的set对象，可选地包含从iterable中获取的元素。
+# set是一个内置类。
+# 有关此类的文档，请参阅set和Set Types - set，frozenset。
+# 对于其他容器，请参阅内置的frozenset，list，tuple和dict类，以及collections模块。
+
+# NOTE 58, setattr(object, name, value)
+
+# 这是getattr（）的对应物。
+# 参数是一个对象，一个字符串和一个任意值。
+# 该字符串可以命名现有属性或新属性。
+# 如果对象允许，该函数会将值分配给属性。
+# 例如，setattr（x，'foobar'，123）等效于x.foobar = 123。
+
+# NOTE 59, class slice(stop)
+# NOTE     class slice(start, stop[, step])
+
+# 返回一个切片对象，表示由range（start，stop，step）指定的索引集。
+# start和step参数默认为None。
+# Slice对象具有只读数据属性start，stop和step，它们只返回参数值（或它们的默认值）。
+# 他们没有其他明确的功能;但是它们被Numerical Python和其他第三方扩展使用。 使用扩展索引语法时也会生成切片对象。
+# 例如：a [start：stop：step]或[start：stop，i]。 有关返回迭代器的备用版本，请参阅itertools.islice（）。
+
+# NOTE 60, sorted(iterable, *, key=None, reverse=False)
+
+# 从iterable中的项返回一个新的排序列表。
+# 有两个可选参数，必须指定为关键字参数。
+# key指定一个参数的函数，该函数用于从每个列表元素中提取比较键：key = str.lower。默认值为None（直接比较元素）。
+
+# reverse是一个布尔值。 如果设置为True，则列表元素将按照每个比较相反的方式进行排序。
+
+# 使用functools.cmp_to_key（）将旧式cmp函数转换为键函数。
+
+# 内置的sorted（）函数保证稳定。如果排序保证不更改比较相等的元素的相对顺序，则排序是稳定的 - 这有助于在多个过程中进行排序
+# （例如，按部门排序，然后按工资等级排序）。
+
+# 有关排序示例和简要排序教程，请参阅排序方式。(https://docs.python.org/3/howto/sorting.html#sortinghowto)
