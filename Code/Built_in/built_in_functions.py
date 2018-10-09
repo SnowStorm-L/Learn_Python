@@ -1206,3 +1206,8 @@ print(repr([0, 1, 2, 3]))
 # （例如，按部门排序，然后按工资等级排序）。
 
 # 有关排序示例和简要排序教程，请参阅排序方式。(https://docs.python.org/3/howto/sorting.html#sortinghowto)
+
+# NOTE 62, class str(object=''), class str(object=b'', encoding='utf-8', errors='strict')
+
+# 返回str版本的对象。 有关详细信息，请参阅str（）。
+# str是内置的字符串类。 有关字符串的一般信息，请参阅文本序列类型 - str。
