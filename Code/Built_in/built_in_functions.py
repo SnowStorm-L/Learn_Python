@@ -1145,6 +1145,7 @@ class C:
 
 print(repr([0, 1, 2, 3]))
 
+
 # NOTE 55, reversed(seq)
 
 # 返回反序迭代器。
@@ -1207,7 +1208,203 @@ print(repr([0, 1, 2, 3]))
 
 # 有关排序示例和简要排序教程，请参阅排序方式。(https://docs.python.org/3/howto/sorting.html#sortinghowto)
 
+# NOTE 61, @staticmethod
+
+# 将方法转换为静态方法。
+# 静态方法不会接收隐式的第一个参数。
+# 要声明静态方法，请使用此方法
+
+class C:
+    @staticmethod
+    def f(arg1, arg2): ...
+
+
+# @staticmethod格式是一个函数装饰器(https://docs.python.org/3/glossary.html#term-decorator)
+# - 有关详细信息，请参阅函数定义中的函数定义说明。
+# 它可以在类（例如C.f() ）或实例（例如C().f() ）上调用。 除了类之外，该实例被忽略。
+
+# Python中的静态方法与Java或C++中的静态方法类似。
+# 另请参阅 classmethod() 以获取对创建备用类构造函数有用的变量。
+
+# 像所有装饰器一样，也可以将staticmethod称为常规函数，并对其结果执行某些操作。
+# 在需要从类主体引用函数并且您希望避免自动转换为实例方法的某些情况下，需要这样做。
+
+# 对于这些情况，请使用此此方法
+class C:
+    builtin_open = staticmethod(open)
+
+
+# 有关静态方法的详细信息,请参阅标准类型层次结构中标准类型层次结构(https://docs.python.org/3/reference/datamodel.html#types)的文档
+
 # NOTE 62, class str(object=''), class str(object=b'', encoding='utf-8', errors='strict')
 
 # 返回str版本的对象。 有关详细信息，请参阅str（）。
 # str是内置的字符串类。 有关字符串的一般信息，请参阅文本序列类型 - str。
+
+# NOTE 63, sum(iterable[, start])
+
+# Sums从左到右开始和迭代的项目并返回总数。start默认为0。
+# iterable的项通常是数字，并且不允许起始值是字符串。
+
+# 对于某些用例，sum() 有很好的替代方法。
+# 连接字符串序列的首选快速方法是调用'.join（sequence）。
+# 要以扩展精度添加浮点值，请参阅math.fsum（）。
+# 要连接一系列迭代，请考虑使用itertools.chain（）。
+
+# NOTE 64, super([type[, object-or-type]])
+
+# 返回将方法调用委托给父类或兄弟类 类型的代理对象。
+# 这对于访问已在类中重写的继承方法很有用。
+
+# 搜索顺序与getattr() 使用的搜索顺序相同，只是跳过了类型本身。
+# 该类型的__mro__属性列出了getattr() 和 super() 使用的方法解析搜索顺序。
+# 该属性是动态的，只要更新继承层次结构，就可以更改该属性。
+
+# 如果省略第二个参数，则返回的超级对象是未绑定的。
+# 如果第二个参数是一个对象，则isinstance（obj，type）必须为true。
+# 如果第二个参数是一个类型，则issubclass（type2，type）必须为true（这对于classmethods很有用）。
+
+# super有两个典型的用例。
+# 在具有单继承的类层次结构中，super可用于引用父类而不显式命名它们，从而使代码更易于维护。
+# 这种用法与其他编程语言中super的使用密切相关。
+
+# 第二个用例是在动态执行环境中支持协作多重继承。
+# 此用例是Python独有的，在静态编译语言或仅支持单继承的语言中找不到。
+# 这使得实现“菱形图”成为可能，其中多个基类实现相同的方法。
+# 好的设计要求此方法在每种情况下都具有相同的调用签名
+# (因为调用的顺序是在运行时确定的，因为该顺序适应类层次结构中的更改，并且因为该顺序可以包括在运行时之前未知的兄弟类）。
+
+# 对于这两种用例，典型的超类调用如下所示：
+class C(B):
+    def method(self, arg):
+        super().method(arg)
+        # This does the same thing as:
+        # super(C, self).method(arg)
+
+
+# 请注意，super() 是作为显式点状属性查找的绑定过程的一部分实现的，例如super().__ getitem __（name）。
+# 它通过实现自己的__getattribute__() 方法来实现，它以可预测的顺序搜索类，支持协作多重继承。
+# 因此，对于使用语句或运算符（如super()[name]）进行隐式查找，未定义super()。
+
+# 另请注意，除零参数形式外，super()不限于使用内部方法。
+# 两个参数形式完全指定参数并进行适当的引用。
+# 零参数形式仅适用于类定义，因为编译器填写必要的细节以正确检索正在定义的类，以及访问普通方法的当前实例。
+
+# 有关如何使用super()设计合作类的实用建议，请参阅使用super()的指南。
+
+# NOTE 65, tuple([iterable])
+
+# 元组实际上是一个不可变的序列类型，而不是一个函数，如元组和序列类型 - list，tuple，range中所述。
+
+# NOTE 66, class type(object), class type(name, bases, dict)
+
+# 使用一个参数，返回对象的类型。
+# 返回值是一个类型对象，通常与object.__class__返回的对象相同。
+
+# 建议使用isinstance()内置函数来测试对象的类型，因为它需要考虑子类。
+
+# 使用三个参数，返回一个新类型对象。
+# 这实际上是类语句的动态形式。
+# 名称字符串是类名，并成为__name__属性; 基元元组列出基类并成为__bases__属性;
+# 并且dict字典是包含类主体定义的命名空间，并被复制到标准字典以成为__dict__属性。
+
+# 例如，以下两个语句创建相同的类型对象：
+class X:
+    a = 1
+
+
+X = type('X', (object,), dict(a=1))
+
+# 也可以看看Type Objects(https://docs.python.org/3/library/stdtypes.html#bltin-type-objects)
+# 在版本3.6中更改：不重写type.__new__的类型的子类可能不再使用单参数形式来获取对象的类型。
+
+# NOTE 67, vars([object])
+
+# 返回具有__dict__属性的模块，类，实例或任何其他对象的__dict__属性。
+# 模块和实例等对象具有可更新的__dict__属性; 但是，其他对象可能对其__dict__属性有写入限制
+# （例如，类使用types.MappingProxyType来防止直接字典更新）。
+
+# 没有参数，vars() 就像locals() 一样。
+# 请注意，locals字典仅对读取有用，因为忽略了对locals字典的更新。
+
+# NOTE 68, zip(*iterables)
+
+# 创建一个迭代器, 聚合来自每个迭代的元素。
+# 返回元组的迭代器，其中第i个元组包含来自每个参数序列或迭代的第i个元素。
+# 当最短输入可迭代用尽时，迭代器停止。 使用单个iterable参数，它返回一个1元组的迭代器。
+
+# 没有参数，它返回一个空迭代器。 相当于：
+
+# def zip(*iterables):
+#     # zip('ABCD', 'xy') --> Ax By
+#     sentinel = object()
+#     iterators = [iter(it) for it in iterables]
+#     while iterators:
+#         result = []
+#         for it in iterators:
+#             elem = next(it, sentinel)
+#             if elem is sentinel:
+#                 return
+#             result.append(elem)
+#         yield tuple(result)
+
+# 保证了迭代的从左到右的评估顺序。
+# 这使得使用zip（* [iter（s）] * n）将数据系列聚类成n长度组的习惯成为可能。
+# 这会重复相同的迭代器n次，以便每个输出元组具有n次调用迭代器的结果。
+# 这具有将输入分成n长度块的效果。
+
+# 当你不关心较长迭代的尾随，不匹配的值时，zip() 只应与不等长度输入一起使用。
+# 如果这些值很重要，请改用itertools.zip_longest（）。
+
+# zip()与*运算符一起用于解压缩列表：
+
+x = [1, 2, 3]
+y = [4, 5, 6]
+zipped = zip(x, y)
+print(list(zipped))
+
+x2, y2 = zip(*zip(x, y))
+
+print(x == list(x2) and y == list(y2))
+print(x2)
+
+# NOTE 69, __import__(name, globals=None, locals=None, fromlist=(), level=0)
+
+# 注意这是一个高级函数，在日常Python编程中不需要，与importlib.import_module()不同。
+
+# import语句调用此函数。
+# 它可以替换（通过导入builtins模块并分配给builtins.__import__）以更改import语句的语义，
+# 但强烈建议不要这样做,因为使用导入钩子(hooks)（参见PEP 302(https://www.python.org/dev/peps/pep-0302/)）
+# 通常更简单，以实现相同的目标，并且不会导致代码假定使用默认导入实现。
+
+# 该函数可以使用给定的globals和locals导入模块名称，以确定如何解释包上下文中的名称。
+# fromlist给出了应该从name给出的模块导入的对象或子模块的名称。
+# 标准实现根本不使用其locals参数，并仅使用其全局变量来确定import语句的包上下文。
+
+# level指定是使用绝对导入还是相对导入。
+# 0（默认值）表示仅执行绝对导入。
+# level的正值表示要搜索的父目录相对于调用__import__()的模块的目录的数量（有关详细信息，请参阅PEP 328）。
+
+# 当name变量的形式为package.module时，通常会返回顶级包（直到第一个点的名称），而不是按名称命名的模块。
+# 但是，当给出非空的fromlist参数时，将返回按名称命名的模块。
+
+# 例如，语句导入垃圾邮件导致字节码类似于以下代码：
+spam = __import__('spam', globals(), locals(), [], 0)
+
+# 语句import spam.ham导致此调用：
+spam = __import__('spam.ham', globals(), locals(), [], 0)
+
+# 注意__import__() 如何返回toplevel模块，因为这是import语句绑定到名称的对象。
+
+# 另一方面，来自spam.ham的声明导入鸡蛋，香肠作为香肠的结果
+
+_temp = __import__('spam.ham', globals(), locals(), ['eggs', 'sausage'], 0)
+eggs = _temp.eggs
+saus = _temp.sausage
+
+# 这里，spam.ham模块从__import__()返回。
+# 从此对象中，将检索要导入的名称并将其分配给各自的名称。
+# 如果您只想按名称导入模块（可能在包中），请使用importlib.import_module()。
+
+# 在版本3.3中更改：不再支持级别的负值（这也将默认值更改为0）。
+
