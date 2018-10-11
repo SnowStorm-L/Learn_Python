@@ -1032,6 +1032,23 @@ print(f'{10:#o}', f'{10:o}')
 # opener
 # 必须返回一个打开的文件描述符（传递os.open作为opener导致类似于传递None的功能）。
 
+# 新创建的文件是不可继承的。
+
+# 以下示例使用os.open（）函数的dir_fd参数打开相对于给定目录的文件：
+
+import os
+
+dir_fd = os.open('somedir', os.O_RDONLY)
+
+
+def opener(path, flags):
+    return os.open(path, flags, dir_fd=dir_fd)
+
+
+with open('spamspam.txt', 'w', opener=opener) as f:
+    print('This will be written to somedir/spamspam.txt', file=f)
+os.close(dir_fd)  # don't leak a file descriptor
+
 # FIXME open to be continue
 
 # NOTE 49, ord(c)
@@ -1407,4 +1424,3 @@ saus = _temp.sausage
 # 如果您只想按名称导入模块（可能在包中），请使用importlib.import_module()。
 
 # 在版本3.3中更改：不再支持级别的负值（这也将默认值更改为0）。
-
