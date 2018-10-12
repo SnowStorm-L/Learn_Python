@@ -1047,9 +1047,36 @@ def opener(path, flags):
 
 with open('spamspam.txt', 'w', opener=opener) as f:
     print('This will be written to somedir/spamspam.txt', file=f)
-os.close(dir_fd)  # don't leak a file descriptor
+os.close(dir_fd)  # 不要泄漏文件描述符
 
-# FIXME open to be continue
+# open() 函数返回的文件对象的类型取决于模式。
+# 当 open() 用于在文本模式 ('w'、 'r'、 'wt'"、 'rt'等) 中打开文件时, 它返回 io 的子类 io.TextIOBase (特别是 io.TextIOWrapper)。
+# 当用于以缓冲方式在二进制模式下打开文件时, 返回的类是 io 的子类 io.BufferedIOBase。
+
+# 确切的类不同: 在读二进制模式中, 它返回 io.BufferedReader;
+# 在写二进制和追加二进制模式, 它返回一个 io.BufferedWriter, 并且在读/写模式下, 它返回一个 io.BufferedRandom。
+# 禁用缓冲时, 原始流 (io 的子类) io.RawIOBase, io.FileIO返回。
+
+# 另请参阅文件处理模块, 如 fileinput、 io (在其中 open() 声明)、 os、 os.path、 tempfile和 shutil .
+
+# 在版本3.3 中更改:
+# 添加了打开程序参数。
+# 添加了'x'模式。
+# IOError 曾经被提升, 现在是 OSError 的别名.
+# 如果在独占创建模式 ('x') 中打开的文件已经存在, FileExistsError 现在被引发。
+
+# 在版本3.4 中更改:
+# 该文件现在不可继承。
+
+# 自版本3.4 以来弃用, 将在版本4.0 中删除:" 'U'模式。
+
+# 在版本3.5 中更改:
+# 如果系统调用中断, 并且信号处理程序不引发异常, 则该函数现在重试系统调用, 而不是引发 InterruptedError 异常 (请参阅 PEP 475 的理由)。
+# 添加了'namereplace'错误处理程序。
+
+# 在版本3.6 中更改:
+# 支持添加到接受实现 os.PathLike .
+# 在 Windows 上, 打开控制台缓冲区可能会返回 io 的子类 io.RawIOBase 除 io 之外 io.FileIO
 
 # NOTE 49, ord(c)
 
