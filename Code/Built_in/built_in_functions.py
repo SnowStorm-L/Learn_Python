@@ -119,6 +119,18 @@ print(bool(), bool(0), bool(1), bool(2))
 
 # NOTE 8, class bytearray([source[, encoding[, errors]]])
 
+# 返回一个新的字节数组。
+# bytearray类是0 <= x <256范围内的可变整数序列。
+# 它具有可变序列的大多数常用方法，在可变序列类型中描述，以及字节类型具有的大多数方法，参见Bytes和Bytearray Operations。
+
+# 可选的source参数可用于以几种不同的方式初始化数组：
+# 1, 如果它是一个字符串，您还必须提供编码（和可选的，错误）参数; 然后，bytearray（）使用str.encode（）将字符串转换为字节。
+# 2, 如果它是一个整数，则该数组将具有该大小，并将使用空字节进行初始化。
+# 3, 如果它是符合缓冲区接口的对象，则将使用该对象的只读缓冲区来初始化bytes数组。
+# 4, 如果它是可迭代的，则它必须是0 <= x <256范围内的整数可迭代，它们用作数组的初始内容。
+
+# 如果没有参数，则会创建一个大小为0的数组。
+
 # NOTE 9, class bytes([source[, encoding[, errors]]])
 
 # NOTE 10, callable(object)
