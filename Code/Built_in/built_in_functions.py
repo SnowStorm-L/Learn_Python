@@ -133,6 +133,15 @@ print(bool(), bool(0), bool(1), bool(2))
 
 # NOTE 9, class bytes([source[, encoding[, errors]]])
 
+# 返回一个新的 "字节" 对象, 它是介于0 <= x < 256范围内的整数的不可变序列。
+# bytes 是 bytearray 的不可变版本-它具有相同的非变异方法和相同的索引和切片行为。
+
+# 因此, 构造函数参数被解释为 bytearray() .
+
+# 还可以使用文本创建字节对象, 请参阅字符串和字节文本.
+
+# 另请参见二进制序列类型-字节、bytearray、memoryview、 字节对象和字节和 bytearray 操作.
+
 # NOTE 10, callable(object)
 
 # 如果对象参数显示为可调用，则返回True，否则返回False。
