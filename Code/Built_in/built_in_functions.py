@@ -103,9 +103,6 @@ print(issubclass(bool, int))
 
 print(bool(), bool(0), bool(1), bool(2))
 
-
-# WARNING 未完成 7, 8, 9
-
 # NOTE 7, breakpoint(*args: Any, **kws: Any) -> None
 
 # 版本3.7中的新功能。
