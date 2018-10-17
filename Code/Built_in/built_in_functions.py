@@ -103,6 +103,7 @@ print(issubclass(bool, int))
 
 print(bool(), bool(0), bool(1), bool(2))
 
+
 # NOTE 7, breakpoint(*args: Any, **kws: Any) -> None
 
 # 版本3.7中的新功能。
@@ -353,6 +354,13 @@ print(dir(s))
 # 对于整数，结果与（a // b，a％b）相同。
 # 对于浮点数，结果为（q，a％b），其中q通常为math.floor（a / b），但可能比该值小1。
 # 无论如何q * b + a％b非常接近a， 如果a％b非零，则其符号与b相同，并且 0 <= abs(a % b) < abs(b).
+
+# divmod(a,b)方法返回的是a//b（商）以及a%b(余数)，返回结果类型为tuple
+
+divmod_test = divmod(9, 2)
+print(divmod_test)
+print(divmod_test[0])
+print(divmod_test[1])
 
 # NOTE 19, enumerate(iterable, start=0)
 
