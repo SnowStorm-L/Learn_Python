@@ -115,6 +115,8 @@ print(bool(), bool(0), bool(1), bool(2))
 # 在这种情况下，它纯粹是一个便利功能，因此您不必显式导入pdb或输入尽可能多的代码来进入调试器。
 # 但是，sys.breakpointhook（）可以设置为其他一些函数，breakpoint（）会自动调用它，允许你进入所选的调试器。
 
+# PDB(Python 的调试工具) 类似于iOS的lldb,Android的ADB
+
 # NOTE 8, class bytearray([source[, encoding[, errors]]])
 
 # 返回一个新的字节数组。
