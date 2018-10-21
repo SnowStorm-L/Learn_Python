@@ -1323,6 +1323,10 @@ class C:
 # 要以扩展精度添加浮点值，请参阅math.fsum（）。
 # 要连接一系列迭代，请考虑使用itertools.chain（）。
 
+print(sum([0, 1, 2]))
+print(sum((2, 3, 4), 1))  # 元组计算总和后再加 1  10
+
+
 # NOTE 64, super([type[, object-or-type]])
 
 # 返回将方法调用委托给父类或兄弟类 类型的代理对象。
@@ -1367,6 +1371,7 @@ class C(B):
 # NOTE 65, tuple([iterable])
 
 # 元组实际上是一个不可变的序列类型，而不是一个函数，如元组和序列类型 - list，tuple，range中所述。
+# 相关看 tuple.py
 
 # NOTE 66, class type(object), class type(name, bases, dict)
 
