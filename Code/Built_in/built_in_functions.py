@@ -1223,6 +1223,9 @@ print(repr([0, 1, 2, 3]))
 # 返回反序迭代器。
 # seq必须是一个具有__reversed __（）方法的对象，或者支持序列协议（__len __（）方法和__getitem __（）方法，整数参数从0开始）。
 
+seq = [1, 2, 3]
+print(reversed(seq))
+
 # NOTE 56, round(number[, ndigits])
 
 # 小数点后舍入到ndigits精度的返回数。
