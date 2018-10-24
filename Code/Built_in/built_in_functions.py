@@ -6,6 +6,8 @@
 # @File    : built_in_functions.py
 # @Software: PyCharm
 
+from Code.Tools.l_log import *
+
 # Built-in Functions
 # Python 内置方法
 # Python 解释器有许多内置的函数和类型, 按字母排序介绍
@@ -13,8 +15,9 @@
 # NOTE 1, abs(x)
 # 返回数字的绝对值。参数可以是整数或浮点数字。如果参数是复数, 则返回其大小。
 
-print(abs(-1))
-print(abs(-1.1))
+l_log(abs(-1))
+l_log(abs(-1))
+l_log(abs(-1.1))
 
 # 复数例子
 # 复数: (mmp 数学是体育老师教的, 还是我铭记了有借有还的道理?)
@@ -31,10 +34,10 @@ print(abs(-1.1))
 
 # 复数 z 或者表示 在x,y轴分别为3,4   复数就是->(长度为5  角度37°, 37°是勾股定理(3,4,5)形成的角度, 复数就是 5∠37或者写成 5 37°)
 z = 3 + 4j
-print(z.real)  # 实部 获取
-print(z.imag)  # 虚部 获取
-print(z.conjugate())  # 输出该复数的共轭复数
-print(abs(3 + 4j))
+l_log(z.real)  # 实部 获取
+l_log(z.imag)  # 虚部 获取
+l_log(z.conjugate())  # 输出该复数的共轭复数
+l_log(abs(3 + 4j))
 
 # NOTE 2, all(iterable)
 
@@ -50,9 +53,9 @@ empty_list = list()
 demo_list = list(range(1, 4))
 demo_list_two = list(range(0, 3))
 
-print("all empty_list", all(empty_list))
-print("all demo_list", all(demo_list))
-print("all demo_list_two", all(demo_list_two))
+l_log("all empty_list", all(empty_list))
+l_log("all demo_list", all(demo_list))
+l_log("all demo_list_two", all(demo_list_two))
 
 # NOTE 3, any(iterable) 楼上 NOTE 2 的亲戚
 
@@ -64,9 +67,9 @@ print("all demo_list_two", all(demo_list_two))
 #             return True
 #     return False
 
-print("any empty_list", any(empty_list))
-print("any demo_list", any(demo_list))
-print("any demo_list_two", any(demo_list_two))
+l_log("any empty_list", any(empty_list))
+l_log("any demo_list", any(demo_list))
+l_log("any demo_list_two", any(demo_list_two))
 
 # NOTE 4, ascii(object)
 
@@ -76,18 +79,18 @@ print("any demo_list_two", any(demo_list_two))
 # 这个函数跟repr()函数一样，返回一个可打印的对象字符串方式表示。当遇到非ASCII码时，就会输出\x，\u或\U等字符来表示。
 # 与Python 2版本号里的repr()是等效的函数。
 
-print(ascii(10), ascii(9000000), ascii('b\31'), ascii('0x\1000'), ascii('中文'))
+l_log(ascii(10), ascii(9000000), ascii('b\31'), ascii('0x\1000'), ascii('中文'))
 
 # NOTE 5, bin(x)
 
 # 将整数数字转换为前缀为 "0b" 的二进制字符串。
 # 结果是有效的 Python 表达式。如果x不是 Python int 对象, 它必须定义一个返回整数的 __index__() 方法。
 
-print(bin(3), bin(-10))
+l_log(bin(3), bin(-10))
 
 # 如果需要前缀 "0b", 则可以使用下列任一方法。
-print(format(14, '#b'), format(14, 'b'))
-print(f'{14:#b}', f'{14:b}')
+l_log(format(14, '#b'), format(14, 'b'))
+l_log(f'{14:#b}', f'{14:b}')
 
 # NOTE 6, class bool([x])
 
@@ -99,10 +102,9 @@ print(f'{14:#b}', f'{14:b}')
 # 在3.7 版中更改:x现在是仅限位置的参数。
 
 # bool 类是 int 的子类别 (请参见数值类型-int、浮点、复数)。不能再创建子类了。它的唯一实例是False和True (请参见布尔值).
-print(issubclass(bool, int))
+l_log(issubclass(bool, int))
 
-print(bool(), bool(0), bool(1), bool(2))
-
+l_log(bool(), bool(0), bool(1), bool(2))
 
 # NOTE 7, breakpoint(*args: Any, **kws: Any) -> None
 
@@ -131,6 +133,9 @@ print(bool(), bool(0), bool(1), bool(2))
 
 # 如果没有参数，则会创建一个大小为0的数组。
 
+b = bytearray()
+l_log(b)
+
 # NOTE 9, class bytes([source[, encoding[, errors]]])
 
 # 返回一个新的 "字节" 对象, 它是介于0 <= x < 256范围内的整数的不可变序列。
@@ -157,7 +162,7 @@ class A:
 
 class B:  # 定义类B
     def __call__(self):
-        print('instances are callable now.')
+        l_log('instances are callable now.')
 
 
 a = A()  # 调用类A
@@ -166,7 +171,7 @@ a = A()  # 调用类A
 b = B()  # 调用类B
 # 实例b是可调用对象
 
-print(callable(B), callable(A), callable(a), callable(b))
+l_log(callable(B), callable(A), callable(a), callable(b))
 
 # 调用实例b成功
 b()
@@ -177,8 +182,8 @@ b()
 # 例如，chr（97）返回字符串'a'，而chr（8364）返回字符串'€'。
 # 这是ord（）相反作用的函数。
 
-print(chr(97))
-print(chr(8364))
+l_log(chr(97))
+l_log(chr(8364))
 
 
 # NOTE 12, @classmethod 类方法标志
@@ -245,7 +250,7 @@ exec(for_in_compile)
 
 test = "3 * 4 + 5"
 test_compile = compile(test, '', 'eval')
-print(eval(test_compile))
+l_log(eval(test_compile))
 
 # NOTE 14, class complex([real[, imag]])
 
@@ -262,12 +267,12 @@ print(eval(test_compile))
 # 复合类型在数值类型中描述, — int, float, complex.
 # 版本3.6中已更改：允许使用下划线对数字进行分组，如代码文字中所示。
 
-print(complex(1, 2))
-print(complex(1))
-print(complex("1"))  # 当做字符串处理
+l_log(complex(1, 2))
+l_log(complex(1))
+l_log(complex("1"))  # 当做字符串处理
 
 # 注意：这个地方在"+"号两边不能有空格，也就是不能写成"1 + 2j"，应该是"1+2j"，否则会报错
-print(complex("1+2j"))
+l_log(complex("1+2j"))
 
 
 # 第一个参数为字符串，还添加第二个参数时会报错：
@@ -288,13 +293,13 @@ class Coordinate:
 
 
 point = Coordinate()
-print('x = ', point.x)
-print('y = ', point.y)
-print('z = ', point.z)
+l_log('x = ', point.x)
+l_log('y = ', point.y)
+l_log('z = ', point.z)
 delattr(Coordinate, 'z')
-print('--删除 z 属性后--')
-print('x = ', point.x)
-print('y = ', point.y)
+l_log('--删除 z 属性后--')
+l_log('x = ', point.x)
+l_log('y = ', point.y)
 # 触发错误 AttributeError: 'Coordinate' object has no attribute 'z'
 # print('z = ', point.z)
 
@@ -330,9 +335,9 @@ class dict(iterable, **kwarg)
 
 import struct
 
-print(dir())  # 显示模块命名空间中的名称
+l_log(dir())  # 显示模块命名空间中的名称
 
-print(dir(struct))  # 显示struct模块中的名称
+l_log(dir(struct))  # 显示struct模块中的名称
 
 
 class Shape:
@@ -341,7 +346,7 @@ class Shape:
 
 
 s = Shape()
-print(dir(s))
+l_log(dir(s))
 
 # NOTE:
 
@@ -360,9 +365,9 @@ print(dir(s))
 # divmod(a,b)方法返回的是a//b（商）以及a%b(余数)，返回结果类型为tuple
 
 divmod_test = divmod(9, 2)
-print(divmod_test)
-print(divmod_test[0])
-print(divmod_test[1])
+l_log(divmod_test)
+l_log(divmod_test[0])
+l_log(divmod_test[1])
 
 # NOTE 19, enumerate(iterable, start=0)
 
@@ -371,9 +376,9 @@ print(divmod_test[1])
 
 seasons = ['Spring', 'Summer', 'Fall', 'Winter']
 
-print(list(enumerate(seasons)))
+l_log(list(enumerate(seasons)))
 
-print(list(enumerate(seasons, start=1)))
+l_log(list(enumerate(seasons, start=1)))
 
 
 # enumerate的实现：
@@ -385,9 +390,9 @@ def custom_enumerate(sequence, start=0):
         n += 1
 
 
-print(list(custom_enumerate(seasons)))
+l_log(list(custom_enumerate(seasons)))
 
-print(list(custom_enumerate(seasons, start=1)))
+l_log(list(custom_enumerate(seasons, start=1)))
 
 # NOTE 20, eval(expression, globals=None, locals=None)
 
@@ -410,11 +415,11 @@ print(list(custom_enumerate(seasons, start=1)))
 
 # demo 1
 x = 1
-print(eval('x+1'))
+l_log(eval('x+1'))
 
 a = 1
 g = {'a': 20}
-print(eval("a+1", g))
+l_log(eval("a+1", g))
 
 # demo 2
 
@@ -434,7 +439,7 @@ def g():
 
 g()
 
-print('locals x %d locals y %d globals x %d globals y %d' % (
+l_log('locals x %d locals y %d globals x %d globals y %d' % (
     locals()["x"], locals()["y"], globals()["x"], globals()["y"]))
 
 # demo 3 locals()对象的值不能修改，globals()对象的值可以修改
@@ -451,17 +456,17 @@ def f():
 
 f()
 globals()["z"] = 2
-print(z)
+l_log(z)
 
 # eval有安全性问题,比如用户恶意输入就会获得当前目录文件
 
 import os
 
-print(eval("__import__('os').system('ls')"))
+l_log(eval("__import__('os').system('ls')"))
 
-print('os' in globals())
+l_log('os' in globals())
 
-print(os.system('whoami'))
+l_log(os.system('whoami'))
 
 # 怎么避免安全问题？
 # １、自行写检查函数；
@@ -552,7 +557,7 @@ def is_odd(n):
 
 
 new_list = filter(is_odd, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-print(list(new_list))
+l_log(list(new_list))
 
 import math
 
@@ -563,7 +568,7 @@ def is_sqr(x):
 
 
 new_list = filter(is_sqr, range(1, 101))
-print(list(new_list))
+l_log(list(new_list))
 
 # NOTE 23, class float([x])
 
@@ -589,7 +594,7 @@ numeric_string ::=  [sign] numeric_value
 # 对于一般的Python对象x，float（x）委托给x .__ float __（）。
 # 如果没有给出参数，则返回0.0。
 
-print(float('+1.23'), float('   -12345\n'), float('1e-003'), float('+1E6'), float('-Infinity'))
+l_log(float('+1.23'), float('   -12345\n'), float('1e-003'), float('+1E6'), float('-Infinity'))
 
 
 # float类型在Numeric Types中描述 - int，float，complex。
@@ -633,7 +638,7 @@ class A(object):
 a = A()
 getattr(a, 'bar')  # 获取属性 bar 值 1
 # getattr(a, 'bar2')  # 属性 bar2 不存在，触发异常 AttributeError: 'A' object has no attribute 'bar2'
-print(getattr(a, 'bar2', 3))  # 属性 bar2 不存在，但设置了默认值 3
+l_log(getattr(a, 'bar2', 3))  # 属性 bar2 不存在，但设置了默认值 3
 
 # NOTE 27, globals()
 
@@ -671,12 +676,12 @@ help(float)
 # 如果x不是 Python int 对象, 它必须定义一个返回整数的 __index__() 方法。
 #
 # 一些例子:
-print(hex(255), hex(-42))
+l_log(hex(255), hex(-42))
 
 # 如果要将整数数字转换为带有前缀的大写或小写十六进制字符串, 可以使用下列任一方法
-print('%#x' % 255, '%x' % 255, '%X' % 255)
-print(format(255, '#x'), format(255, 'x'), format(255, 'X'))
-print(f'{255:#x}', f'{255:x}', f'{255:X}')
+l_log('%#x' % 255, '%x' % 255, '%X' % 255)
+l_log(format(255, '#x'), format(255, 'x'), format(255, 'X'))
+l_log(f'{255:#x}', f'{255:x}', f'{255:X}')
 
 # 有关详细信息, 请参阅 format() 。
 
@@ -775,10 +780,10 @@ int(x, base=10)，base缺省值为10，也就是说不指定base的值时，函�
 
 a = "b"
 
-print(isinstance(a, str))
+l_log(isinstance(a, str))
 
 # 参数classinfo为一个元组，则若对象类型与元组中类型名之一相同即返回True。
-print(isinstance(a, (str, int, list)))
+l_log(isinstance(a, (str, int, list)))
 
 
 #  isinstance()与type()的区别
@@ -804,8 +809,8 @@ type(B()) == A  # returns False
 # classinfo可以是类对象的元组，在这种情况下，将检查classinfo中的每个条目。
 # 在任何其他情况下，都会引发TypeError异常。
 
-print(issubclass(B, A))
-print(issubclass(B, (int, str)))
+l_log(issubclass(B, A))
+l_log(issubclass(B, (int, str)))
 
 
 # NOTE 37, iter(object[, sentinel])
@@ -851,7 +856,7 @@ def runoob(arg):
 
 
 runoob(4)
-print(locals())
+l_log(locals())
 
 # NOTE 41, map(function, iterable, ...)
 
@@ -899,20 +904,20 @@ b[:2] = b'bb'  # 对b的改动不影响a
 
 a = b'aaaaaa'
 me = memoryview(a)
-print(me.readonly)  # 只读的memoryview
+l_log(me.readonly)  # 只读的memoryview
 
 mb = me[:2]  # 不会产生新的字符串
 
 a = bytearray(b'aaaaaa')
 me = memoryview(a)
-print(me.readonly)  # 可写的memoryview
+l_log(me.readonly)  # 可写的memoryview
 mb = me[:2]  # 不会会产生新的bytearray
 mb[:2] = b'bb'  # 对mb的改动就是对me的改动
 
-print(mb.tobytes())
+l_log(mb.tobytes())
 'bb'
 
-print(me.tobytes())
+l_log(me.tobytes())
 'bbaaaa'
 
 # NOTE 44, min(iterable, *[, key, default]), min(arg1, arg2, *args[, key])
@@ -954,14 +959,14 @@ print(me.tobytes())
 # 如果x不是Python int对象，则必须定义一个返回整数的__index__() 方法。
 
 # demo
-print(oct(8))
-print(oct(-56))
+l_log(oct(8))
+l_log(oct(-56))
 
 # 如果要将整数转换为八进制字符串，或者使用前缀“0o”，则可以使用以下任一方法。
 
-print('%#o' % 10, '%o' % 10)
-print(format(10, '#o'), format(10, 'o'))
-print(f'{10:#o}', f'{10:o}')
+l_log('%#o' % 10, '%o' % 10)
+l_log(format(10, '#o'), format(10, 'o'))
+l_log(f'{10:#o}', f'{10:o}')
 
 # 有关更多信息，另请参见format() https://docs.python.org/3/library/functions.html#format。
 
@@ -1064,18 +1069,18 @@ print(f'{10:#o}', f'{10:o}')
 
 # 以下示例使用os.open（）函数的dir_fd参数打开相对于给定目录的文件：
 
-import os
-
-dir_fd = os.open('somedir', os.O_RDONLY)
-
-
-def opener(path, flags):
-    return os.open(path, flags, dir_fd=dir_fd)
-
-
-with open('spamspam.txt', 'w', opener=opener) as f:
-    print('This will be written to somedir/spamspam.txt', file=f)
-os.close(dir_fd)  # 不要泄漏文件描述符
+# import os
+#
+# dir_fd = os.open('somedir', os.O_RDONLY)
+#
+#
+# def opener(path, flags):
+#     return os.open(path, flags, dir_fd=dir_fd)
+#
+#
+# with open('spamspam.txt', 'w', opener=opener) as f:
+#     print('This will be written to somedir/spamspam.txt', file=f)
+# os.close(dir_fd)  # 不要泄漏文件描述符
 
 # open() 函数返回的文件对象的类型取决于模式。
 # 当 open() 用于在文本模式 ('w'、 'r'、 'wt'"、 'rt'等) 中打开文件时, 它返回 io 的子类 io.TextIOBase (特别是 io.TextIOWrapper)。
@@ -1113,7 +1118,7 @@ os.close(dir_fd)  # 不要泄漏文件描述符
 
 # NOTE 50, pow(x, y[, z])
 
-print(pow(5, 2))
+l_log(pow(5, 2))
 
 
 # modulo z（比pow（x，y）％z更有效地计算）。
@@ -1215,8 +1220,7 @@ class C:
 
 # 类可以通过定义__repr __（）方法来控制此函数为其实例返回的内容。
 
-print(repr([0, 1, 2, 3]))
-
+l_log(repr([0, 1, 2, 3]))
 
 # NOTE 55, reversed(seq)
 
@@ -1224,7 +1228,8 @@ print(repr([0, 1, 2, 3]))
 # seq必须是一个具有__reversed __（）方法的对象，或者支持序列协议（__len __（）方法和__getitem __（）方法，整数参数从0开始）。
 
 seq = [1, 2, 3]
-print(reversed(seq))
+l_log(reversed(seq))
+
 
 # NOTE 56, round(number[, ndigits])
 
@@ -1326,8 +1331,8 @@ class C:
 # 要以扩展精度添加浮点值，请参阅math.fsum（）。
 # 要连接一系列迭代，请考虑使用itertools.chain（）。
 
-print(sum([0, 1, 2]))
-print(sum((2, 3, 4), 1))  # 元组计算总和后再加 1  10
+l_log(sum([0, 1, 2]))
+l_log(sum((2, 3, 4), 1))  # 元组计算总和后再加 1  10
 
 
 # NOTE 64, super([type[, object-or-type]])
@@ -1441,12 +1446,12 @@ X = type('X', (object,), dict(a=1))
 x = [1, 2, 3]
 y = [4, 5, 6]
 zipped = zip(x, y)
-print(list(zipped))
+l_log(list(zipped))
 
 x2, y2 = zip(*zip(x, y))
 
-print(x == list(x2) and y == list(y2))
-print(x2)
+l_log(x == list(x2) and y == list(y2))
+l_log(x2)
 
 # NOTE 69, __import__(name, globals=None, locals=None, fromlist=(), level=0)
 
@@ -1469,18 +1474,18 @@ print(x2)
 # 但是，当给出非空的fromlist参数时，将返回按名称命名的模块。
 
 # 例如，语句导入垃圾邮件导致字节码类似于以下代码：
-spam = __import__('spam', globals(), locals(), [], 0)
+# spam = __import__('spam', globals(), locals(), [], 0)
 
 # 语句import spam.ham导致此调用：
-spam = __import__('spam.ham', globals(), locals(), [], 0)
+# spam = __import__('spam.ham', globals(), locals(), [], 0)
 
 # 注意__import__() 如何返回toplevel模块，因为这是import语句绑定到名称的对象。
 
 # 另一方面，来自spam.ham的声明导入鸡蛋，香肠作为香肠的结果
 
-_temp = __import__('spam.ham', globals(), locals(), ['eggs', 'sausage'], 0)
-eggs = _temp.eggs
-saus = _temp.sausage
+# _temp = __import__('spam.ham', globals(), locals(), ['eggs', 'sausage'], 0)
+# eggs = _temp.eggs
+# saus = _temp.sausage
 
 # 这里，spam.ham模块从__import__()返回。
 # 从此对象中，将检索要导入的名称并将其分配给各自的名称。
