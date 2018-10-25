@@ -567,8 +567,10 @@ def is_sqr(x):
     return math.sqrt(x) % 1 == 0
 
 
+new_list_lambda = filter(lambda x: math.sqrt(x) % 1 == 0, range(1, 101))
 new_list = filter(is_sqr, range(1, 101))
 l_log(list(new_list))
+l_log(list(new_list_lambda))
 
 # NOTE 23, class float([x])
 
