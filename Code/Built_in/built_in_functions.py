@@ -596,7 +596,7 @@ numeric_string ::=  [sign] numeric_value
 # 对于一般的Python对象x，float（x）委托给x .__ float __（）。
 # 如果没有给出参数，则返回0.0。
 
-l_log(float('+1.23'), float('   -12345\n'), float('1e-003'), float('+1E6'), float('-Infinity'))
+l_log(float('+1.23'), float('-12345\n'), float('1e-003'), float('+1E6'), float('-Infinity'))
 
 
 # float类型在Numeric Types中描述 - int，float，complex。
