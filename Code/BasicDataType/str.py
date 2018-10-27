@@ -89,6 +89,7 @@ print(newStr.capitalize())
 
 # casefold()
 # 把整个字符串的所有字符改为小写
+# str.lower() 只能转换ASCII字母。
 
 print(newStr.casefold())
 
@@ -151,6 +152,10 @@ print(newStr.center(40, 'a'))
 # lower()
 # 转换字符串中所有大写字符为小写。
 
+str1 = 'NOSTALGIA'
+str2 = str1.lower()
+print(str2)
+
 # lstrip()
 # 去掉字符串左边的所有空格
 
@@ -190,14 +195,24 @@ print(newStr.center(40, 'a'))
 # swapcase()
 # 翻转字符串中的大小写。
 
+str1 = 'No Smouking'
+str2 = str1.swapcase()
+print(str2)
+
 # title()
 # 返回标题化（所有的单词都是以大写开始，其余字母均小写）的字符串。
+str1 = 'nostalgia fly'
+str2 = str1.title()
+print(str2)
 
 # translate(table)
 # 根据table的规则（可以由str.maketrans('a', 'b')定制）转换字符串中的字符。
 
 # upper()
 # 转换字符串中的所有小写字符为大写。
+str1 = 'nostalgia'
+str2 = str1.upper()
+print(str2)
 
 # zfill(width)
 # 返回长度为width的字符串，原字符串右对齐，前边用0填充。
