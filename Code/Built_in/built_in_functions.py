@@ -1323,6 +1323,8 @@ class C:
 # 返回str版本的对象。 有关详细信息，请参阅str（）。
 # str是内置的字符串类。 有关字符串的一般信息，请参阅文本序列类型 - str。
 
+# 相关 看str.py
+
 # NOTE 63, sum(iterable[, start])
 
 # Sums从左到右开始和迭代的项目并返回总数。start默认为0。
