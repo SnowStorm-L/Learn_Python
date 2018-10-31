@@ -8,8 +8,7 @@
 
 import os
 
-file_path = 'en.lproj/Localizable.strings'
-
+file_path = '/Users/l/Desktop/阿里云git项目/A113D/pannel86_ios/A113D/A113D/SupportingFiles/en.lproj/Localizable.strings'
 
 def desktop_path():
     return os.path.join(os.path.expanduser("~"), 'Desktop')
@@ -17,8 +16,9 @@ def desktop_path():
 
 def create_localizable_file():
     os.chdir(desktop_path())
-    print(os.getcwd())
     create_file = "touch LocalizedUtils.swift"
     os.system(create_file)
 
-create_localizable_file()
+def open_file():
+    pass
+
