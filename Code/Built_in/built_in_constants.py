@@ -189,3 +189,16 @@ l_log(stream)
 
 # site模块（在启动期间自动导入，除非给出-S命令行选项）将向内置命名空间添加几个常量。 它们对交互式解释器shell很有用，不应在程序中使用。
 
+# NOTE quit(code=None)
+# NOTE exit(code=None)
+
+# 打印时的对象，打印消息，如“使用退出（）或Ctrl-D（即EOF）退出”，并在调用时，使用指定的退出代码引发SystemExit。
+
+# NOTE copyright
+# NOTE credits
+
+# 打印或调用的对象分别打印版权或信用的文本。
+
+# NOTE license
+
+# 打印时的对象，打印消息“类型许可证（）以查看完整的许可证文本”，并在调用时以类似寻呼机的方式显示完整的许可证文本（一次一个屏幕）。
