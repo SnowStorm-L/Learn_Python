@@ -8,7 +8,7 @@
 
 from Code.Tools.l_log import *
 
-# 少量常量存在于内置命名空间中。 他们是：
+# 量常量存在于内置命名空间中。 他们是：
 
 # NOTE False
 
@@ -49,9 +49,8 @@ l_log(a())
 
 # l_log(NotImplemented)
 
-# NotImplemented 是个特殊值, 它能被二元特殊方法返回（比如__eq__()、__lt__()、__add__()、__rsub__()等,
-# 表明某个类型没有像其他类型那样实现这些操作。
-# 同样，它或许会被原地处理（in place）的二元特殊方法返回（比如__imul__()、__iand__()等）。
+# 二进制特殊方法应返回的特殊值, 例如，__eq__()、__lt__()、__add __()、__rsub__() 等）表示操作没有针对其他类型实现
+# 为了相同的目的，可以通过就地二进制特殊方法（例如，__imul __()、__ rightnd__() 等）返回。 它的逻辑值为真。
 # 还有，它的实际值为True：
 
 l_log(bool(NotImplemented))
@@ -182,12 +181,13 @@ l_log(stream)
 
 # NOTE __debug__
 
-# 如果Python未使用-O选项启动，则此常量为true。 另请参见断言语句。
-# None，False，True和__debug__不能重新分配（对它们的赋值，即使作为属性名称，引发SyntaxError），因此它们可以被认为是“真正的”常量。
+# 如果Python未使用-O选项启动，则此常量为true。 另请参见assert语句。
+# 变量名 None，False，True 和 __ debug__ 无法重新赋值（赋值给它们，即使是属性名，将引发 SyntaxError)
+# 所以它们可以被认为是“真正的”常数。
 
 # NOTE 由site模块(初始化期间会自动导入该模块)添加的常量
 
-# site模块（在启动期间自动导入，除非给出-S命令行选项）将向内置命名空间添加几个常量。 它们对交互式解释器shell很有用，不应在程序中使用。
+# site模块（在启动期间自动导入，除非给出-S命令行选项）将向内置命名空间添加几个常量。 它们对交互式解释器shell很有用，并且不应在程序中使用。
 
 # NOTE quit(code=None)
 # NOTE exit(code=None)
@@ -201,4 +201,4 @@ l_log(stream)
 
 # NOTE license
 
-# 打印时的对象，打印消息“类型许可证（）以查看完整的许可证文本”，并在调用时以类似寻呼机的方式显示完整的许可证文本（一次一个屏幕）。
+# 打印时的对象，打印消息“Type license() to see the full license text”，并在调用时以分页形式显示完整的许可证文本（一次一个屏幕）。
