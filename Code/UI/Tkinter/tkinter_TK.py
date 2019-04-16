@@ -93,6 +93,62 @@ l_log(tk.attributes())
 # 例如，工具提示窗口可能具有在映射和取消映射工具提示时使用的动画。
 # Combobox下拉列表具有与对话框不同的样式。 此属性的值应设置为首选窗口类型列表，因为并非所有窗口管理器都支持所有类型。
 
+# NOTE 3, def wm_client(self, name=None): 貌似只是记录一个值, 具体没发现有什么作用
+# 将NAME存储在此窗口小部件的WM_CLIENT_MACHINE属性中。 返回当前值。
+
+# 设置和获取 WM_CLIENT_MACHINE 属性
+# 如果要删除 WM_CLIENT_MACHINE 属性，赋值为空字符串即可
+# 该属性仅支持 X 窗口系统的窗口管理器，其他系统均忽略
+
+tk.client(name="123")
+
+l_log(tk.client())
+
+# NOTE 4, def wm_colormapwindows(self, *wlist): 具体没发现有什么作用
+
+# 将窗口名称列表（WLIST）存储到此窗口小部件的WM_COLORMAPWINDOWS属性中。
+# 此列表包含其颜色映射与其父项不同的窗口。
+# 如果WLIST为空，则返回小部件的当前列表。
+
+# 该属性仅支持 X 窗口系统的窗口管理器，其它系统均忽略
+
+# l_log(tk.colormapwindows())
+
+# NOTE 5, def wm_command(self, value=None): 具体没发现有什么作用
+
+# 将VALUE存储在WM_COMMAND属性中。
+# 它是用于调用应用程序的命令。
+# 如果VALUE为None，则返回当前命令。
+
+# l_log(tk.command())
+
+# NOTE 6, def wm_deiconify(self):
+
+# 显示窗口
+# 默认情况下新创建的窗口都会显示在屏幕上，但使用 iconify() 或 withdraw() 方法可以在屏幕上移除窗口
+
+# Deiconify这个小部件。 如果它从未映射过，则不会映射。
+# 在Windows上，它将引发此小部件并为其提供焦点。
+
+# tk.iconify()
+# tk.deiconify()
+
+# NOTE 7, def wm_focusmodel(self, model=None):
+
+# 将焦点模型设置为MODEL。
+# “active”表示此窗口小部件将声明焦点本身，“passive”表示窗口管理器应提供焦点。
+# 如果MODEL为None，则返回当前焦点模型。
+
+# 设置和获取焦点模式
+
+# tk.focusmodel(model="active")
+
+# NOTE 8, def wm_forget(self, window): # new in Tk 8.5 没理解
+
+# 该窗口将从屏幕上取消映射，不再由wm管理。
+# 一旦不再由wm管理，顶层窗口将被视为框架窗口
+# 但是，会记录菜单配置选项, 菜单返回一次后 小部件将再次被管理
+
 # NOTE title
 tk.title("TK title 属性") # 修改框体的名字,也可在创建时使用className参数来命名；
 
