@@ -149,6 +149,32 @@ l_log(tk.client())
 # 一旦不再由wm管理，顶层窗口将被视为框架窗口
 # 但是，会记录菜单配置选项, 菜单返回一次后 小部件将再次被管理
 
+# NOTE 9, def wm_frame(self):
+
+# 如果存在，则返回此小部件的装饰框的标识符。
+
+# 返回一个字符串表示当前系统特征
+# 对于类 Unix 系统，返回值是 X 窗口标识符
+# 对于 Windows 系统，返回值是 HWND 强制转换为长整形的结果
+
+# l_log(tk.frame())
+
+# NOTE 10, def wm_geometry(self, newGeometry=None):
+
+# 设置窗口的位置,大小
+
+# 参数结构为  width x height + x + y。
+# 如果给出None，则返回当前值。
+tk.geometry("250x100+300+40")
+
+# NOTE 11, def wm_grid(self, baseWidth=None, baseHeight=None, widthInc=None, heightInc=None):
+
+# 通知窗口管理器该窗口将以网格的形式重新调整尺寸
+# widthInc 和 heightInc 指定网格单元的宽度和高度（像素）
+# baseWidth 和 baseHeight 指定 Tk_GeometryRequest 要求的网格单元数
+
+
+
 # NOTE title
 tk.title("TK title 属性") # 修改框体的名字,也可在创建时使用className参数来命名；
 
@@ -158,13 +184,6 @@ tk.title("TK title 属性") # 修改框体的名字,也可在创建时使用clas
 
 # FIXME (不设置窗口可拉伸最大,最新范围的情况下  拉伸后黑屏? 单一方向禁止拉伸无效?)
 tk.resizable(True, True) # 或者写0 or 1
-
-# NOTE geometry
-# 设置窗口的位置,大小
-
-# 参数结构为  width x height + x + y。
-# 如果给出None，则返回当前值。
-tk.geometry("250x100+300+40")
 
 # 设置窗口可拉伸的最大 宽度, 高度
 # tk.maxsize(width=300, height=200)
