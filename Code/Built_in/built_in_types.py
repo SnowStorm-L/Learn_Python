@@ -6,6 +6,8 @@
 # @File    : built_in_types.py
 # @Software: PyCharm
 
+from Code.Tools.l_log import *
+
 # 内置类型
 
 # 以下部分描述了解释器中内置的标准类型。
@@ -191,3 +193,71 @@
 # 3, 右移 n 位等价于不带溢出检测地除以 pow(2, n)。
 # 4, 使用带有至少一个额外符号扩展位的有限个二进制补码表示（有效位宽度为 1 + max(x.bit_length(), y.bit_length()) 或以上）
 # 执行这些计算就足以获得相当于有无数个符号位时的同样结果。
+
+# NOTE 整数类型的附加方法
+
+# int 类型实现了 numbers.Integral abstract base class。 此外，它还提供了其他几个方法:
+
+# 1, int.bit_length()
+# 返回以二进制表示一个整数所需要的位数，不包括符号位和前面的零:
+
+n = -37
+l_log(bin(n))
+l_log(n.bit_length())
+
+# 更准确地说，如果 x 非零，则 x.bit_length() 是使得 2**(k-1) <= abs(x) < 2**k 的唯一正整数 k。
+# 同样地，当 abs(x) 小到足以具有正确的舍入对数时，则 k = 1 + int(log(abs(x), 2))。 如果 x 为零，则 x.bit_length() 返回 0。
+
+# 等价于:
+
+def bit_length(self):
+    s = bin(self)       # binary representation:  bin(-37) --> '-0b100101'
+    s = s.lstrip('-0b') # remove leading zeros and minus sign
+    return len(s)       # len('100101') --> 6
+
+
+# 3.1 新版功能.
+# 2, int.to_bytes(length, byteorder, *, signed=False)
+# 返回表示一个整数的字节数组。
+
+l_log((1024).to_bytes(2, byteorder='big'))
+l_log((1024).to_bytes(10, byteorder='big'))
+l_log((-1024).to_bytes(10, byteorder='big', signed=True))
+x = 1000
+l_log(x.to_bytes((x.bit_length() + 7) // 8, byteorder='little'))
+
+# 整数会使用 length 个字节来表示。 如果整数不能用给定的字节数来表示则会引发 OverflowError。
+
+# byteorder 参数确定用于表示整数的字节顺序。
+# 如果 byteorder 为 "big"，则最高位字节放在字节数组的开头。
+# 如果 byteorder 为 "little"，则最高位字节放在字节数组的末尾。
+# 要请求主机系统上的原生字节顺序，请使用 sys.byteorder 作为字节顺序值。
+
+# signed 参数确定是否使用二的补码来表示整数。
+# 如果 signed 为 False 并且给出的是负整数，则会引发 OverflowError。
+# signed 的默认值为 False。
+
+# 3.2 新版功能.
+
+# class method int.from_bytes(bytes, byteorder, *, signed=False)
+# 返回由给定字节数组所表示的整数。
+
+l_log(int.from_bytes(b'\x00\x10', byteorder='big'))
+
+l_log(int.from_bytes(b'\x00\x10', byteorder='little'))
+
+l_log(int.from_bytes(b'\xfc\x00', byteorder='big', signed=True))
+
+l_log(int.from_bytes(b'\xfc\x00', byteorder='big', signed=False))
+
+l_log(int.from_bytes([255, 0, 0], byteorder='big'))
+
+# bytes 参数必须为一个 bytes-like object 或是生成字节的可迭代对象。
+
+# byteorder 参数确定用于表示整数的字节顺序。
+# 如果 byteorder 为 "big"，则最高位字节放在字节数组的开头。
+# 如果 byteorder 为 "little"，则最高位字节放在字节数组的末尾。
+# 要请求主机系统上的原生字节顺序，请使用 sys.byteorder 作为字节顺序值。
+
+# signed 参数指明是否使用二的补码来表示整数。
+
