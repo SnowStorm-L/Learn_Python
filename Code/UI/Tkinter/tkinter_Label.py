@@ -180,6 +180,25 @@ label_7 = tk.Label(master, text = "label_7", font = test_font)
 
 label_7.pack()
 
+# NOTE 10, foreground 可简写为fg
+
+# 设置 Label 的文本和位图的前景色颜色
+# 默认值由系统指定
+
+label_8 = tk.Label(master, text = "label_8", foreground = "red") # , bitmap = "error"
+
+label_8.pack()
+
+# NOTE 11, highlightbackground
+
+# NOTE 12, highlightcolor
+
+# NOTE 13, highlightthickness
+
+label_9 = tk.Label(master, text = "label_9", highlightcolor = "red", relief = "ridge")
+label_9.focus_set()
+label_9.pack()
+
 # print(label.config()) 打印设置属性
 
 master.mainloop()
