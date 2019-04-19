@@ -237,7 +237,7 @@ l_log(x.to_bytes((x.bit_length() + 7) // 8, byteorder='little'))
 # 如果 signed 为 False 并且给出的是负整数，则会引发 OverflowError。
 # signed 的默认值为 False。
 
-# 3.2 新版功能.
+# NOTE 3.2 新版功能.
 
 # class method int.from_bytes(bytes, byteorder, *, signed=False)
 # 返回由给定字节数组所表示的整数。
@@ -260,4 +260,85 @@ l_log(int.from_bytes([255, 0, 0], byteorder='big'))
 # 要请求主机系统上的原生字节顺序，请使用 sys.byteorder 作为字节顺序值。
 
 # signed 参数指明是否使用二的补码来表示整数。
+
+# NOTE 3.2 新版功能.
+
+# NOTE 浮点类型的附加方法
+
+# float 类型实现了 numbers.Real abstract base class。 float 还具有以下附加方法。
+
+# 1, float.as_integer_ratio()
+# 返回一对整数，其比率正好等于原浮点数并且分母为正数。 无穷大会引发 OverflowError 而 NaN 则会引发 ValueError。
+
+# 2, float.is_integer()
+# 如果 float 实例可用有限位整数表示则返回 True，否则返回 False:
+
+l_log((-2.0).is_integer())
+l_log((3.2).is_integer())
+
+# 两个方法均支持与十六进制数字符串之间的转换。
+# 由于 Python 浮点数在内部存储为二进制数，因此浮点数与 十进制数 字符串之间的转换往往会导致微小的舍入错误。
+# 而十六进制数字符串却允许精确地表示和描述浮点数。
+# 这在进行调试和数值工作时非常有用。
+
+# 3, float.hex()
+# 以十六进制字符串的形式返回一个浮点数表示。 对于有限浮点数，这种表示法将总是包含前导的 0x 和尾随的 p 加指数。
+
+l_log(2.1.hex())
+
+# 4, class method float.fromhex(s)
+# 返回以十六进制字符串 s 表示的浮点数的类方法。 字符串 s 可以带有前导和尾随的空格。
+
+# 请注意 float.hex() 是实例方法，而 float.fromhex() 是类方法。
+
+# 十六进制字符串采用的形式为:
+# [sign] ['0x'] integer ['.' fraction] ['p' exponent]
+
+# 可选的 sign 可以是 + 或 -，integer 和 fraction 是十六进制数码组成的字符串，exponent 是带有可选前导符的十进制整数。
+# 大小写没有影响，在 integer 或 fraction 中必须至少有一个十六进制数码。
+# 此语法类似于 C99 标准的 6.4.4.2 小节中所描述的语法，也是 Java 1.5 以上所使用的语法。
+# 特别地，float.hex() 的输出可以用作 C 或 Java 代码中的十六进制浮点数字面值，
+# 而由 C 的 %a 格式字符或 Java 的 Double.toHexString 所生成的十六进制数字符串由为 float.fromhex() 所接受。
+
+# 请注意 exponent 是十进制数而非十六进制数，它给出要与系数相乘的 2 的幂次。
+# 例如，十六进制数字符串 0x3.a7p10 表示浮点数 (3 + 10./16 + 7./16**2) * 2.0**10 即 3740.0:
+
+l_log(float.fromhex('0x3.a7p10'))
+
+# 对 3740.0 应用反向转换会得到另一个代表相同数值的十六进制数字符串:
+
+l_log(float.hex(3740.0))
+
+# NOTE 数字类型的哈希运算
+
+# 对于可能为不同类型的数字 x 和 y，要求 x == y 时必定 hash(x) == hash(y) (详情参见 __hash__() 方法的文档)。
+
+# 为了便于在各种数字类型 (包括 int, float, decimal.Decimal 和 fractions.Fraction) 上实现并保证效率，
+# Python 对数字类型的哈希运算是基于为任意有理数定义统一的数学函数，因此该运算对 int 和 fractions.Fraction 的全部实例，
+# 以及 float 和 decimal.Decimal 的全部有限实例均可用.
+
+# 从本质上说，此函数是通过以一个固定质数 P 进行 P 降模给出的。
+# P 的值在 Python 中可以 sys.hash_info 的 modulus 属性的形式被访问。
+
+# CPython implementation detail: 目前所用的质数设定，
+# 在 C long 为 32 位的机器上 P = 2**31 - 1 而在 C long 为 64 位的机器上 P = 2**61 - 1。
+
+# 详细规则如下所述:
+
+# 1, 如果 x = m / n 是一个非负的有理数且 n 不可被 P 整除，则定义 hash(x) 为 m * invmod(n, P) % P，
+# 其中 invmod(n, P) 是对 n 模 P 取反。
+
+# 2, 如果 x = m / n 是一个非负的有理数且 n 可被 P 整除（但 m 不能）则 n 不能对 P 降模，
+# 以上规则不适用；在此情况下则定义 hash(x) 为常数值 sys.hash_info.inf。
+
+# 3, 如果 x = m / n 是一个负的有理数则定义 hash(x) 为 -hash(-x)。 如果结果哈希值为 -1 则将其替换为 -2。
+
+# 4, 特定值 sys.hash_info.inf, -sys.hash_info.inf 和 sys.hash_info.nan 被用作正无穷、负无穷和空值（所分别对应的）哈希值。
+# （所有可哈希的空值都具有相同的哈希值。）
+
+# 5, 对于一个 complex 值 z，会通过计算 hash(z.real) + sys.hash_info.imag * hash(z.imag) 将实部和虚部的哈希值结合起来，
+# 并进行降模 2**sys.hash_info.width 以使其处于 range(-2**(sys.hash_info.width - 1), 2**(sys.hash_info.width - 1)) 范围之内。
+#  同样地，如果结果为 -1 则将其替换为 -2。
+
+# 为了阐明上述规则，这里有一些等价于内置哈希算法的 Python 代码示例，可用于计算有理数、float 或 complex 的哈希值:
 
