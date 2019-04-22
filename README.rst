@@ -7,4 +7,3 @@ Learn Python
 * Email   : L862608263@163.com
 * Software: PyCharm
 
-Use the Pipenv Management Pack
