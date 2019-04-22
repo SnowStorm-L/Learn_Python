@@ -12,7 +12,7 @@ import tkinter as tk
 
 master = tk.Tk()
 
-master.title("TK title 属性")
+master.title("TK Label 学习")
 
 master.geometry("300x600+0+0")
 
@@ -59,19 +59,21 @@ wraplength
 # 当多个小部件具有一组通用选项时，这非常有用。
 # 选项也可以传递（通过关键字），个别选项覆盖dict中的任何选项。
 
-cnf = {"text": "cnf_label", 'bg': 'red'} # 对于多个label, 同样的样式, 作归纳配置使用
+cnf = {"text": "cnf_label", 'bg': 'red'}  # 对于多个label, 同样的样式, 作归纳配置使用
 
-cnf_label = tk.Label(master, cnf= cnf)
-cnf_label.pack() # 添加到视图上
+cnf_label = tk.Label(master, cnf=cnf)
+cnf_label.pack()  # 添加到视图上
 
-# NOTE 1,2  activebackground, activeforeground 这2个属性对于Label不知道有什么作用
+# TODO 1,2  activebackground, activeforeground
+
+# 用于设置Label处于活动（active）状态下的背景和前景颜色,默认由系统指定。
 
 label_1 = tk.Label(master,
-                 activebackground = "red", #
-                 activeforeground = "green",
-                 text = "label_1",
-                 bg = "yellow"
-                 )
+                   activebackground="yellow",
+                   activeforeground="green",
+                   text="label_1",
+                   state="active"
+                   )
 label_1.pack()
 
 # NOTE 3, anchor 控制文本（或图像）在 Label 中显示的位置
@@ -83,7 +85,7 @@ label_1.pack()
 # （ewsn 代表东西南北，上北下南左西右东）
 # 默认值是 "center"
 
-label_2 = tk.Label(master, anchor = "e", text = "label_2", width = "100", bg = "red")
+label_2 = tk.Label(master, anchor="e", text="label_2", width="100", bg="red")
 
 label_2.pack()
 
@@ -111,16 +113,16 @@ label_2.pack()
 * gray75
 """
 
-label_3 = tk.Label(master, width = "100", bitmap = "error", bg = "green")
+label_3 = tk.Label(master, width="100", bitmap="error", bg="green")
 
 label_3.pack()
 
-# NOTE 6, borderwidth (不加relief看不到效果)
+# NOTE 6, borderwidth 简写 bd (不加relief看不到效果)
 
 # 指定 Label 的边框宽度
 # 默认值由系统指定，通常是 1 或 2 像素
 
-label_4 = tk.Label(master, text = "label_4", borderwidth = "5", relief="groove")
+label_4 = tk.Label(master, text="label_4", bd="5", relief="groove")
 
 label_4.pack()
 
@@ -130,29 +132,80 @@ label_4.pack()
 # 默认值由系统指定
 
 # 具体样式能否显示, 与平台相关(有些只能用在mac上, 有些只能用着win上)
-"arrow"
-"circle"
-"clock"
-"cross"
-"dotbox"
-"exchange"
-"fleur"
-"heart"
-"man"
-"mouse"
-"pirate"
-"plus"
-"shuttle"
-"sizing"
-"spider"
-"spraycan"
-"star"
-"target"
-"tcross"
-"trek"
-"watch"
+'''
+arrow 箭头
+based_arrow_down 基础向上箭头
+based_arrow_up 基础向下箭头
+mouse 鼠标
+boat 船
+pencil 铅笔
+bogosity 虚假度
+bottom_left_corner 左下角
+bottom_right_corner 右下角
+question_arrow 问题箭头
+bottom_side 最下边
+right_ptr 右指针
+bottom_tee T型底
+right_side 最右边
+box_spiral 方螺旋
+right_tee T型右
+center_ptr 中指针
+circle 圆
+clock 表
+sailboat 帆船
+coffee_mug 咖啡杯
+sb_down_arrow 宽下箭头
+cross 十字
+sb_h_double_arrow 宽水平双箭头
+cross_reverse 米字
+sb_left_arrow 宽左箭头
+crosshair 十字线
+sb_right_arrow 宽右箭头
+diamond_cross 十字钻
+sb_up_arrow 宽上箭头
+dot 点
+sb_v_double_arrow 宽垂直双箭头
+dotbox 方点
+shuttle 梭子型
+double_arrow 双箭头
+sizing 改变大小
+draft_large 大拖拽
+spider 蜘蛛
+draft_small 小拖拽
+spraycan 喷枪
+draped_box 褶皱盒子
+star 星星
+exchange 交换
+target 目标
+fleur 十字花
+tcross T型十字
+gobbler 火鸡
+top_left_arrow 左上箭头
+gumby gumby（卡通角色
+hand1 手型1
+top_right_corner
+hand2 手型2
+top_side 最上边
+heart 心型
+top_tee T型上
+icon 图标
+trek 跋涉
+iron_cross 铁十字
+ul_angle 左上角度
+left_ptr 左指针
+umbrella 雨伞
+left_side 最左边
+ur_angle 右上角度
+left_tee T型左
+watch 表
+leftbutton
+xterm 输入光标
+ll_angle 左下角度
+X_cursor X型指针
+lr_angle 右下角度
+'''
 
-label_5 = tk.Label(master, text = "label_5", cursor = "heart")
+label_5 = tk.Label(master, text="label_5", cursor="bogosity")
 
 label_5.pack()
 
@@ -161,7 +214,7 @@ label_5.pack()
 # 指定当 Label 不可用的时候前景色的颜色
 # 默认值由系统指定
 
-label_6 = tk.Label(master, text = "label_6", state = "disabled", disabledforeground = "red")
+label_6 = tk.Label(master, text="label_6", state="disabled", disabledforeground="red")
 
 label_6.pack()
 
@@ -173,10 +226,11 @@ label_6.pack()
 
 from tkinter.font import Font
 
-test_font = Font(size = 44)
+test_font = Font(size=44)
 
-# label_7 = tk.Label(master, text = "label_7", font = ("Courier", 44, "bold"))
-label_7 = tk.Label(master, text = "label_7", font = test_font)
+# ('Times',10,'bold','italic')    依次表示字体、字号、加粗、倾斜
+# label_7 = tk.Label(master, text = "label_7", font = ('Times',10,'bold','italic'))
+label_7 = tk.Label(master, text="label_7", font=test_font)
 
 label_7.pack()
 
@@ -185,22 +239,109 @@ label_7.pack()
 # 设置 Label 的文本和位图的前景色颜色
 # 默认值由系统指定
 
-label_8 = tk.Label(master, text = "label_8", foreground = "red") # , bitmap = "error"
+label_8 = tk.Label(master, text="label_8", foreground="red")  # , bitmap = "error"
 
 label_8.pack()
 
-# NOTE 11, highlightbackground
+# TODO 11, highlightbackground
 
-# NOTE 12, highlightcolor
+# 指定当Label没有获得焦点时的高亮边框颜色
 
-# NOTE 13, highlightthickness
+# TODO 12, highlightcolor
 
-label_9 = tk.Label(master, text = "label_9", highlightcolor = "red", relief = "ridge")
-label_9.focus_set()
+# 当Label获得焦点时的高亮边框颜色
+
+# TODO 13, highlightthickness
+
+# 指定高亮边框的宽度
+# 默认值是0
+
+label_9 = tk.Label(master,
+                   text="label_9",
+                   highlightcolor="yellow",
+                   highlightbackground="red",
+                   highlightthickness=5)
+# 设置焦点(当TK主窗口获得焦点时, 边框显示黄色, 当PyCharm获得焦点时, 边框显示红色)
+# 上面这3个参数 仅在Label允许接收焦点的情况下 才能看到切换变化
+label_9.focus_force()  # 不加这行看不到切换变化
 label_9.pack()
+
+# NOTE image
+
+# 指定 Label 显示的图片
+# 该值应该是 PhotoImage，BitmapImage，或者能兼容的对象
+# 该选项优先于 text 和 bitmap 选项 (当设置image选项时, bitmap选项设置失效)
+
+# 你可以使用 Label 显示 PhotoImage 和 BitmapImage 对象。
+# 当你这么做的时候，请务必保留一份图片对象的引用，以防止被 Python 的垃圾回收机制回收。
+# 你可以使用一个全局变量，或一个实例的属性，或者再简单点，在实例上添加一个属性即可：
+
+image_path = "../Resources/strlen.gif"
+
+gif_frames = 59
+
+image = tk.PhotoImage(file=image_path)
+
+label_10 = tk.Label(master, image=image)
+
+frames = [tk.PhotoImage(file=image_path, format='gif -index %i' % (i)) for i in range(gif_frames)]
+
+
+def update(idx):
+    frame = frames[idx]
+    idx += 1
+    label_10.configure(image=frame)
+    master.after(100, update, idx % gif_frames)
+
+
+label_10.pack()
+
+master.after(0, update, 0)
+
+# NOTE justify
+
+# 定义如何对齐多行文本
+# 使用 "left"，"right" 或 "center"
+# 注意，文本的位置取决于 anchor 选项
+# 默认值是 "center"
+
+# NOTE padx, pady
+
+# 指定 Label 水平(竖直)方向上的额外间距（内容和边框间）
+
+label_11 = tk.Label(master, text="label_10", bd="2", relief="groove", padx="5", pady="20")
+
+label_11.pack()
+
+# NOTE relief
+
+# 指定边框样式
+# 默认值是 "flat"
+# 另外你还可以设置 "groove", "raised", "ridge", "solid" 或者 "sunken"
+
+# TODO takefocus (待验证)
+
+# 如果是 True，该 Label 接受输入焦点
+# 默认值是 False
+
+label = tk.Label(master, text="good good study", bg="red", takefocus=False)
+# 设置焦点
+label.focus_set()
+label.pack()
+
+
+def func(event):
+    print("event.char =", event.char)
+    print("event.keycode =", event.keycode)
+
+
+# <Key> 响应所有的按键
+
+label.bind("<Key>", func)
 
 # print(label.config()) 打印设置属性
 
+#
+# state normal(默认)/active/disable
+
 master.mainloop()
-
-
