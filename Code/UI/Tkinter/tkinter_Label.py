@@ -14,7 +14,7 @@ master = tk.Tk()
 
 master.title("TK Label 学习")
 
-master.geometry("300x600+0+0")
+master.geometry("300x800+0+0")
 
 # NOTE Label（master=None, cnf={}, **kw）
 
@@ -44,6 +44,7 @@ text,
 textvariable, 
 underline, 
 wraplength
+compound
 """
 
 # 特定于WIDGET的选项
@@ -266,7 +267,7 @@ label_9 = tk.Label(master,
 label_9.focus_force()  # 不加这行看不到切换变化
 label_9.pack()
 
-# NOTE image
+# NOTE 11, image
 
 # 指定 Label 显示的图片
 # 该值应该是 PhotoImage，BitmapImage，或者能兼容的对象
@@ -298,50 +299,131 @@ label_10.pack()
 
 master.after(0, update, 0)
 
-# NOTE justify
+# NOTE 12, justify
 
 # 定义如何对齐多行文本
 # 使用 "left"，"right" 或 "center"
 # 注意，文本的位置取决于 anchor 选项
 # 默认值是 "center"
 
-# NOTE padx, pady
+# NOTE 13, 14 padx, pady
 
 # 指定 Label 水平(竖直)方向上的额外间距（内容和边框间）
 
-label_11 = tk.Label(master, text="label_10", bd="2", relief="groove", padx="5", pady="20")
+label_11 = tk.Label(master, text="label_11", bd="2", relief="groove", padx="5", pady="20")
 
 label_11.pack()
 
-# NOTE relief
+# NOTE 15, relief
 
 # 指定边框样式
 # 默认值是 "flat"
 # 另外你还可以设置 "groove", "raised", "ridge", "solid" 或者 "sunken"
 
-# TODO takefocus (待验证)
+# TODO 16, takefocus (待验证)
 
 # 如果是 True，该 Label 接受输入焦点
 # 默认值是 False
 
-label = tk.Label(master, text="good good study", bg="red", takefocus=False)
-# 设置焦点
-label.focus_set()
-label.pack()
+# label = tk.Label(master, text="good good study", bg="red", takefocus=False)
+# # 设置焦点
+# label.focus_set()
+# label.pack()
+#
+#
+# def func(event):
+#     print("event.char =", event.char)
+#     print("event.keycode =", event.keycode)
+#
+#
+# # <Key> 响应所有的按键
+#
+# label.bind("<Key>", func)
+
+# NOTE 17, text
+
+# 指定 Label 显示的文本
+# 文本可以包含换行符
+# 如果设置了 bitmap 或 image 选项，该选项则被忽略
+
+# NOTE 18, textvariable
+
+# Label 显示 Tkinter 变量（通常是一个 StringVar 变量）的内容
+# 如果变量被修改，Label 的文本会自动更新
 
 
-def func(event):
-    print("event.char =", event.char)
-    print("event.keycode =", event.keycode)
+# 一个倒计时的例子
+
+remaining = 0
+
+prompt = tk.StringVar()
 
 
-# <Key> 响应所有的按键
+def snooze(secs):
+    """
+    Snoozes for the given number of seconds. During the snooze, a progress
+    dialog is launched notifying the
+    """
 
-label.bind("<Key>", func)
+    def decrement_label():
+        global remaining, prompt
+        remaining -= 1
+        prompt.set('Snoozing %d sec(s)' % remaining)
+        label.update_idletasks()
+        if not remaining:
+            prompt.set("end")
+
+    global remaining
+    prompt.set("start")
+    label = tk.Label(master, textvariable=prompt, width=30, bg='purple')
+    label.pack()
+
+    remaining = secs
+    for i in range(1, secs + 1):
+        master.after(i * 1000, decrement_label)
+
+
+snooze(20)
+
+# NOTE 19, underline
+
+# 跟 text 选项一起使用，用于指定哪一个字符画下划线（例如用于表示键盘快捷键）
+# 默认值是 -1
+
+label_12 = tk.Label(master, text="label-12", underline=1)
+
+# 如果需要underline所有字符串
+# f = Font(label_12, label_12.cget("font"))
+# f.configure(underline=True)
+# label_12.configure(font=f)
+
+label_12.pack()
+
+# NOTE 20, wraplength
+
+# 决定 Label 的文本应该被分成多少行
+# 该选项指定每行的长度，单位是屏幕单元
+# 默认值是 0
+
+label_13 = tk.Label(master, text="label_13", wraplength=20, bg="orange")
+
+label_13.pack()
+
+# NOTE 21, compound
+
+# 控制 Label 中文本和图像的混合模式
+# 默认情况下，如果有指定位图或图片，则不显示文本
+# 如果该选项设置为 "center"，文本显示在图像上（文本重叠图像）
+# 如果该选项设置为 "bottom"，"left"，"right" 或 "top"，那么图像显示在文本的旁边（如 "bottom"，则图像在文本的下方）
+# 默认值是 NONE
+
+
+label_14 = tk.Label(master, text="label_14", height="100", image=image, compound="right", bg="yellow")
+
+label_14.pack()
 
 # print(label.config()) 打印设置属性
 
-#
 # state normal(默认)/active/disable
 
 master.mainloop()
