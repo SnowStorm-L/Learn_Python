@@ -264,7 +264,7 @@ label_9 = tk.Label(master,
                    highlightthickness=5)
 # 设置焦点(当TK主窗口获得焦点时, 边框显示黄色, 当PyCharm获得焦点时, 边框显示红色)
 # 上面这3个参数 仅在Label允许接收焦点的情况下 才能看到切换变化
-label_9.focus_force()  # 不加这行看不到切换变化
+# label_9.focus_force()  # 不加这行看不到切换变化
 label_9.pack()
 
 # NOTE 11, image
@@ -325,20 +325,22 @@ label_11.pack()
 # 如果是 True，该 Label 接受输入焦点
 # 默认值是 False
 
-# label = tk.Label(master, text="good good study", bg="red", takefocus=False)
-# # 设置焦点
+label = tk.Label(master, text="good good study", bg="red", takefocus=True)
+# 设置焦点
 # label.focus_set()
-# label.pack()
-#
-#
-# def func(event):
-#     print("event.char =", event.char)
-#     print("event.keycode =", event.keycode)
-#
-#
-# # <Key> 响应所有的按键
-#
-# label.bind("<Key>", func)
+# 'takefocus': ('takefocus', 'takeFocus', 'TakeFocus', '0', '0')
+print(label.config())
+label.pack()
+
+
+def func(event):
+    print("event.char =", event.char)
+    print("event.keycode =", event.keycode)
+
+
+# <Key> 响应所有的按键
+
+label.bind("<Key>", func)
 
 # NOTE 17, text
 
@@ -424,6 +426,17 @@ label_14.pack()
 
 # print(label.config()) 打印设置属性
 
-# state normal(默认)/active/disable
+# NOTE 22, state
+
+# 指定 Label 的状态
+# 这个标签控制 Label 如何显示
+# 可设置的选项为: normal(默认)/active/disable
+
+# NOTE 23, 24 width, height
+
+# 设置 Label 的宽度(高度)
+# 如果 Label 显示的是文本，那么单位是文本单元
+# 如果 Label 显示的是图像，那么单位是像素（或屏幕单元）
+# 如果设置为 0 或者干脆不设置，那么会自动根据 Label 的内容计算出宽度(高度)
 
 master.mainloop()
