@@ -7,7 +7,7 @@
 # @Software: PyCharm
 
 
-from tkinter import  *
+from tkinter import *
 from Code.Tools.l_log import *
 
 # Tk的顶级小部件，主要代表应用程序的主窗口。(根窗口)
@@ -174,16 +174,15 @@ tk.geometry("250x100+300+40")
 # baseWidth 和 baseHeight 指定 Tk_GeometryRequest 要求的网格单元数
 
 
-
 # NOTE title
-tk.title("TK title 属性") # 修改框体的名字,也可在创建时使用className参数来命名；
+tk.title("TK title 属性")  # 修改框体的名字,也可在创建时使用className参数来命名；
 
 # NOTE resizable
 # 是否可以手动拉伸window的宽高。
 # 两个值都是布尔值。
 
 # FIXME (不设置窗口可拉伸最大,最新范围的情况下  拉伸后黑屏? 单一方向禁止拉伸无效?)
-tk.resizable(True, True) # 或者写0 or 1
+tk.resizable(True, True)  # 或者写0 or 1
 
 # 设置窗口可拉伸的最大 宽度, 高度
 # tk.maxsize(width=300, height=200)

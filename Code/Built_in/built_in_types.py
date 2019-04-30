@@ -205,15 +205,16 @@ n = -37
 l_log(bin(n))
 l_log(n.bit_length())
 
+
 # 更准确地说，如果 x 非零，则 x.bit_length() 是使得 2**(k-1) <= abs(x) < 2**k 的唯一正整数 k。
 # 同样地，当 abs(x) 小到足以具有正确的舍入对数时，则 k = 1 + int(log(abs(x), 2))。 如果 x 为零，则 x.bit_length() 返回 0。
 
 # 等价于:
 
 def bit_length(self):
-    s = bin(self)       # binary representation:  bin(-37) --> '-0b100101'
-    s = s.lstrip('-0b') # remove leading zeros and minus sign
-    return len(s)       # len('100101') --> 6
+    s = bin(self)  # binary representation:  bin(-37) --> '-0b100101'
+    s = s.lstrip('-0b')  # remove leading zeros and minus sign
+    return len(s)  # len('100101') --> 6
 
 
 # 3.1 新版功能.
@@ -342,3 +343,89 @@ l_log(float.hex(3740.0))
 
 # 为了阐明上述规则，这里有一些等价于内置哈希算法的 Python 代码示例，可用于计算有理数、float 或 complex 的哈希值:
 
+import sys, math
+
+
+def hash_fraction(m, n):
+    """计算有理数m / n的散列.
+
+    假设m和n是整数，n为正。
+    相当于hash（fractions.Fraction（m，n））.
+
+    """
+    P = sys.hash_info.modulus
+    # 去除P.的常见因素（如果m和n已经是互质的，则不必要。）
+    while m % P == n % P == 0:
+        m, n = m // P, n // P
+
+    if n % P == 0:
+        hash_value = sys.hash_info.inf
+    else:
+        # Fermat's Little Theorem:
+        # pow（n，P-1，P）为1，因此pow（n，P-2，P）给出n模P的倒数。
+        hash_value = (abs(m) % P) * pow(n, P - 2, P) % P
+    if m < 0:
+        hash_value = -hash_value
+    if hash_value == -1:
+        hash_value = -2
+    return hash_value
+
+
+def hash_float(x):
+    """计算浮点x的哈希值。"""
+
+    if math.isnan(x):
+        return sys.hash_info.nan
+    elif math.isinf(x):
+        return sys.hash_info.inf if x > 0 else -sys.hash_info.inf
+    else:
+        return hash_fraction(*x.as_integer_ratio())
+
+
+def hash_complex(z):
+    """计算复数z的哈希值。"""
+
+    hash_value = hash_float(z.real) + sys.hash_info.imag * hash_float(z.imag)
+    # do a signed reduction modulo 2**sys.hash_info.width
+    M = 2 ** (sys.hash_info.width - 1)
+    hash_value = (hash_value & (M - 1)) - (hash_value & M)
+    if hash_value == -1:
+        hash_value = -2
+    return hash_value
+
+# NOTE 迭代器类型
+
+# Python 支持在容器中进行迭代的概念。
+# 这是通过使用两个单独方法来实现的；它们被用于允许用户自定义类对迭代的支持。
+# 将在下文中详细描述的序列总是支持迭代方法。
+
+# 容器对象要提供迭代支持，必须定义一个方法:
+
+# container.__iter__()
+
+# 返回一个迭代器对象。 该对象需要支持下文所述的迭代器协议。
+# 如果容器支持不同的迭代类型，则可以提供额外的方法来专门地请求不同迭代类型的迭代器。
+# （支持多种迭代形式的对象的例子有同时支持广度优先和深度优先遍历的树结构。）
+# 此方法对应于 Python/C API 中 Python 对象类型结构体的 tp_iter 槽位。
+
+# 迭代器对象自身需要支持以下两个方法，它们共同组成了 迭代器协议:
+
+# iterator.__iter__()
+# 返回迭代器对象本身。 这是同时允许容器和迭代器配合 for 和 in 语句使用所必须的。
+# 此方法对应于 Python/C API 中 Python 对象类型结构体的 tp_iter 槽位。
+
+# iterator.__next__()
+# 从容器中返回下一项。 如果已经没有项可返回，则会引发 StopIteration 异常。
+# 此方法对应于 Python/C API 中 Python 对象类型结构体的 tp_iternext 槽位。
+
+# Python 定义了几种迭代器对象以支持对一般和特定序列类型、字典和其他更特别的形式进行迭代。
+# 除了迭代器协议的实现，特定类型的其他性质对迭代操作来说都不重要。
+
+# 一旦迭代器的 __next__() 方法引发了 StopIteration，它必须一直对后续调用引发同样的异常。
+# 不遵循此行为特性的实现将无法正常使用。
+
+# NOTE 生成器类型
+
+# Python 的 generator 提供了一种实现迭代器协议的便捷方式。
+# 如果容器对象 __iter__() 方法被实现为一个生成器，它将自动返回一个迭代器对象（从技术上说是一个生成器对象），
+# 该对象提供 __iter__() 和 __next__() 方法。 有关生成器的更多信息可以参阅 yield 表达式的文档。
