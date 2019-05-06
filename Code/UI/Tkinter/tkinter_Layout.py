@@ -88,8 +88,64 @@ master.geometry("500x500+0+0")
 # 默认值是TOP
 # 还可以设置的值有：LEFT，BOTTOM，RIGHT
 
-label_2 = tk.Label(bg="green", text="label_2")
-label_2.pack(side=tk.LEFT)
+# label_2 = tk.Label(bg="green", text="label_2")
+# label_2.pack(side=tk.LEFT)
 
+# NOTE def pack_configure(self, cnf={}, **kw):
+
+# cnf 参数字典
+# **kw 参数用法和pack一样
+
+# label_2 = tk.Label(bg="green", text="label_2")
+# label_2.pack_configure(cnf={"side": tk.LEFT})
+
+# NOTE def pack_forget(self):
+
+# 将组件从屏幕中隐藏
+# 并没有销毁该组件，只是看不到了
+# 可以通过 pack 或其他布局管理器显示已隐藏的组件
+
+# label_1 = tk.Label(bg="red", text="label_1")
+# label_1.pack_forget()
+#
+# label_2 = tk.Label(bg="green", text="label_2")
+# label_2.pack()
+#
+# # 再显示
+# label_1.pack()
+
+# NOTE def pack_info(self):
+
+# 以字典的形式返回当前 pack 的选项
+
+# label_2 = tk.Label(bg="green", text="label_2")
+# label_2.pack()
+# print(label_2.pack_info())
+
+# NOTE pack_propagate(flag)
+
+# 如果开启，父组件会自动调节尺寸以容纳所有子组件
+# 默认值是开启（flag = True）
+# 该方法仅适用于父组件
+
+# frame = tk.Frame(master, width=400, height=400, bg='green')
+#
+# # 将框架放在其父级中
+# frame.pack()
+#
+# # 告诉框架不要让它的子控件控制它的大小(可以切换0或1看效果)
+# frame.pack_propagate(0)
+#
+# # 将文本框放在框架中
+# textBox = tk.Label(frame, text="(x,y): ", bg='red')
+# textBox.pack()
+
+# NOTE pack_slaves()
+
+# 以列表的形式返回该组件的所有子组件
+
+# label_2 = tk.Label(bg="green", text="label_2")
+# label_2.pack()
+# print(master.pack_slaves())
 
 master.mainloop()
