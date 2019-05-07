@@ -29,7 +29,7 @@ master.geometry("500x500+0+0")
 # label_2 = tk.Label(bg="green", text="label_2")
 # label_2.grid()
 
-# NOTE pack 布局
+# NOTE 1, pack 布局
 
 # NOTE anchor
 
@@ -147,5 +147,60 @@ master.geometry("500x500+0+0")
 # label_2 = tk.Label(bg="green", text="label_2")
 # label_2.pack()
 # print(master.pack_slaves())
+
+
+# NOTE 2, grid布局
+
+# NOTE column, row
+
+# 指定组件插入的列, 行（0 表示第 1 列, 行）
+# 默认值是 0
+
+# label_1 = tk.Label(bg="green", text="label_1")
+# label_1.grid(column=0)
+#
+# label_2 = tk.Label(bg="green", text="label_2")
+# label_2.grid(column=1)  # 如果这里是2 只是代表一个左右, 上下的关系 并不是再空一列, 行
+
+# TODO columnspan(没懂) or rowspan(没懂)
+
+# 指定用多少列（跨列）显示该组件
+# 组件的列宽
+# 从组件所置单元格算起在列方向上的跨度；
+
+# label_1 = tk.Label(master, text="label_1", bg='red')
+# label_1.grid(row=0, column=0, rowspan=2, columnspan=2)
+#
+# label_2 = tk.Label(master, text="label_2", bg='green')
+# label_2.grid(row=0, column=1)
+#
+# label_3 = tk.Label(master, text='label_3', bg='blue')
+# label_3.grid(row=1, column=0)
+
+# NOTE sticky
+
+# 默认的控件在窗口中的对齐方式是居中。
+# 可以使用sticky选项去指定对齐方式，可以选择的值有：N/S/E/W，
+# 分别代表上对齐/下对齐/左对齐/右对齐，可以单独使用N/S/E/W，也可以上下和左右组合使用，达到不同的对齐效果，如
+
+label_1 = tk.Label(master, text='First', height=2, width=7, bg='red')
+label_2 = tk.Label(master, text='Second', height=3, width=13, bg='blue')
+label_1.grid(row=0, column=0)
+label_2.grid(row=0, column=1)
+
+# 现在2个不等高的控件是居中对齐的
+# 加sticky让他们对齐
+label_1.grid_configure(sticky=tk.N+tk.S)
+label_2.grid_configure(sticky=tk.N+tk.S)
+
+# sticky=N/S/E//W:顶端对齐/底端对齐/右对齐/左对齐
+#
+# sticky=N+S：拉伸高度，使其在水平方向上顶端和底端都对齐
+#
+# sticky=E+W，拉伸宽度，使其在垂直方向上左边界和右边界都对齐
+#
+# sticky=N+S+E:拉伸高度，使其在水平方向上对齐，并将控件放在右边（当两个控件放在同一行同一列时效果明显）
+#
+# 等等自己组合
 
 master.mainloop()
