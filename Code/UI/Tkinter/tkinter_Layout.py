@@ -183,24 +183,27 @@ master.geometry("500x500+0+0")
 # 可以使用sticky选项去指定对齐方式，可以选择的值有：N/S/E/W，
 # 分别代表上对齐/下对齐/左对齐/右对齐，可以单独使用N/S/E/W，也可以上下和左右组合使用，达到不同的对齐效果，如
 
-label_1 = tk.Label(master, text='First', height=2, width=7, bg='red')
-label_2 = tk.Label(master, text='Second', height=3, width=13, bg='blue')
-label_1.grid(row=0, column=0)
-label_2.grid(row=0, column=1)
+# from tkinter import *
+#
+# label_1 = tk.Label(master, text='First', height=3, width=7, bg='red')
+# label_2 = tk.Label(master, text='Second', height=6, width=13, bg='blue')
+#
+# # 2个控件 竖直排布
+# # label_1.grid(sticky=E + W)  # 1, 左右都对齐
+# # label_1.grid(sticky=E)  # 2, 左对齐
+# # label_1.grid(sticky=W)  # 3, 右对齐
+# # label_1.grid()  # 4, center
+#
+# # 2个控件 水平排布
+# # label_1.grid(sticky=N + S)  # 1, 上下都对齐
+# # label_1.grid(sticky=N)  # 2, 上对齐
+# # label_1.grid(sticky=S)  # 3, 下对齐
+# # label_1.grid()  # 4, center
+#
+# label_2.grid(row=0, column=1)
 
-# 现在2个不等高的控件是居中对齐的
-# 加sticky让他们对齐
-label_1.grid_configure(sticky=tk.N+tk.S)
-label_2.grid_configure(sticky=tk.N+tk.S)
+# 还有其它组合自己尝试
 
-# sticky=N/S/E//W:顶端对齐/底端对齐/右对齐/左对齐
-#
-# sticky=N+S：拉伸高度，使其在水平方向上顶端和底端都对齐
-#
-# sticky=E+W，拉伸宽度，使其在垂直方向上左边界和右边界都对齐
-#
-# sticky=N+S+E:拉伸高度，使其在水平方向上对齐，并将控件放在右边（当两个控件放在同一行同一列时效果明显）
-#
-# 等等自己组合
+# NOTE
 
 master.mainloop()
