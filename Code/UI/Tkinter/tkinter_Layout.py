@@ -202,8 +202,18 @@ master.geometry("500x500+0+0")
 #
 # label_2.grid(row=0, column=1)
 
+# NOTE ipadx, ipady, padx pady
+
+# 参照pack里面这几个参数的用法
+
 # 还有其它组合自己尝试
 
-# NOTE
+# NOTE def grid_configure(self, cnf={}, **kw):
+
+# cnf 参数字典
+# **kw 参数用法和grid一样
+
+label_2 = tk.Label(bg="green", text="label_2")
+label_2.grid_configure(cnf={"ipady": 20, "ipadx": "30", "pady": "30", "padx": "30"})
 
 master.mainloop()
