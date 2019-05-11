@@ -202,18 +202,34 @@ master.geometry("500x500+0+0")
 #
 # label_2.grid(row=0, column=1)
 
+# 还有其它组合自己尝试
+
 # NOTE ipadx, ipady, padx pady
 
 # 参照pack里面这几个参数的用法
 
-# 还有其它组合自己尝试
+# TODO def grid_anchor(self, anchor=None): # new in Tk 8.5 (没看懂)
+
+# 当没有行/列具有任何权重时，锚值控制如何将网格放置在主文件中
+
+# label_1 = tk.Label(text='First', bg='red')
+#
+# label_1.grid(row=0, column=0)
+#
+# label_2 = tk.Label(bg="green", text="label_2", width="50")
+#
+# label_2.grid(row=0, column=0)
+# label_2.grid_anchor("n")
+# n, ne, e, se, s, sw, w, nw, or center
 
 # NOTE def grid_configure(self, cnf={}, **kw):
 
 # cnf 参数字典
 # **kw 参数用法和grid一样
 
-label_2 = tk.Label(bg="green", text="label_2")
-label_2.grid_configure(cnf={"ipady": 20, "ipadx": "30", "pady": "30", "padx": "30"})
+# label_2 = tk.Label(bg="green", text="label_2")
+# label_2.grid_configure(cnf={"ipady": 20, "ipadx": "30", "pady": "30", "padx": "30"})
+
+# NOTE
 
 master.mainloop()
