@@ -210,17 +210,46 @@ master.geometry("500x500+0+0")
 
 # TODO def grid_anchor(self, anchor=None): # new in Tk 8.5 (没看懂)
 
-# 当没有行/列具有任何权重时，锚值控制如何将网格放置在主文件中
+# NOTE def grid_bbox(self, column=None, row=None, col2=None, row2=None): -- bbox（）在窗口渲染后工作
 
-# label_1 = tk.Label(text='First', bg='red')
+# 返回一个 4 元组描述该组件所在的限定矩形
+# 如果指定 column 和 row 参数，则返回该位置（column, row）的组件的限定矩形描述
+# 如果指定 4 个参数，则返回从（column, row）到（col2, row2）所有组件的限定矩形描述
+# 例如 grid_bbox(0, 0, 1, 1) 返回的是 4 个组件所在的限定矩形
+
+
+# def action():
+#     print(button.winfo_width())
+#     print(button.winfo_height())
+#     print("content bbox=", master.bbox())
 #
-# label_1.grid(row=0, column=0)
 #
-# label_2 = tk.Label(bg="green", text="label_2", width="50")
-#
-# label_2.grid(row=0, column=0)
-# label_2.grid_anchor("n")
-# n, ne, e, se, s, sw, w, nw, or center
+# button = tk.Button(bg="green", text="button_2", command=action)
+# button.grid()
+
+# NOTE def grid_columnconfigure(self, index, cnf={}, **kw):
+# NOTE def grid_rowconfigure(self, index, cnf={}, **kw):
+
+# 设置列的属性
+# 注意：设置的是该组件所拥有的 grid 的列
+# cnf 惯例字典键值对描述
+
+# cnf or **kw 可以设置的选项及含义如下
+
+# 1, minsize 指定该列的最小宽度
+
+# 2, pad 指定该列中最大网格的水平边距
+
+# 3, weight 指定列与列之间的相对距离
+# 初创建窗口的时候，grid 会自动根据组件的尺寸分配窗口的尺寸，当你拉伸窗口的尺寸时就会有空白显示出来。
+# 这个选项正是指定列与列之间是否填充空白，默认是不填充的。
+# 另外，该选项的值是指定填充空白的倍数，例如 weight = 2 的列会比 weight = 1 的列填充多一倍的空白。
+# 所以需要平均填充的话，只需要所有的列都设置 weight = 1 即可。
+
+# textWidget = tk.Text(master)
+# textWidget.grid(row=0, column=0, sticky="ns")
+# master.grid_rowconfigure(0, weight=1)
+# master.grid_columnconfigure(0, weight=1)
 
 # NOTE def grid_configure(self, cnf={}, **kw):
 
@@ -233,3 +262,4 @@ master.geometry("500x500+0+0")
 # NOTE
 
 master.mainloop()
+
