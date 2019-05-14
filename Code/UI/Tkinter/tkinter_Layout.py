@@ -259,7 +259,12 @@ master.geometry("500x500+0+0")
 # label_2 = tk.Label(bg="green", text="label_2")
 # label_2.grid_configure(cnf={"ipady": 20, "ipadx": "30", "pady": "30", "padx": "30"})
 
-# NOTE
+# NOTE def grid_forget(self):
+
+# 可参考pack_forget
+# 将组件从屏幕中隐藏
+# 并没有销毁该组件，只是看不到了
+# 可以通过 pack 或其他布局管理器显示已隐藏的组件
 
 master.mainloop()
 
