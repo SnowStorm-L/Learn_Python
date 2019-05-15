@@ -19,6 +19,7 @@ master = tk.Tk()
 
 master.geometry("500x500+0+0")
 
+
 # NOTE 注意：不要在同一个父组件中混合使用 pack() 和 grid()，因为 Tkinter 无法确定首先使用哪个布局管理器。
 
 # 例如以下这个例子
@@ -266,5 +267,84 @@ master.geometry("500x500+0+0")
 # 并没有销毁该组件，只是看不到了
 # 可以通过 pack 或其他布局管理器显示已隐藏的组件
 
-master.mainloop()
+# NOTE def grid_info(self):
 
+# 以字典的形式返回当前 grid 的选项
+
+# label_2 = tk.Label(bg="green", text="label_2")
+# label_2.grid()
+# print(label_2.grid_info())
+
+# NOTE def grid_location(self, x, y):
+
+# 返回列和行的元组，用于标识主窗口小部件中位置X和Y处的像素所在的单元格。
+
+
+# class Location:
+#
+#     def click(self, event):
+#
+#         x = event.x_root - master.winfo_rootx()
+#         y = event.y_root - master.winfo_rooty()
+#         (col, row) = master.grid_location(x, y)
+#         print("Clicked ", col, row)
+#
+#     def __init__(self, master=None):
+#         self.master = master
+#
+#         for r in range(3):
+#             for c in range(3):
+#                 lbl = tk.Label(master, text=1000 + r + c)
+#                 lbl.grid(row=r, column=c, sticky=tk.NSEW)
+#
+#
+# g = Location(master)
+# master.bind("<Button-1>", g.click)
+
+# NOTE def grid_propagate(self, flag=_noarg_):
+
+# 如果开启，父组件会自动调节尺寸以容纳所有子组件
+# 默认值是开启（flag = True）
+# 该方法仅适用于父组件
+
+# NOTE def grid_remove(self):
+
+# 跟 grid_forget() 一样，但恢复的时候会记住该组件所在网格的选项设置
+
+# class Example:
+#     def __init__(self):
+#         self.root = master
+#         self.root.grid_rowconfigure(2, weight=1)
+#         self.root.grid_columnconfigure(1, weight=1)
+#
+#         self.toolbar = tk.Frame(self.root)
+#         self.toggle = tk.Button(self.toolbar, text="Toggle the message",
+#                                 command=self.toggle_message)
+#         self.toggle.pack(side="left")
+#
+#         self.navpanel = tk.Frame(self.root, background="bisque", width=100, height=200)
+#         self.main = tk.Frame(self.root, background="white", width=300, height=200, bd=1, relief='sunken')
+#         self.message = tk.Label(self.root, text="Hello, world!")
+#
+#         self.toolbar.grid(row=0, column=0, columnspan=2)
+#         self.message.grid(row=1, column=0, columnspan=2)
+#         self.navpanel.grid(row=2, column=0, sticky="nsew")
+#         self.main.grid(row=2, column=1, sticky="nsew")
+#
+#     def start(self):
+#         self.root.mainloop()
+#
+#     def toggle_message(self):
+#         if self.message.winfo_viewable():
+#             # self.message.grid_remove()
+#             self.message.grid_forget()
+#         else:
+#             self.message.grid()
+#
+#
+# Example().start()
+
+# 如果将代码从使用更改grid_remove为使用grid_forget，则恢复标签不会将其放回到相同位置或使用相同选项。
+# 这是grid_remove和之间的主要区别grid_forget- grid_forget字面上会忘记网格选项，而grid_remove删除窗口小部件但会记住设置。
+
+master.mainloop()
