@@ -347,4 +347,34 @@ master.geometry("500x500+0+0")
 # 如果将代码从使用更改grid_remove为使用grid_forget，则恢复标签不会将其放回到相同位置或使用相同选项。
 # 这是grid_remove和之间的主要区别grid_forget- grid_forget字面上会忘记网格选项，而grid_remove删除窗口小部件但会记住设置。
 
+# NOTE def grid_size(self):
+
+# 返回该组件所拥有的 grid 的尺寸
+# 返回值是一个 2 元组，表示（列, 行）分别的网格数
+
+# def add_entry(master, text):
+#     column, row = master.grid_size()
+#
+#     label = tk.Label(master, text=text)
+#     label.grid(row=row, column=0, sticky=tk.E, padx=2)
+#
+#     entry = tk.Entry(master)
+#     entry.grid(row=row, column=1, sticky=tk.E + tk.W)
+#     print(master.grid_size())
+#     return entry
+#
+#
+# add_entry(master, "First")
+# add_entry(master, "Second")
+# add_entry(master, "Third")
+
+# NOTE def grid_slaves(self, row=None, column=None):
+
+# TODO row column ?
+
+# 以列表的形式返回该组件的所有子组件
+# 该方法仅适用于父组件
+
+
+
 master.mainloop()
