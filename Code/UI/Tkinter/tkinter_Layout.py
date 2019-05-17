@@ -64,10 +64,16 @@ master.geometry("500x500+0+0")
 # 个人理解expand类似于控件的外边距(透明)那样填充父控件的位置
 # fill就是控件内部所占的空间扩容
 
-# TODO in_ (待验证)
+# NOTE in_
 
 # 将该组件放到该选项指定的组件中
 # 指定的组件必须是该组件的父组件
+
+# f1 = tk.Frame(width=200, height=200, background="red")
+# f2 = tk.Frame(width=100, height=100, background="blue")
+#
+# f1.pack(fill="both", expand=False, padx=20, pady=20)
+# f2.place(in_=f1, anchor="c", relx=.5, rely=.5)  # 加了in_之后 f2在f1中心,  不加in_f2在master中心
 
 # NOTE ipadx, ipady
 # 指定水平,竖直方向上的内边距
@@ -163,14 +169,16 @@ master.geometry("500x500+0+0")
 # label_2 = tk.Label(bg="green", text="label_2")
 # label_2.grid(column=1)  # 如果这里是2 只是代表一个左右, 上下的关系 并不是再空一列, 行
 
-# TODO columnspan(没懂) or rowspan(没懂)
+# NOTE columnspan rowspan
 
-# 指定用多少列（跨列）显示该组件
-# 组件的列宽
-# 从组件所置单元格算起在列方向上的跨度；
+# 指定用多少列（跨列）, 行（跨行）显示该组件
+# 组件的列(行)宽
+# 从组件所置单元格算起在列(行)方向上的跨度
+# 默认都是1
 
 # label_1 = tk.Label(master, text="label_1", bg='red')
-# label_1.grid(row=0, column=0, rowspan=2, columnspan=2)
+# label_1.grid(row=0, column=0, columnspan=2)  # 这里设置了2, 说明要2行的位置显示这个label
+# # 可以改成columnspan=2 2列的空间显示这个label
 #
 # label_2 = tk.Label(master, text="label_2", bg='green')
 # label_2.grid(row=0, column=1)
@@ -352,7 +360,7 @@ master.geometry("500x500+0+0")
 # 返回该组件所拥有的 grid 的尺寸
 # 返回值是一个 2 元组，表示（列, 行）分别的网格数
 
-# def add_entry(master, text):
+# def add_entry(text):
 #     column, row = master.grid_size()
 #
 #     label = tk.Label(master, text=text)
@@ -361,20 +369,17 @@ master.geometry("500x500+0+0")
 #     entry = tk.Entry(master)
 #     entry.grid(row=row, column=1, sticky=tk.E + tk.W)
 #     print(master.grid_size())
+#     print(master.grid_slaves(row=1))
 #     return entry
 #
 #
-# add_entry(master, "First")
-# add_entry(master, "Second")
-# add_entry(master, "Third")
+# add_entry("First")
+# add_entry("Second")
+# add_entry("Third")
 
 # NOTE def grid_slaves(self, row=None, column=None):
 
-# TODO row column ?
-
-# 以列表的形式返回该组件的所有子组件
+# 以列表的形式返回该组件的所有子组件(row 和 column 是过滤条件, 不设置的话默认返回所有) 看上面的例子
 # 该方法仅适用于父组件
-
-
 
 master.mainloop()
