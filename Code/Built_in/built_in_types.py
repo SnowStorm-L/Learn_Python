@@ -686,3 +686,69 @@ l_log(lists)
 # 对于通过名称访问相比通过索引访问更清晰的异构数据多项集，collections.namedtuple() 可能是比简单元组对象更为合适的选择。
 
 # NOTE range 对象
+
+# range 类型表示不可变的数字序列，通常用于在 for 循环中循环指定的次数。
+
+# class range(stop)
+# class range(start, stop[, step])
+
+# range 构造器的参数必须为整数（可以是内置的 int 或任何实现了 __index__ 特殊方法的对象）。
+# 如果省略 step 参数，其默认值为 1。 如果省略 start 参数，其默认值为 0，如果 step 为零则会引发 ValueError。
+
+# 如果 step 为正值，确定 range r 内容的公式为 r[i] = start + step*i 其中 i >= 0 且 r[i] < stop。
+# 如果 step 为负值，确定 range 内容的公式仍然为 r[i] = start + step*i，但限制条件改为 i >= 0 且 r[i] > stop.
+
+# 如果 r[0] 不符合值的限制条件，则该 range 对象为空。
+# range 对象确实支持负索引，但是会将其解读为从正索引所确定的序列的末尾开始索引。
+
+# 元素绝对值大于 sys.maxsize 的 range 对象是被允许的，但某些特性 (例如 len()) 可能引发 OverflowError。
+
+# 一些 range 对象的例子:
+l_log(list(range(10)))
+l_log(list(range(1, 11)))
+l_log(list(range(0, 30, 5)))
+l_log(list(range(0, -10, -1)))
+l_log(list(range(1, 0)))
+
+# range 对象实现了 一般 序列的所有操作，但拼接和重复除外
+# （这是由于 range 对象只能表示符合严格模式的序列，而重复和拼接通常都会违反这样的模式）。
+
+# start
+# start 形参的值 (如果该形参未提供则为 0)
+
+# stop
+# stop 形参的值
+
+# step
+# step 形参的值 (如果该形参未提供则为 1)
+
+# range 类型相比常规 list 或 tuple 的优势在于一个 range 对象总是占用固定数量的（较小）内存，不论其所表示的范围有多大
+# （因为它只保存了 start, stop 和 step 值，并会根据需要计算具体单项或子范围的值）。
+
+# range 对象实现了 collections.abc.Sequence ABC，提供如包含检测、元素索引查找、切片等特性，并支持负索引
+# (参见 序列类型 --- list, tuple, range):
+
+r = range(0, 20, 2)
+l_log(list(r))
+l_log(11 in r)
+l_log(10 in r)
+l_log(r.index(10))
+l_log(r[5])
+l_log(list(r[:5]))
+l_log(r[-1])
+
+# 使用 == 和 != 检测 range 对象是否相等是将其作为序列来比较。
+# 也就是说，如果两个 range 对象表示相同的值序列就认为它们是相等的。
+# （请注意比较结果相等的两个 range 对象可能会具有不同的 start, stop 和 step 属性，
+# 例如 range(0) == range(2, 1, 3) 而 range(0, 3, 2) == range(0, 4, 2)。）
+
+# 在 3.2 版更改: 实现 Sequence ABC。 支持切片和负数索引。 使用 int 对象在固定时间内进行成员检测，而不是逐一迭代所有项。
+
+# 在 3.3 版更改: 定义 '==' 和 '!=' 以根据 range 对象所定义的值序列来进行比较（而不是根据对象的标识）。
+
+# 3.3 新版功能: start, stop 和 step 属性。
+
+# 参见:
+# linspace recipe 演示了如何实现一个延迟求值版本的适合浮点数应用的 range 对象。
+
+# NOTE 文本序列类型 --- str
