@@ -29,3 +29,6 @@ os.system("which python")
 # 5, 将test.py可执行文件夹写入dist文件夹中。
 
 # 在dist文件夹中，您可以找到分发给用户的打包好的应用程序。
+
+# 打包的exe 并不是跨平台使用, 就是你在mac打包的exe还是只能在mac运行, 不能直接放到win上运行
+# 只能把代码放到win上打包
